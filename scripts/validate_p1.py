@@ -48,10 +48,10 @@ REQUIRED_FILES = {
     "evaluation/adjudication.md",
 }
 ARM_C_FILES = {
-    "arm_c/failure_diagnosis.json",
-    "arm_c/revised_candidate_question_set.json",
-    "arm_c/downstream_preparation.json",
-    "arm_c/human_render.md",
+    "failure_diagnosis.json",
+    "revised_candidate_question_set.json",
+    "downstream_preparation.json",
+    "human_render.md",
 }
 
 
@@ -76,15 +76,23 @@ def validate_case(case_dir: Path, errors: list, case_results: list) -> dict:
 
     meta = json.loads((case_dir / "case_metadata.json").read_text(encoding="utf-8"))
 
-    # 2. raw input hash
+    # 2. raw input hash (metadata + every downstream arm must bind the same raw bytes)
     raw_text = (case_dir / "raw_narrative.txt").read_text(encoding="utf-8")
     raw_sha = sha256_text(raw_text)
-    if raw_sha != meta.get("input_sha256"):
+    res["checks"]["raw_hash_valid"] = raw_sha == meta.get("input_sha256")
+    if not res["checks"]["raw_hash_valid"]:
         errors.append(f"{case_dir.name}: raw_narrative.txt sha256 mismatch with case_metadata.input_sha256")
-        res["checks"]["raw_hash_valid"] = False
         res["ok"] = False
-    else:
-        res["checks"]["raw_hash_valid"] = True
+    for arm in ("arm_a", "arm_b", "arm_c"):
+        p = case_dir / arm / "downstream_preparation.json"
+        if not p.is_file():
+            continue
+        d = json.loads(p.read_text(encoding="utf-8"))
+        key = f"{arm}_raw_hash_valid"
+        res["checks"][key] = d.get("raw_input_sha256") == raw_sha
+        if not res["checks"][key]:
+            errors.append(f"{case_dir.name}: {arm} downstream raw_input_sha256 does not bind the case raw input (RA1 invariant)")
+            res["ok"] = False
 
     # 3. arm_b CQS validation (P0 contract, unchanged)
     cqs_b = json.loads((case_dir / "arm_b" / "candidate_question_set.json").read_text(encoding="utf-8"))

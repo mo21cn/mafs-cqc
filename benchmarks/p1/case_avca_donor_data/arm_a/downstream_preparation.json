@@ -2,7 +2,7 @@
   "case_id": "case_avca_donor_data",
   "arm": "A",
   "generated_from": "raw_narrative.txt (narrative-only baseline; no CandidateQuestionSet consulted)",
-  "raw_input_sha256": "7b136c4d6ae87a3e9e50a38fbb08e1e7c6165c78599a52bcb5b742ab06a63f0e",
+  "raw_input_sha256": "7b136c4d6ae8d77d9cae98e23e312dfec4fb0076099e295dd0d6a5053a747ae2",
   "question_ids_to_search": [
     {
       "question_id": "QA-01",
@@ -25,13 +25,24 @@
       "notes": "判定标准借用法"
     }
   ],
-  "question_order_if_any": ["QA-01", "QA-02", "QA-03", "QA-04"],
+  "question_order_if_any": [
+    "QA-01",
+    "QA-02",
+    "QA-03",
+    "QA-04"
+  ],
   "reason_for_order": "确认资源→查元数据字段→对照检索→借用判定惯例",
   "questions_blocked_by_prerequisite": [],
-  "questions_independently_searchable": ["QA-01", "QA-02", "QA-03", "QA-04"],
+  "questions_independently_searchable": [
+    "QA-01",
+    "QA-02",
+    "QA-03",
+    "QA-04"
+  ],
   "missing_information_before_search": [
     "『年轻』『健康』『原代』阈值未定义——检索时隐含采用常见惯例（如供体年龄 <40 健康、primary = 非培养系），该假设未显式记录",
     "原话『有没有有没有』重复，按单一疑问理解，未记录"
   ],
-  "natural_reasoning_notes": "Narrative-only baseline: judgment thresholds were implicitly borrowed from common conventions; the textual repetition was silently normalized. Neither choice is auditable from outputs alone."
+  "natural_reasoning_notes": "Narrative-only baseline: judgment thresholds were implicitly borrowed from common conventions; the textual repetition was silently normalized. Neither choice is auditable from outputs alone.",
+  "raw_input_sha256_note": "corrected in CQC-P1-RA1 Closure A (mechanical provenance fix; value was hand-copied incorrectly at P1)"
 }

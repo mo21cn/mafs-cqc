@@ -1,0 +1,64 @@
+{
+  "artifact_id": "CQS-CQC-P1-04-RC1",
+  "schema_version": "0.1",
+  "source_narrative_sha256": "5975fee3490826bf06cd2005c2230bc19e7797ee4d46fdf4ac27c7068f7a4e6c",
+  "source_narrative": "拮抗剂研究的应用领域有哪些\n",
+  "questions": [
+    {
+      "question_id": "CQ-01",
+      "statement": "『拮抗剂』在此请求中的指称范围是什么（药理受体拮抗剂？运动科学拮抗肌？其他『拮抗』策略？），默认解读应如何与操作者确认？",
+      "source_trace": [
+        {
+          "exact_quote": "拮抗剂研究"
+        }
+      ],
+      "question_type": "TERMINOLOGY_OR_NAMING",
+      "dependencies": [],
+      "resolution_condition": "证据条件：以原词检索得到的实体类型分布（药理分子/解剖结构/其他），结合操作者确认。指称范围锁定后，后续盘点（CQ-02）的检索面才被正确界定。",
+      "uncertainty": "重度歧义：分子类型、靶点、疾病域全部未指定；中文语境默认药理解读但存在竞争解读（如拮抗肌）。"
+    },
+    {
+      "question_id": "CQ-02",
+      "statement": "药理拮抗剂研究的应用领域版图是什么（治疗领域 × 靶点/机制家族的盘点矩阵）？",
+      "source_trace": [
+        {
+          "exact_quote": "应用领域有哪些"
+        }
+      ],
+      "question_type": "GENERALIZATION",
+      "dependencies": [
+        "CQ-01"
+      ],
+      "resolution_condition": "证据条件：以『拮抗剂』药理解读为界的领域盘点证据（综述、药物分类体系如 ATC、靶点家族记录）。盘点矩阵在新增领域类目不再出现时达到饱和。",
+      "uncertainty": "盘点维度（按疾病/靶点/分子模态）原话未指定；本问题按『治疗领域×机制家族』双维组织，其他维度保留。"
+    },
+    {
+      "question_id": "CQ-03",
+      "statement": "拮抗剂作为研究工具（chemical probes、体外/体内实验工具）的非治疗应用有哪些？",
+      "source_trace": [
+        {
+          "exact_quote": "拮抗剂研究"
+        }
+      ],
+      "question_type": "TRANSLATION",
+      "dependencies": [
+        "CQ-01"
+      ],
+      "resolution_condition": "证据条件：拮抗剂分子被用作研究工具的公开记录（probe 数据库、方法学文献）。工具用途清单与治疗用途清单分离呈现即为解决状态。",
+      "uncertainty": "本问题假设药理分子解读（受体拮抗剂类分子用作研究工具）；该假设依赖 CQ-01 的消歧结果——若消歧离开药理解读，本问题需重新表述或撤回。"
+    },
+    {
+      "question_id": "CQ-04",
+      "statement": "『应用领域』盘点的组织维度（按疾病、按靶点家族、按分子模态、按发展阶段）应如何选择，不同维度产生何种不同的盘点结果？",
+      "source_trace": [
+        {
+          "exact_quote": "应用领域有哪些"
+        }
+      ],
+      "question_type": "ENTITY_RESOLUTION",
+      "dependencies": [],
+      "resolution_condition": "证据条件：不同盘点维度下各自可得的结果结构（试盘点对照），以及操作者对维度的偏好确认。维度确定后 CQ-02 的矩阵结构随之确定。",
+      "uncertainty": "盘点维度歧义保留；不同维度不是对错关系而是服务不同后续目的。"
+    }
+  ]
+}

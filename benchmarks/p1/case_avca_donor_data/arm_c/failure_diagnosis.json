@@ -1,0 +1,14 @@
+{
+  "case_id": "case_avca_donor_data",
+  "diagnosis_source": "HO+ChatGPT P1 acceptance",
+  "prior_artifact_id": "CQS-CQC-P1-05",
+  "prior_artifact_sha256": "76ddbb4fa63f80f5f2d3c34b82117f588586871d9f62f9cd94cc3374db095010",
+  "observed_conflict": "Arm B CQ-02 (existence of young-healthy primary donor data) depends on CQ-01 (Atlas identity) but NOT on CQ-03 (operational decidability of the three judgment words), while the downstream preparation itself states that CQ-03's output binds whether/how CQ-02 can be answered: a missing prerequisite.",
+  "diagnosis": "HO+ChatGPT P1 acceptance: the prep/artifact contradiction (answer binds standards that the artifact does not declare as prerequisite) violates referential stability between stages.",
+  "implicated_fields": [
+    "CQ-02.dependencies"
+  ],
+  "repair_instruction": "CQ-02.dependencies = [CQ-01, CQ-03]. No other field changed.",
+  "revised_artifact_id": "CQS-CQC-P1-05-RC1",
+  "revised_artifact_sha256": "990a1e818e3766009e94cec0144ce0d9c0f98e28b6d96bddaf96988d5d58b43e"
+}

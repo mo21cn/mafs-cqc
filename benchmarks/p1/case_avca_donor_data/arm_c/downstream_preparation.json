@@ -1,7 +1,7 @@
 {
   "case_id": "case_avca_donor_data",
-  "arm": "B",
-  "generated_from": "arm_b/candidate_question_set.json (explicit digestion artifact CQS-CQC-P1-05)",
+  "arm": "C",
+  "generated_from": "arm_c/revised_candidate_question_set.json (CQS-CQC-P1-05-RC1)",
   "raw_input_sha256": "7b136c4d6ae8d77d9cae98e23e312dfec4fb0076099e295dd0d6a5053a747ae2",
   "question_ids_to_search": [
     {
@@ -38,5 +38,7 @@
     "原话『有没有有没有』重复——在 CQ-02.uncertainty 显式记录（按单一疑问理解）"
   ],
   "natural_reasoning_notes": "Explicit digestion arm: threshold borrowing becomes an operable question (CQ-03) whose three-state answer determines whether CQ-02 can be answered at all; the textual repetition is durably recorded.",
-  "raw_input_sha256_note": "corrected in CQC-P1-RA1 Closure A (mechanical provenance fix; value was hand-copied incorrectly at P1)"
+  "raw_input_sha256_note": "corrected in CQC-P1-RA1 Closure A (mechanical provenance fix; value was hand-copied incorrectly at P1)",
+  "prior_arm_b_artifact_id": "CQS-CQC-P1-05",
+  "redigestion_note": "regenerated from revised CQS after earned re-digestion (CQC-P1-RA1); see failure_diagnosis.json"
 }

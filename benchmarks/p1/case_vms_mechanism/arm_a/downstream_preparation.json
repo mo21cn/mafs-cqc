@@ -2,7 +2,7 @@
   "case_id": "case_vms_mechanism",
   "arm": "A",
   "generated_from": "raw_narrative.txt (narrative-only baseline; no CandidateQuestionSet consulted)",
-  "raw_input_sha256": "c0600db6f5bf7cd0b1e04243f0ed42d43d5173764286c9b53f14e09e94389dc1",
+  "raw_input_sha256": "c0600db6f5bfd1be5e735f298c3ad4944b78c5c7560a4a907f409a42959bab42",
   "question_ids_to_search": [
     {
       "question_id": "QA-01",
@@ -30,14 +30,27 @@
       "notes": "机制→药物的转化印证，可反推机制可信度"
     }
   ],
-  "question_order_if_any": ["QA-01", "QA-02", "QA-03", "QA-04", "QA-05"],
+  "question_order_if_any": [
+    "QA-01",
+    "QA-02",
+    "QA-03",
+    "QA-04",
+    "QA-05"
+  ],
   "reason_for_order": "先综述锚定术语，再按『细胞分辨率』收窄，中枢与血管两线并行，最后用转化药物证据交叉验证机制",
   "questions_blocked_by_prerequisite": [],
-  "questions_independently_searchable": ["QA-01", "QA-02", "QA-03", "QA-04", "QA-05"],
+  "questions_independently_searchable": [
+    "QA-01",
+    "QA-02",
+    "QA-03",
+    "QA-04",
+    "QA-05"
+  ],
   "missing_information_before_search": [
     "『女性』是否特指围绝经期/更年期人群（也见于治疗诱导 VMS，如乳腺癌内分泌治疗）",
     "『细胞分辨率层面』指单细胞组学还是高分辨率成像",
     "是否需要区分自然绝经与手术/药物绝经"
   ],
-  "natural_reasoning_notes": "Narrative-only baseline: decomposition happens inline during search preparation; no durable artifact, no source trace, ambiguities recorded only as free text here."
+  "natural_reasoning_notes": "Narrative-only baseline: decomposition happens inline during search preparation; no durable artifact, no source trace, ambiguities recorded only as free text here.",
+  "raw_input_sha256_note": "corrected in CQC-P1-RA1 Closure A (mechanical provenance fix; value was hand-copied incorrectly at P1)"
 }

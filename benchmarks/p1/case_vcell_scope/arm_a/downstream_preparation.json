@@ -2,7 +2,7 @@
   "case_id": "case_vcell_scope",
   "arm": "A",
   "generated_from": "raw_narrative.txt (narrative-only baseline; no CandidateQuestionSet consulted)",
-  "raw_input_sha256": "aac9f8ba4abaee4fffbcd0e4632b7c51358c1d29ba59b391bd6bb96bc8655313",
+  "raw_input_sha256": "aac9f8ba4abad9f60cc0c517f1d2f217435e4c0ac473a2df7f7a5801f243a1f7",
   "question_ids_to_search": [
     {
       "question_id": "QA-01",
@@ -30,12 +30,25 @@
       "notes": "防止术语漏检"
     }
   ],
-  "question_order_if_any": ["QA-01", "QA-02", "QA-03", "QA-04", "QA-05"],
+  "question_order_if_any": [
+    "QA-01",
+    "QA-02",
+    "QA-03",
+    "QA-04",
+    "QA-05"
+  ],
   "reason_for_order": "综述先行锚定方向分类，再按机制建模→AI 模型→数据资源三条主线展开，最后用相邻术语补漏",
   "questions_blocked_by_prerequisite": [],
-  "questions_independently_searchable": ["QA-01", "QA-02", "QA-03", "QA-04", "QA-05"],
+  "questions_independently_searchable": [
+    "QA-01",
+    "QA-02",
+    "QA-03",
+    "QA-04",
+    "QA-05"
+  ],
   "missing_information_before_search": [
     "原文拼写 \"Virtual Cel\"（少一个 l）——按 Virtual Cell 理解处理，未做显式记录"
   ],
-  "natural_reasoning_notes": "Narrative-only baseline: the operator's typo was silently normalized to 'Virtual Cell' during preparation — no durable record of that interpretation choice exists in this arm."
+  "natural_reasoning_notes": "Narrative-only baseline: the operator's typo was silently normalized to 'Virtual Cell' during preparation — no durable record of that interpretation choice exists in this arm.",
+  "raw_input_sha256_note": "corrected in CQC-P1-RA1 Closure A (mechanical provenance fix; value was hand-copied incorrectly at P1)"
 }

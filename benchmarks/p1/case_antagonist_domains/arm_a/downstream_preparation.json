@@ -2,7 +2,7 @@
   "case_id": "case_antagonist_domains",
   "arm": "A",
   "generated_from": "raw_narrative.txt (narrative-only baseline; no CandidateQuestionSet consulted)",
-  "raw_input_sha256": "5975fee349086e278ca19754c773657d760e0ee3073e2ed68dbec42d15a00967",
+  "raw_input_sha256": "5975fee3490826bf06cd2005c2230bc19e7797ee4d46fdf4ac27c7068f7a4e6c",
   "question_ids_to_search": [
     {
       "question_id": "QA-01",
@@ -25,14 +25,25 @@
       "notes": "歧义排查，凭语感判断大概率不需要"
     }
   ],
-  "question_order_if_any": ["QA-01", "QA-02", "QA-03", "QA-04"],
+  "question_order_if_any": [
+    "QA-01",
+    "QA-02",
+    "QA-03",
+    "QA-04"
+  ],
   "reason_for_order": "默认药理解读为主轴盘点，机制维度辅助，工具用途补充，非药物解读只做快速排查",
   "questions_blocked_by_prerequisite": [],
-  "questions_independently_searchable": ["QA-01", "QA-02", "QA-03", "QA-04"],
+  "questions_independently_searchable": [
+    "QA-01",
+    "QA-02",
+    "QA-03",
+    "QA-04"
+  ],
   "missing_information_before_search": [
     "『拮抗剂』未限定靶点、疾病域、分子类型——检索时默认按药理受体拮抗剂处理，该解读选择未显式记录",
     "『应用领域』的盘点维度（按疾病/靶点/模态）未指定",
     "『研究』指学术研究还是药物研发过程，未指定"
   ],
-  "natural_reasoning_notes": "Narrative-only baseline: the dominant pharmacological interpretation was adopted by default; the muscle-antagonist reading was dismissed by intuition without durable record."
+  "natural_reasoning_notes": "Narrative-only baseline: the dominant pharmacological interpretation was adopted by default; the muscle-antagonist reading was dismissed by intuition without durable record.",
+  "raw_input_sha256_note": "corrected in CQC-P1-RA1 Closure A (mechanical provenance fix; value was hand-copied incorrectly at P1)"
 }

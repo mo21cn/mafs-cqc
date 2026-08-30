@@ -1,7 +1,7 @@
 {
   "contract_id": "CQC-P0-MINIMAL-DIGESTION-SURFACE-v0.1",
-  "commit_sha": "b95af6445869136b1d4b749a4dcf85f0f67d027b",
-  "ci_run_id": null,
+  "commit_sha": "7fe8cf13561f6d27fdab902e9a20102c0461da0f",
+  "ci_run_id": "33319678983",
   "artifact_schema_version": "0.1",
   "example_count": 3,
   "schema_valid_count": 3,

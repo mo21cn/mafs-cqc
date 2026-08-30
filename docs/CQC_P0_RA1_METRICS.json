@@ -1,7 +1,7 @@
 {
   "contract_id": "CQC-P0-RA1-SEMANTIC-FIDELITY-STRUCTURED-DIGESTION-CLOSURE-v0.1",
-  "verified_commit_sha": "a5b8722940f0c19e0cf202a2325ffa95b9da29ec",
-  "ci_run_id": null,
+  "verified_commit_sha": "7b5de2f33b6d0b644c73602db3e6f7044e2b4e79",
+  "ci_run_id": "33322844350",
   "example_count": 3,
   "question_count_total": 14,
   "schema_valid_count": 3,

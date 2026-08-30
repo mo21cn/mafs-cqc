@@ -1,7 +1,7 @@
 {
   "contract_id": "CQC-P0-RA2-DEPENDENCY-PREREQUISITE-FINAL-CLOSURE-v0.1",
-  "verified_commit_sha": "9e8a6f542007c919a19bfa06091327facfbebbd2",
-  "ci_run_id": null,
+  "verified_commit_sha": "5146c6fea0d0fa8759558956b605ff195cdf3868",
+  "ci_run_id": "33324568398",
   "example_count": 3,
   "question_count_total": 14,
   "schema_valid_count": 3,

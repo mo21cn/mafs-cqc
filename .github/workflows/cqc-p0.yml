@@ -15,6 +15,10 @@ jobs:
           python-version: "3.11"
       - name: Install test dependency
         run: pip install pytest
+      - name: Repository hygiene (no committed bytecode)
+        run: |
+          test -z "$(find . -name '__pycache__' -not -path './.git/*')" || { echo '__pycache__ committed'; exit 1; }
+          test -z "$(find . -name '*.pyc' -not -path './.git/*')" || { echo '*.pyc committed'; exit 1; }
       - name: Validate committed CQS artifacts (schema + hash + trace + DAG + input crosscheck)
         run: python scripts/validate_cqs.py examples/outputs/*.json --check-inputs examples/inputs
       - name: Run tests (validation rules + deterministic rendering reproducibility)

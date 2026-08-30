@@ -37,7 +37,7 @@ Our novelty framing may drift as the literature moves quickly, so the uncertaint
 - source trace:
   - "We do not know the actual coverage of existing perturbation-prediction models over combination settings"
 - dependencies: (none)
-- resolution condition: 系统性检索已发表的扰动预测模型与评测，按实验设置分类（单基因敲除 / 单药响应 / 组合扰动），统计哪些工作覆盖了组合设置及其规模；『覆盖』以公开可复核的评测结果为准，不以团队自述为准。
+- resolution condition: 证据条件：已发表扰动预测工作的公开可复核评测证据所构成的覆盖图——按实验设置分类（单基因敲除 / 单药响应 / 组合扰动）后，组合扰动设置被覆盖的程度与规模。覆盖认定以公开可复核的评测结果为准，不以团队自述为准。
 - uncertainty: (none)
 
 ### CQ-02
@@ -46,8 +46,8 @@ Our novelty framing may drift as the literature moves quickly, so the uncertaint
 - statement: 针对组合扰动泛化，是否已存在社区公认的评测基准（benchmark/leaderboard）？
 - source trace:
   - "we do not know whether a community benchmark for combination generalization already exists"
-- dependencies: CQ-01
-- resolution condition: 在 CQ-01 的文献覆盖图基础上，检索社区基准、挑战赛与排行榜记录：存在则记录其数据划分、指标与当前最优；不存在则将『无公认基准』记录为明确结论。
+- dependencies: (none)
+- resolution condition: 证据条件：是否存在社区公认的组合扰动泛化评测基准。『存在』的证据状态由该基准公开的数据划分、指标定义与当前最优结果记录构成；无此类记录时，『无公认基准』即为问题的解决状态。
 - uncertainty: (none)
 
 ### CQ-03
@@ -57,7 +57,7 @@ Our novelty framing may drift as the literature moves quickly, so the uncertaint
 - source trace:
   - "we do not know which specific "virtual cell" claims have already been publicly staked by which teams."
 - dependencies: (none)
-- resolution condition: 检索各团队的论文、预印本与官方声明，把每条 virtual cell 相关主张归入表征/预测/因果三类并记录出处与时间点，形成主张-团队对照表。
+- resolution condition: 证据条件：各团队公开材料（论文、预印本、官方声明）中关于 virtual cell 的明确主张，按表征 / 扰动预测 / 因果机制归类后形成的主张-团队-时间点映射。该映射的完备性受公开材料可见性约束，结论必须绑定检索时点。
 - uncertainty: 该领域演进快、公共表述边界模糊，主张面会随时间漂移；结论必须绑定检索时点，且叙事明确指出各团队强调点不同。
 
 ### CQ-04
@@ -66,7 +66,7 @@ Our novelty framing may drift as the literature moves quickly, so the uncertaint
 - statement: 现有方法是否评估过跨扰动组合的系统性泛化（如 held-out combination classes）？其评测协议是否可复用？
 - source trace:
   - "Our differentiation is systematic generalization across perturbation combinations: most published evaluations report single-gene knockouts or single-drug responses, while we want double- and triple-perturbation settings with held-out combination classes."
-- dependencies: CQ-01, CQ-02
-- resolution condition: 基于 CQ-01 的覆盖分类与 CQ-02 的基准清单，确认是否存在包含组合设置与 held-out 划分的评测协议；存在则评估其可复用性（数据可得性、指标定义、划分方式），不存在则记录协议缺口。
+- dependencies: CQ-02
+- resolution condition: 证据条件（依赖 CQ-02 的基准存在性结论）：评测协议是否同时包含组合扰动设置与 held-out 组合类别划分。若存在此类协议，其数据可得性、指标定义与划分方式构成可复用性的证据；若不存在，即构成明确的协议缺口。
 - uncertainty: (none)
 

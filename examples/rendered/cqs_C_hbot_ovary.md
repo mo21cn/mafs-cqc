@@ -39,7 +39,7 @@ The confounder list includes concurrent oxidative exposures, age, and indication
 - source trace:
   - "So the net direction of the redox effect in ovarian tissue under repeated hyperoxic exposure is genuinely unresolved."
 - dependencies: (none)
-- resolution condition: 检索卵巢组织在高压/高氧暴露下 ROS 水平与抗氧化标志物（SOD、CAT、GPx、MDA 等）的定量研究，按方案参数（压力、次数、时长）归纳效应方向；若双向证据并存，归纳出方向切换的条件。
+- resolution condition: 证据条件：卵巢组织在高压/高氧暴露下 ROS 水平与抗氧化标志物（SOD、CAT、GPx、MDA 等）的定量测量，按方案参数（压力、次数、时长）分层后的效应方向。双向证据并存时，方向切换的条件本身即为问题的解决状态。
 - uncertainty: 叙事明确双向假设均有组织学外证据支持（促氧化：ROS 驱动原始卵泡过度激活；抗氧化：上调抗氧化防御）；方向未定是本问题的起点而非待清除的噪声。
 
 ### CQ-02
@@ -47,9 +47,9 @@ The confounder list includes concurrent oxidative exposures, age, and indication
 - type: INTERVENTION_OR_CONTROL
 - statement: 现有 HBOT-卵巢动物实验的对照设置（常氧高压、常压氧、假处理）是否足以把观察到的效应归因于高压氧本身？
 - source trace:
-  - "Clinical HBOT protocols differ widely in pressure, session count, and duration, and the animal dosing rarely matches clinical exposure."
-- dependencies: CQ-01
-- resolution condition: 对 CQ-01 收录的动物研究逐篇核对对照类型、随机化与盲法设置；以对照质量分层后重新审视归因强度，输出按证据等级分组的研究清单。
+  - "the quality of the interventional controls in the animal literature"
+- dependencies: (none)
+- resolution condition: 证据条件：HBOT-卵巢动物实验中每个效应主张所对应的对照设置（常氧高压 / 常压供氧 / 假处理）、随机化与盲法状态。对照质量决定效应归因于高压氧本身的强度分层；该分层即问题的解决状态。
 - uncertainty: (none)
 
 ### CQ-03
@@ -59,7 +59,7 @@ The confounder list includes concurrent oxidative exposures, age, and indication
 - source trace:
   - "measured by AMH levels, antral follicle counts, and histological primordial follicle counts"
 - dependencies: (none)
-- resolution condition: 检索卵巢储备测量方法学文献与权威指南，比较三类测量的信度、效度与跨物种/跨批次可比性；输出各测量适用场景与已知偏差。
+- resolution condition: 证据条件：AMH、AFC、组织学原始卵泡计数三类卵巢储备测量各自的信度/效度证据与已知偏差记录，以及跨物种、跨批次可比性的方法学证据。三者共同决定跨研究比较的可行边界。
 - uncertainty: (none)
 
 ### CQ-04
@@ -68,8 +68,8 @@ The confounder list includes concurrent oxidative exposures, age, and indication
 - statement: 是否有直接证据（以原始卵泡激活或丢失率为终点）表明 HBOT 改变卵巢储备的消耗速率？
 - source trace:
   - "whether any direct evidence ties HBOT to primordial follicle activation or loss rates"
-- dependencies: CQ-01, CQ-02
-- resolution condition: 在 CQ-01/CQ-02 的证据清单上，检索以原始卵泡激活/丢失组织学计数为终点的 HBOT 研究：有则以对照质量分级记录；无则记录『直接证据缺失』，不视为阴性结论。
+- dependencies: CQ-02
+- resolution condition: 证据条件（依赖 CQ-02 的对照质量分层）：以原始卵泡激活率或丢失率为直接终点的 HBOT 研究证据。存在则按对照质量定级记录；不存在则状态为『直接证据缺失』——这是证据缺口，不得当作阴性结论。
 - uncertainty: 叙事中的『preoperatively can preserve』说法来自卵巢缺血再灌注损伤模型；该保护效应外推到健康卵巢或临床 HBOT 人群未经证实，需保持假设状态。
 
 ### CQ-05
@@ -77,8 +77,8 @@ The confounder list includes concurrent oxidative exposures, age, and indication
 - type: TRANSLATION
 - statement: 动物 HBOT 剂量方案向临床 HBOT 方案的外推效度如何，暴露量差距有多大？
 - source trace:
-  - "Human evidence on HBOT and ovarian reserve specifically appears thin and mostly indirect."
+  - "Clinical HBOT protocols differ widely in pressure, session count, and duration, and the animal dosing rarely matches clinical exposure."
 - dependencies: CQ-04
-- resolution condition: 将 CQ-04 收录研究的动物暴露参数（压力 ATA、频次、总时长）与临床 HBOT 常规方案逐项对照，量化暴露差距并评估外推风险等级。
+- resolution condition: 证据条件（依赖 CQ-04 的直接证据研究集）：这些研究的动物暴露参数（压力 ATA、频次、总时长）与临床 HBOT 常规方案参数之间的差距本身。差距的大小即为外推效度的证据状态。
 - uncertainty: (none)
 

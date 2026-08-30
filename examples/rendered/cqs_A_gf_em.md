@@ -45,7 +45,7 @@ Prepare an executable question set for downstream MAFS retrieval: confirm source
 - source trace:
   - "It is also unverified whether the supplementary materials of von Reyn 2014 actually contain a GF neuron ID list at all."
 - dependencies: (none)
-- resolution condition: 直接获取 von Reyn 2014 论文的补充材料并逐项检查：存在 GF 神经元 ID 清单则提取并记录其覆盖范围；不存在则记录明确的不存在结论。标题与摘要层面的推断不作为判定依据。
+- resolution condition: 证据条件：von Reyn 2014 (Nature Neuroscience 17:962-970) 补充材料内容本身。若其中包含 GF 神经元 ID 清单，问题以『存在 + 清单覆盖范围』解决；若确认不含，以『明确不存在』解决。标题与摘要层面的推断不足以裁决任一方向。
 - uncertainty: 补充材料的公开可及性未知；若仅部分可及，结论须区分『确认不存在』与『无法确认』。
 
 ### CQ-02
@@ -55,7 +55,7 @@ Prepare an executable question set for downstream MAFS retrieval: confirm source
 - source trace:
   - "Whether "von Reyn 2020" refers to a real Giant Fiber paper is doubtful: the major 2020 Drosophila connectome work is Scheffer et al. 2020 ("A connectome and analysis of the adult Drosophila central brain", eLife), from a largely overlapping Janelia collaboration, which may be what the operator conflated."
 - dependencies: (none)
-- resolution condition: 在 PubMed/Crossref 以 von Reyn + 2020 + Giant Fiber/Drosophila 组合检索：命中真实论文则确认其书目身份与 GF 相关性；无命中且检索充分则记录 NOT_FOUND，并将混淆假设标记为 LIKELY_CONFLATION。
+- resolution condition: 证据条件：存在或不存在一篇 2020 年发表的、作者含 von Reyn 且主题为 GF 的研究论文的可验证书目记录。前者→问题转为确认该论文的身份与 GF 相关性；后者（在证据覆盖充分的前提下）→支持『引用混淆』判定，其混淆对象最可能是 Scheffer et al. 2020 的果蝇中央脑连接组论文。
 - uncertainty: 若检索发现真实的 von Reyn 2020 GF 论文，本问题从『混淆判定』转为『确认该论文身份』；叙事当前只提供了怀疑依据，未提供否定证据。
 
 ### CQ-03
@@ -65,7 +65,7 @@ Prepare an executable question set for downstream MAFS retrieval: confirm source
 - source trace:
   - "which labels the Giant Fiber as DNp01"
 - dependencies: (none)
-- resolution condition: 以 Namiki et al. 2018 (eLife 7:e34272) 原文对 DNp01 的定义，以及 Virtual Fly Brain 官方条目 FBbt:00004020 的记录为准，确认 GF（Giant Fiber）与 DNp01 的映射；两个来源一致则视为确立。
+- resolution condition: 确立条件：Namiki et al. 2018 (eLife 7:e34272) 原文对 DNp01 的定义与 Virtual Fly Brain 官方条目 FBbt:00004020 的记录对 GF（Giant Fiber）→DNp01 映射的记载一致。二者一致即视为命名关系确立；不一致则把分歧本身记录为解决状态。
 - uncertainty: (none)
 
 ### CQ-04
@@ -75,7 +75,7 @@ Prepare an executable question set for downstream MAFS retrieval: confirm source
 - source trace:
   - "no authoritative primary source has confirmed that DNg01 is a synonym of DNp01, so the two must not be silently treated as the same neuron class"
 - dependencies: (none)
-- resolution condition: 以权威一手来源（FlyBase 参考报告、Virtual Fly Brain 条目、原始文献的神经元命名表述）为准：明确确立同义则更新映射；确立二者为不同类别则按不同类别处理；均无法确立则保持 DISTINCT_NEURON_CLASS_UNLESS_AUTHORITATIVE_EVIDENCE 立场。
+- resolution condition: 确立条件：任一权威一手来源（如 FlyBase 参考报告、Virtual Fly Brain 条目、原始文献中的神经元命名表述）对 DNg01 与 DNp01 关系的明确记载。记载为同义→同义关系成立；记载为区分→维持不同类别；无任何明确记载→保持 DISTINCT_NEURON_CLASS_UNLESS_AUTHORITATIVE_EVIDENCE 立场，且该立场本身就是问题的当前解决状态。
 - uncertainty: 当前所有已知权威来源均未证实同义关系；本问题的结论可能随新的一手证据翻转。
 
 ### CQ-05
@@ -85,6 +85,6 @@ Prepare an executable question set for downstream MAFS retrieval: confirm source
 - source trace:
   - "the specific root IDs supplied by the operator for the right and left GF have not been independently confirmed against dataset annotations"
 - dependencies: CQ-03
-- resolution condition: 以数据集官方注释资源（flywire_annotations 发布库、neuPrint 兼容 API、hemibrain 官方文档）确认 DNp01 对应的左右体节 root ID；与操作者提供的 ID 比对并记录一致或不一致。
+- resolution condition: 证据条件：数据集官方注释记录（FlyWire annotations 发布库 / neuPrint 兼容接口 / hemibrain 官方文档）中 DNp01 的左右体节 root ID。该记录与操作者所提供 ID 的一致或不一致即为问题的解决状态；结论必须绑定具体数据集版本（v783、FAFB14.1、annotation v2.1.0 等）。
 - uncertainty: 操作者提供的 root ID 未经独立验证，且 root ID 可能随数据集版本（v783、FAFB14.1、annotation v2.1.0）变化；结论必须绑定具体数据集版本。
 

@@ -1,7 +1,7 @@
 {
   "contract_id": "CQC-P1-REAL-TASK-DIGESTION-REPLAY-REDIGESTION-LINEAGE-v0.1",
-  "verified_commit_sha": "367d6a319c61ac2d98f176c691bc58ef315ef13b",
-  "ci_run_id": null,
+  "verified_commit_sha": "4b956de2adf841475660c7b998262cf6e855e7d3",
+  "ci_run_id": "33331552163",
   "benchmark_case_count": 5,
   "raw_or_verbatim_case_count": 5,
   "reconstructed_case_count": 0,

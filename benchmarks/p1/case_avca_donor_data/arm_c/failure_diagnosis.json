@@ -10,5 +10,6 @@
   ],
   "repair_instruction": "CQ-02.dependencies = [CQ-01, CQ-03]. No other field changed.",
   "revised_artifact_id": "CQS-CQC-P1-05-RC1",
-  "revised_artifact_sha256": "990a1e818e3766009e94cec0144ce0d9c0f98e28b6d96bddaf96988d5d58b43e"
+  "revised_artifact_sha256": "2d5c90f6b34d20041f24935f70cccbc1628e93a8aedd4bb98958a4d4cfb8258d",
+  "revised_artifact_sha256_basis": "sha256 of the committed (LF-normalized) revised artifact bytes, rebound in CQC-P1-RA1 after EOL normalization"
 }

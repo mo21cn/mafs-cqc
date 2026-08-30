@@ -10,5 +10,6 @@
   ],
   "repair_instruction": "CQ-01.dependencies = [] (remove edge CQ-01->CQ-02). No other field changed.",
   "revised_artifact_id": "CQS-CQC-P1-02-RC1",
-  "revised_artifact_sha256": "81c5f40bc8fbd73d500ef0d832b266fed94e3ff009ad16302d4586345615a922"
+  "revised_artifact_sha256": "5767b00560755456d91c545d70cdd42bf87d226e72db98b38a7c0d1650618791",
+  "revised_artifact_sha256_basis": "sha256 of the committed (LF-normalized) revised artifact bytes, rebound in CQC-P1-RA1 after EOL normalization"
 }

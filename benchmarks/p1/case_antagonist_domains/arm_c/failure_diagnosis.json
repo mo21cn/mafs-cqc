@@ -11,5 +11,6 @@
   ],
   "repair_instruction": "CQ-03.dependencies = [CQ-01] and CQ-03.uncertainty states the assumed pharmacological reading explicitly. No other field changed.",
   "revised_artifact_id": "CQS-CQC-P1-04-RC1",
-  "revised_artifact_sha256": "191816cf0330f1abce3f910f5c81395b838ba3c131007bf928ecdbd43d74a37c"
+  "revised_artifact_sha256": "3a6fff273978fb80b360da9d1d43b222280feb26a1904ed8f76f626232492d1f",
+  "revised_artifact_sha256_basis": "sha256 of the committed (LF-normalized) revised artifact bytes, rebound in CQC-P1-RA1 after EOL normalization"
 }

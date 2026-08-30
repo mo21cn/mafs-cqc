@@ -1,6 +1,6 @@
 {
   "contract_id": "CQC-P1-RA1-EXPERIMENTAL-TRUTH-LINEAGE-EARNED-REDIGESTION-CLOSURE-v0.1",
-  "verified_commit_sha": "b19f895982fccea2220be80600f4e95b5d053775",
+  "verified_commit_sha": "c75864a03444097fbf1ed4aae5c90a33c8db0c49",
   "ci_run_id": null,
   "benchmark_case_count": 5,
   "raw_hash_match_arm_a_count": 5,

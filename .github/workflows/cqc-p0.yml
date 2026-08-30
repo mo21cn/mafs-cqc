@@ -1,0 +1,21 @@
+name: cqc-p0
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install test dependency
+        run: pip install pytest
+      - name: Validate committed CQS artifacts (schema + hash + trace + DAG + input crosscheck)
+        run: python scripts/validate_cqs.py examples/outputs/*.json --check-inputs examples/inputs
+      - name: Run tests (validation rules + deterministic rendering reproducibility)
+        run: python -m pytest -q

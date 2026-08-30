@@ -1,0 +1,21 @@
+{
+  "case_id": "case_antagonist_domains",
+  "arm": "B",
+  "generated_from": "arm_b/candidate_question_set.json (explicit digestion artifact CQS-CQC-P1-04)",
+  "raw_input_sha256": "5975fee349086e278ca19754c773657d760e0ee3073e2ed68dbec42d15a00967",
+  "question_ids_to_search": [
+    {"question_id": "CQ-01", "search_question": "『拮抗剂』指称范围消歧（原词检索的实体类型分布 + 操作者确认）", "resolution_condition_ref": "见 CQ-01.resolution_condition"},
+    {"question_id": "CQ-02", "search_question": "药理拮抗剂应用领域版图盘点（治疗领域×机制家族矩阵；blocked by CQ-01）", "resolution_condition_ref": "见 CQ-02.resolution_condition"},
+    {"question_id": "CQ-03", "search_question": "拮抗剂作为研究工具的非治疗用途", "resolution_condition_ref": "见 CQ-03.resolution_condition"},
+    {"question_id": "CQ-04", "search_question": "盘点维度选择（疾病/靶点/模态/发展阶段试盘点对照）", "resolution_condition_ref": "见 CQ-04.resolution_condition"}
+  ],
+  "question_order_if_any": ["CQ-01", "CQ-04", "CQ-02", "CQ-03"],
+  "reason_for_order": "CQ-01 消歧先行（CQ-02 被其阻塞，依赖边 CQ-02→CQ-01）；CQ-04 维度选择可与消歧并行；CQ-03 工具用途线独立",
+  "questions_blocked_by_prerequisite": ["CQ-02 (blocked by CQ-01 per dependency edge)"],
+  "questions_independently_searchable": ["CQ-01", "CQ-03", "CQ-04"],
+  "missing_information_before_search": [
+    "指称范围歧义（CQ-01.uncertainty 显式保留，等待操作者确认）",
+    "盘点维度歧义（CQ-04.uncertainty 显式保留）"
+  ],
+  "natural_reasoning_notes": "Explicit digestion arm: the dominant-interpretation choice is no longer silent — it is a first-class question (CQ-01) with a blocking edge to the inventory question (CQ-02)."
+}

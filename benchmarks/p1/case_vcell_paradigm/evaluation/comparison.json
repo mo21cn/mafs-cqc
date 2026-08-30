@@ -1,0 +1,46 @@
+{
+  "case_id": "case_vcell_paradigm",
+  "machine_facts": {
+    "arm_b_cqs_questions": 3,
+    "arm_b_dependency_edges": 1,
+    "arm_b_edges": [["CQ-03", "CQ-01"]],
+    "arm_b_schema_valid": true,
+    "arm_b_source_hash_valid": true,
+    "arm_b_exact_trace_valid": true,
+    "arm_b_dag_valid": true,
+    "arm_b_render_reproducible": true,
+    "arm_a_prepared_questions": 4,
+    "arm_b_prepared_questions": 3
+  },
+  "manual_adjudication": {
+    "adjudicator": "local_claw_preliminary",
+    "status": "PENDING_HO_PLUS_CHATGPT_FINAL_ADJUDICATION",
+    "critical_question_coverage": {
+      "reference_set_basis": "minimal critical set from operator intent: (1) candidate-paradigm inventory; (2) explicit disposition of the undefined paradigm-judgment criterion; (3) lineage of candidates against prior paradigms",
+      "critical_questions_expected": ["candidate paradigm inventory", "paradigm-criterion disposition", "lineage mapping"],
+      "arm_a_recovered": ["candidate inventory (QA-01..03)", "criterion — handled implicitly (self-claimed-paradigm proxy, unrecorded)", "lineage (QA-04 contrast line, unstructured)"],
+      "arm_b_recovered": ["candidate inventory (CQ-01 wide-net)", "criterion disposition (CQ-02 — explicit question requiring operator confirmation)", "lineage (CQ-03, dependency-gated on CQ-01)"],
+      "arm_a_missed": ["criterion disposition is unauditable in Arm A (loose proxy adopted silently)"],
+      "arm_b_missed": []
+    },
+    "unnecessary_questions": {"arm_a": [], "arm_b": []},
+    "intent_preservation": {
+      "arm_a": "behaviorally preserved; the undefined-criterion gap was papered over by an implicit proxy",
+      "arm_b": "preserved; the gap became an operable question (CQ-02) that must be resolved with the operator before final filtering"
+    },
+    "granularity_failures": {"arm_a": [], "arm_b": []},
+    "dependency_failures": {
+      "arm_a": "not applicable",
+      "arm_b": "edge CQ-03→CQ-01 survives the RA2 test: lineage mapping has no object without the candidate list; flagged for HO confirmation"
+    },
+    "cross_stage_drift": {
+      "arm_a": "not applicable",
+      "arm_b": "none: prep order (CQ-01→CQ-03→CQ-02) matches dependency edge and wide-net-then-filter rationale"
+    },
+    "traceability": {
+      "arm_a": "none",
+      "arm_b": "full (verbatim trace; uncertainty on 2/3)"
+    },
+    "repeated_reasoning_cost": {"model_calls": "1 per arm", "token_use": null, "wall_time": null, "manual_intervention_count": 0}
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "case_vcell_paradigm",
+  "arm": "A",
+  "generated_from": "raw_narrative.txt (narrative-only baseline; no CandidateQuestionSet consulted)",
+  "raw_input_sha256": "37f34e945191809c47253d6280b5889c447316e52695f5472f8a4a13daee2ad1",
+  "question_ids_to_search": [
+    {
+      "question_id": "QA-01",
+      "search_question": "virtual cell 领域综述中自称/被称为 paradigm 的工作与段落",
+      "notes": "直接找范式声明"
+    },
+    {
+      "question_id": "QA-02",
+      "search_question": "cell biology foundation models（扰动预测、细胞状态模拟）的范式级文献",
+      "notes": "近年最可能的『新范式』聚集地"
+    },
+    {
+      "question_id": "QA-03",
+      "search_question": "数据基础设施作为范式：大规模 atlas / perturbation map 资源的方法学声明",
+      "notes": "资源型范式候选"
+    },
+    {
+      "question_id": "QA-04",
+      "search_question": "机制建模 → ML 混合建模范式的过渡与对比文献",
+      "notes": "相对经典范式的『新』参照"
+    }
+  ],
+  "question_order_if_any": ["QA-01", "QA-02", "QA-03", "QA-04"],
+  "reason_for_order": "先找自称范式的综述，再按 AI 模型/数据基础设施/混合建模三条候选线展开",
+  "questions_blocked_by_prerequisite": [],
+  "questions_independently_searchable": ["QA-01", "QA-02", "QA-03", "QA-04"],
+  "missing_information_before_search": [
+    "『范式』的判定标准未给出——检索时隐含采用了『自称范式即候选』的宽松标准，未显式记录",
+    "『新』的参照点（相对哪些既有范式）未指定",
+    "原文拼写 \"Virtual Cel\" 按领域名理解，未记录"
+  ],
+  "natural_reasoning_notes": "Narrative-only baseline: paradigm-judgment criteria were implicitly assumed, not recorded; the artifact-free arm cannot carry that interpretive choice forward for audit."
+}

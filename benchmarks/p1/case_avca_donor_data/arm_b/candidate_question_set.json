@@ -1,0 +1,49 @@
+{
+  "artifact_id": "CQS-CQC-P1-05",
+  "schema_version": "0.1",
+  "source_narrative_sha256": "7b136c4d6ae8d77d9cae98e23e312dfec4fb0076099e295dd0d6a5053a747ae2",
+  "source_narrative": "\"Arc Virtual Cell Atlas\"数据集资源里有没有有没有年轻健康血管/心脏原代供体数据\n",
+  "questions": [
+    {
+      "question_id": "CQ-01",
+      "statement": "Arc Virtual Cell Atlas 是什么实体（维护方、收录范围、数据组织方式、访问途径）？",
+      "source_trace": [
+        {
+          "exact_quote": "\"Arc Virtual Cell Atlas\"数据集资源"
+        }
+      ],
+      "question_type": "ENTITY_RESOLUTION",
+      "dependencies": [],
+      "resolution_condition": "证据条件：Atlas 官方文档、发布说明或论文对其身份、收录数据集清单与访问方式的记录。实体身份与内容组织被确认即为解决状态；实体不存在或名称歧义则向上浮出为命名问题。",
+      "uncertainty": "实体以原话引用名为准；若官方名与引用名有出入（缩写/全称/版本），差异记录为命名谱系问题而非静默更正。"
+    },
+    {
+      "question_id": "CQ-02",
+      "statement": "Atlas 收录的数据集中，是否存在来自年轻健康供体的血管/心脏原代细胞数据？",
+      "source_trace": [
+        {
+          "exact_quote": "年轻健康血管/心脏原代供体数据"
+        }
+      ],
+      "question_type": "SOURCE_CONTENT",
+      "dependencies": [
+        "CQ-01"
+      ],
+      "resolution_condition": "证据条件：Atlas 数据集清单/元数据中对目标数据的存在性记录——存在（给出数据集标识与供体元数据字段值）/ 不存在（在清单可枚举的前提下记录明确的不存在）。标题与描述层面的推断不足以裁决。",
+      "uncertainty": "『年轻』『健康』『原代』三个判定词均未定义（见 CQ-03）；存在性回答必须绑定所用判定标准的显式声明。原话存在『有没有有没有』重复，按单一疑问理解并在此记录。"
+    },
+    {
+      "question_id": "CQ-03",
+      "statement": "『年轻』『健康』『原代』三个判定词在 Atlas 元数据体系中对应哪些可操作字段与阈值（年龄分箱、健康状态定义、primary vs cell line vs iPSC-derived 的区分）？",
+      "source_trace": [
+        {
+          "exact_quote": "年轻健康血管/心脏原代供体"
+        }
+      ],
+      "question_type": "MEASUREMENT_OR_OBSERVABILITY",
+      "dependencies": [],
+      "resolution_condition": "证据条件：Atlas 元数据 schema 的字段定义记录。每个判定词映射到『可判定（有字段）/不可判定（无字段）/部分可判定』三态之一即为解决状态；不可判定时需向操作者上浮阈值确认请求。",
+      "uncertainty": "操作者未给任何阈值；判定标准只能来自数据集元数据体系与操作者补充，消化不得代拟。"
+    }
+  ]
+}

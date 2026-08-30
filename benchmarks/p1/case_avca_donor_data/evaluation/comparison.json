@@ -1,0 +1,46 @@
+{
+  "case_id": "case_avca_donor_data",
+  "machine_facts": {
+    "arm_b_cqs_questions": 3,
+    "arm_b_dependency_edges": 1,
+    "arm_b_edges": [["CQ-02", "CQ-01"]],
+    "arm_b_schema_valid": true,
+    "arm_b_source_hash_valid": true,
+    "arm_b_exact_trace_valid": true,
+    "arm_b_dag_valid": true,
+    "arm_b_render_reproducible": true,
+    "arm_a_prepared_questions": 4,
+    "arm_b_prepared_questions": 3
+  },
+  "manual_adjudication": {
+    "adjudicator": "local_claw_preliminary",
+    "status": "PENDING_HO_PLUS_CHATGPT_FINAL_ADJUDICATION",
+    "critical_question_coverage": {
+      "reference_set_basis": "minimal critical set from operator intent: (1) Atlas entity confirmation; (2) existence answer bound to explicit judgment standards; (3) decidability of the three judgment words (年轻/健康/原代); (4) disposition of the textual repetition 有没有有没有",
+      "critical_questions_expected": ["atlas entity confirmation", "existence answer bound to standards", "threshold decidability", "repetition disposition"],
+      "arm_a_recovered": ["atlas entity (QA-01)", "existence check (QA-02)", "thresholds — borrowed common conventions implicitly (unrecorded)", "repetition normalized silently"],
+      "arm_b_recovered": ["atlas entity (CQ-01, gating)", "existence check (CQ-02, blocked; answer must bind CQ-03 standards)", "threshold decidability (CQ-03 three-state mapping: decidable/undecidable/partial)", "repetition durably recorded in CQ-02.uncertainty"],
+      "arm_a_missed": ["threshold provenance is unauditable in Arm A (borrowed conventions, no record)"],
+      "arm_b_missed": []
+    },
+    "unnecessary_questions": {"arm_a": [], "arm_b": []},
+    "intent_preservation": {
+      "arm_a": "behaviorally preserved; threshold borrowing and repetition normalization unrecorded",
+      "arm_b": "preserved; three-state decidability question (CQ-03) forces the standard problem into the open before an existence claim is made"
+    },
+    "granularity_failures": {"arm_a": [], "arm_b": []},
+    "dependency_failures": {
+      "arm_a": "not applicable",
+      "arm_b": "edge CQ-02→CQ-01 survives the RA2 test: existence inside a resource cannot be evaluated before the resource's identity, scope and access path are confirmed; flagged for HO confirmation"
+    },
+    "cross_stage_drift": {
+      "arm_a": "not applicable",
+      "arm_b": "none: prep blocked-question and order match the CQS edge; CQ-03 positioned before CQ-02 execution because its output binds the answer"
+    },
+    "traceability": {
+      "arm_a": "none",
+      "arm_b": "full (verbatim traces including the duplicated 有没有有没有 fragment preserved in uncertainty)"
+    },
+    "repeated_reasoning_cost": {"model_calls": "1 per arm", "token_use": null, "wall_time": null, "manual_intervention_count": 0}
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "case_id": "case_vcell_scope",
+  "arm": "A",
+  "generated_from": "raw_narrative.txt (narrative-only baseline; no CandidateQuestionSet consulted)",
+  "raw_input_sha256": "aac9f8ba4abaee4fffbcd0e4632b7c51358c1d29ba59b391bd6bb96bc8655313",
+  "question_ids_to_search": [
+    {
+      "question_id": "QA-01",
+      "search_question": "\"virtual cell\" 领域综述与立场文章（scope/review）",
+      "notes": "直接按领域名检索盘点性文献"
+    },
+    {
+      "question_id": "QA-02",
+      "search_question": "whole-cell modeling 谱系（如 Mycoplasma 全细胞动力学模型等机制建模传统）",
+      "notes": "virtual cell 的机制建模前身"
+    },
+    {
+      "question_id": "QA-03",
+      "search_question": "AI/基础模型线：cell foundation models、perturbation-response 预测模型（scGPT/Geneformer 语境下的 virtual cell 叙事）",
+      "notes": "近年最活跃方向"
+    },
+    {
+      "question_id": "QA-04",
+      "search_question": "数据资源线：Arc Virtual Cell Atlas、CZ/HCA 类细胞图谱与虚拟细胞资源",
+      "notes": "数据基础设施方向"
+    },
+    {
+      "question_id": "QA-05",
+      "search_question": "相邻术语扩展检索：in silico cell / digital cell / cell digital twin",
+      "notes": "防止术语漏检"
+    }
+  ],
+  "question_order_if_any": ["QA-01", "QA-02", "QA-03", "QA-04", "QA-05"],
+  "reason_for_order": "综述先行锚定方向分类，再按机制建模→AI 模型→数据资源三条主线展开，最后用相邻术语补漏",
+  "questions_blocked_by_prerequisite": [],
+  "questions_independently_searchable": ["QA-01", "QA-02", "QA-03", "QA-04", "QA-05"],
+  "missing_information_before_search": [
+    "原文拼写 \"Virtual Cel\"（少一个 l）——按 Virtual Cell 理解处理，未做显式记录"
+  ],
+  "natural_reasoning_notes": "Narrative-only baseline: the operator's typo was silently normalized to 'Virtual Cell' during preparation — no durable record of that interpretation choice exists in this arm."
+}

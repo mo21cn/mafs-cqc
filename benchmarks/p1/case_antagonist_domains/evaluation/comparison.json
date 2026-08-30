@@ -1,0 +1,46 @@
+{
+  "case_id": "case_antagonist_domains",
+  "machine_facts": {
+    "arm_b_cqs_questions": 4,
+    "arm_b_dependency_edges": 1,
+    "arm_b_edges": [["CQ-02", "CQ-01"]],
+    "arm_b_schema_valid": true,
+    "arm_b_source_hash_valid": true,
+    "arm_b_exact_trace_valid": true,
+    "arm_b_dag_valid": true,
+    "arm_b_render_reproducible": true,
+    "arm_a_prepared_questions": 4,
+    "arm_b_prepared_questions": 4
+  },
+  "manual_adjudication": {
+    "adjudicator": "local_claw_preliminary",
+    "status": "PENDING_HO_PLUS_CHATGPT_FINAL_ADJUDICATION",
+    "critical_question_coverage": {
+      "reference_set_basis": "minimal critical set from operator intent: (1) disposition of the heavily under-specified term 拮抗剂 (pharmacological vs muscle vs other readings); (2) application-domain inventory; (3) research-tool (non-therapeutic) usage line",
+      "critical_questions_expected": ["term disambiguation", "domain inventory", "research-tool usage", "inventory-dimension choice"],
+      "arm_a_recovered": ["domain inventory (QA-01..03, default pharmacological reading)", "research-tool usage (QA-03)", "dimension choice implicit (by therapeutic area, unrecorded)"],
+      "arm_b_recovered": ["term disambiguation (CQ-01, blocking edge to inventory)", "domain inventory (CQ-02, gated)", "research-tool usage (CQ-03)", "inventory-dimension choice (CQ-04, explicit)"],
+      "arm_a_missed": ["term disambiguation is unauditable in Arm A (non-pharmacological reading dismissed by intuition, no record)"],
+      "arm_b_missed": []
+    },
+    "unnecessary_questions": {"arm_a": [], "arm_b": []},
+    "intent_preservation": {
+      "arm_a": "behaviorally preserved but the dominant-interpretation choice (pharmacological) was adopted by default and is unauditable",
+      "arm_b": "preserved; the heavy ambiguity is a first-class question (CQ-01) whose resolution gates the inventory (CQ-02) via a blocking edge"
+    },
+    "granularity_failures": {"arm_a": [], "arm_b": []},
+    "dependency_failures": {
+      "arm_a": "not applicable",
+      "arm_b": "edge CQ-02→CQ-01 survives the RA2 test: without disambiguation the inventory search surface would admit non-pharmacological 拮抗 literature (e.g. antagonist-muscle studies), corrupting the domain matrix; flagged for HO confirmation"
+    },
+    "cross_stage_drift": {
+      "arm_a": "not applicable",
+      "arm_b": "none: prep blocked-question and order match the CQS edge"
+    },
+    "traceability": {
+      "arm_a": "none",
+      "arm_b": "full (verbatim traces; uncertainty on 3/4)"
+    },
+    "repeated_reasoning_cost": {"model_calls": "1 per arm", "token_use": null, "wall_time": null, "manual_intervention_count": 0}
+  }
+}

@@ -67,10 +67,8 @@
         }
       ],
       "question_type": "TRANSLATION",
-      "dependencies": [
-        "CQ-04"
-      ],
-      "resolution_condition": "证据条件（依赖 CQ-04 的直接证据研究集）：这些研究的动物暴露参数（压力 ATA、频次、总时长）与临床 HBOT 常规方案参数之间的差距本身。差距的大小即为外推效度的证据状态。",
+      "dependencies": [],
+      "resolution_condition": "证据条件：HBOT-卵巢动物研究——涵盖储备终点与机制/红氧终点——所报告的暴露参数（压力 ATA、频次、总时长）与临床 HBOT 常规方案参数之间的差距本身。差距的大小即为外推效度的证据状态。",
       "uncertainty": null
     }
   ]

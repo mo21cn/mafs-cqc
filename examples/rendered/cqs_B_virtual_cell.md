@@ -66,7 +66,7 @@ Our novelty framing may drift as the literature moves quickly, so the uncertaint
 - statement: 现有方法是否评估过跨扰动组合的系统性泛化（如 held-out combination classes）？其评测协议是否可复用？
 - source trace:
   - "Our differentiation is systematic generalization across perturbation combinations: most published evaluations report single-gene knockouts or single-drug responses, while we want double- and triple-perturbation settings with held-out combination classes."
-- dependencies: CQ-02
-- resolution condition: 证据条件（依赖 CQ-02 的基准存在性结论）：评测协议是否同时包含组合扰动设置与 held-out 组合类别划分。若存在此类协议，其数据可得性、指标定义与划分方式构成可复用性的证据；若不存在，即构成明确的协议缺口。
+- dependencies: (none)
+- resolution condition: 证据条件：评测协议是否同时包含组合扰动设置与 held-out 组合类别划分——无论该协议是否已成为社区公认基准。已发表工作中的协议设计本身即证据：其数据可得性、指标定义与划分方式构成可复用性的证据状态；完全缺失此类协议时，即构成明确的协议缺口。
 - uncertainty: (none)
 

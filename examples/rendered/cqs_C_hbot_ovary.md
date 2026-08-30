@@ -78,7 +78,7 @@ The confounder list includes concurrent oxidative exposures, age, and indication
 - statement: 动物 HBOT 剂量方案向临床 HBOT 方案的外推效度如何，暴露量差距有多大？
 - source trace:
   - "Clinical HBOT protocols differ widely in pressure, session count, and duration, and the animal dosing rarely matches clinical exposure."
-- dependencies: CQ-04
-- resolution condition: 证据条件（依赖 CQ-04 的直接证据研究集）：这些研究的动物暴露参数（压力 ATA、频次、总时长）与临床 HBOT 常规方案参数之间的差距本身。差距的大小即为外推效度的证据状态。
+- dependencies: (none)
+- resolution condition: 证据条件：HBOT-卵巢动物研究——涵盖储备终点与机制/红氧终点——所报告的暴露参数（压力 ATA、频次、总时长）与临床 HBOT 常规方案参数之间的差距本身。差距的大小即为外推效度的证据状态。
 - uncertainty: (none)
 

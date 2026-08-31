@@ -1,7 +1,7 @@
 {
   "contract_id": "CQC-P1-RA2-ARTIFACT-RECURSIVE-DIGESTION-DOWNSTREAM-STATE-PROPAGATION-CLOSURE-v0.1",
-  "verified_commit_sha": "14c22c75c6b7f5d305e18cd4030b8234d70487b6",
-  "ci_run_id": null,
+  "verified_commit_sha": "6ad06698c2d0904d1fea440968ca8d4869fb1ef0",
+  "ci_run_id": "33352004934",
   "benchmark_case_count": 5,
   "arm_c_triggered_count": 3,
   "arm_c_completed_count": 3,

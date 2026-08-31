@@ -33,10 +33,10 @@ since P3 freeze; no pressure earned a new field across 6 cases + 2 perturbations
 |---|---|---:|---|
 | S1 | PASS | 2 | containment holds (population/resolution ambiguities stay conditional) |
 | S2 | REPAIRED | 0 | evidence-state semantics, not search strategy |
-| S3 | PRODUCTIVE_INSTABILITY_PRESERVED | 4 | terminology/entity ambiguity preserved |
+| S3 | PRODUCTIVE_INSTABILITY_PRESERVED | 3 | terminology/entity ambiguity preserved |
 | S4 | PASS | 1 | shared requirement retained (identity serves CQ-01+CQ-02) |
 | S5 | REPAIRED | 1 | context resurrection closed |
-| S6 | BOUNDARY_UNRESOLVED_PRESERVED | 0 | identity granularity preserved |
+| S6 | BOUNDARY_UNRESOLVED_PRESERVED | 1 | identity granularity preserved |
 
 Counts are machine-derived from final artifacts (`docs/CQC_P3_METRICS.json`).
 

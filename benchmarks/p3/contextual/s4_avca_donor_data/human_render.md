@@ -1,0 +1,47 @@
+# SearchRequirementProfile: SRP-CQC-P3-04
+
+- schema_version: 0.1
+- source_cqs_id: CQS-CQC-P2-04
+- source_cqs_sha256: ba34208d5ba862e7bdf4498ebe19efcee87efe695c4b61200fe573f1dcef2c15
+- source_narrative_sha256: 7b136c4d6ae8d77d9cae98e23e312dfec4fb0076099e295dd0d6a5053a747ae2
+- requirements: 3
+
+## Source Narrative (verbatim)
+
+"Arc Virtual Cell Atlas"数据集资源里有没有有没有年轻健康血管/心脏原代供体数据
+
+## Requirements
+
+### R01
+
+- target_question_ids: CQ-01, CQ-02
+- evidence_need: Arc Virtual Cell Atlas 的实体身份、收录范围、数据组织与访问途径的权威记录——同时回答 CQ-01（实体确认）并为 CQ-02 的存在性判定提供清单证据源（共享 requirement：一份身份证据服务两个问题）。
+- epistemic routes:
+  - entity_resource_identity [REQUIRED] — 确认 Atlas 官方文档/发布记录中的身份、范围与访问途径
+    condition: 始终需要；它是 CQ-02 存在性判定的清单证据源
+- source_requirements: formal resource documentation, dataset metadata
+- stopping_condition: Atlas 的身份、收录范围与访问途径被官方记录确认；若实体不存在或名称歧义无法消解，则上浮为命名问题。
+- uncertainty_binding: 实体以原话引用名为准；官方名与引用名的出入记录为命名谱系问题（不静默更正）。
+
+### R02
+
+- target_question_ids: CQ-03
+- evidence_need: Atlas 元数据 schema 对『年轻』『健康』『原代』三个判定词的字段定义记录——每个词映射到『可判定/不可判定/部分可判定』三态。
+- epistemic routes:
+  - measurement_observability [REQUIRED] — 核查元数据体系对各判定词的可操作字段与阈值支持
+    condition: 始终需要；其三态结论直接决定 CQ-02 的存在性回答能否给出及以何种标准给出
+- source_requirements: dataset metadata, formal resource documentation
+- stopping_condition: 三个判定词各自获得三态判定之一。
+- uncertainty_binding: 操作者未给任何阈值——不可判定时上浮确认请求，不代拟阈值。
+
+### R03
+
+- target_question_ids: CQ-02
+- evidence_need: Atlas 清单/元数据中对目标数据（年轻健康供体血管/心脏原代细胞）的存在性记录——存在（含数据集标识与元数据字段值）或不存在（清单可枚举前提下）。
+- epistemic routes:
+  - source_content_verification [CONDITIONAL] — 在 R01 确认的清单证据源内核对目标数据的存在性
+    condition: gated on R01（清单证据源确认）与 R02（判定标准三态结论）；两者就绪后激活
+- source_requirements: dataset metadata, formal resource documentation
+- stopping_condition: 存在（含标识与字段值）/不存在/无法确认三态之一达成，且回答绑定 R02 产出的判定标准声明。
+- uncertainty_binding: 原文『有没有有没有』重复已在 CQ-02.uncertainty 记录（按单一疑问理解）；判定词阈值歧义由 R02 承接。
+

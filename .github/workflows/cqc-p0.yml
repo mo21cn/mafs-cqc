@@ -30,5 +30,7 @@ jobs:
         run: python scripts/validate_p1.py --hygiene
       - name: Validate P2 semantic stress packages and revision topologies (if present)
         run: python scripts/validate_p2.py --hygiene
+      - name: Validate P3 contextual SRP packages (if present)
+        run: python scripts/validate_p3.py --hygiene
       - name: Run tests (validation rules + deterministic rendering reproducibility)
         run: python -m pytest -q

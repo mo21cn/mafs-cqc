@@ -1,0 +1,27 @@
+{
+  "case_id": "s2_vcell_paradigm",
+  "source_cqs_id": "CQS-CQC-P2-02-R1",
+  "source_cqs_sha256": "39b0f15a28d684e93c74c01233261995be7f15bd6e6bc4d2e05a575e5606ee11",
+  "srp_artifact_id": "SRP-CQC-P3-02",
+  "srp_sha256": "77bff6df815ce9337ad817bbd1414ceb78b02875ccdb77256a390d2708a98819",
+  "mechanical": {
+    "schema_valid": true,
+    "source_binding_valid": true,
+    "question_refs_valid": true,
+    "render_valid": true,
+    "execution_leak_free": true
+  },
+  "local_claw_preliminary_review": {
+    "source_context_contribution": "material — the source narrative's brevity is itself the constraint that produces the wide-net-then-filter topology (R01 wide inventory, R02 criterion, R03 gated lineage); without it the criterion question (CQ-02) would have no justification",
+    "uncertainty_preserved": true,
+    "possible_overcommitment": "none; no paradigm candidates pre-populated (P2-RA1 repair held through the SRP transition)",
+    "possible_context_loss": "low",
+    "possible_question_type_routing_leak": "none; NOVELTY type on CQ-01 did not produce a 'prior-art database' route — routes came from the wide-net/filter strategy",
+    "possible_requirement_overdecomposition": "none",
+    "possible_missing_requirement": "none observed",
+    "shared_requirement_observed": false
+  },
+  "final_semantic_adjudication": {
+    "status": "PENDING_HO_CHATGPT"
+  }
+}

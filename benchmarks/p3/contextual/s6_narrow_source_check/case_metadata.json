@@ -1,0 +1,10 @@
+{
+  "case_id": "s6_narrow_source_check",
+  "source_cqs_id": "CQS-CQC-P2-06-R1",
+  "source_cqs_sha256": "a67dc5c5e98c8351947f36e4b00e584bd695c0bf6c3166b81b2a768d484836ab",
+  "source_narrative_sha256": "95f91f7c8dec4ece9f973a2607b8b8f5988963a83abf09fb11228c8a050da92d",
+  "input_status": "FINAL_P2_CQS+RAW (verbatim reuse; narrative bytes unchanged since P1)",
+  "case_family": "SYNTHETIC_STRESS_minimal_no_decomposition",
+  "model_config": "zai/zai_auto via OpenClaw local claw; single model, frozen P0 digestion instruction + SRP v0.1 contract",
+  "run_timestamp": "2026-08-31T19:55:00Z"
+}

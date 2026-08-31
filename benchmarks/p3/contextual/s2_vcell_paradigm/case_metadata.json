@@ -1,0 +1,10 @@
+{
+  "case_id": "s2_vcell_paradigm",
+  "source_cqs_id": "CQS-CQC-P2-02-R1",
+  "source_cqs_sha256": "39b0f15a28d663bd3ee6d8453ddf45379714b6b721c773a23719e11248e4081d",
+  "source_narrative_sha256": "37f34e945191656a338bfec3cee788dd959cccc3bdbe94fc60171ff88a5a8df4",
+  "input_status": "FINAL_P2_CQS+RAW (verbatim reuse; narrative bytes unchanged since P1)",
+  "case_family": "B_novelty_prior_art_framing",
+  "model_config": "zai/zai_auto via OpenClaw local claw; single model, frozen P0 digestion instruction + SRP v0.1 contract",
+  "run_timestamp": "2026-08-31T19:55:00Z"
+}

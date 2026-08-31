@@ -1,0 +1,9 @@
+{
+  "case_id": "s3_antagonist_domains",
+  "note": "SRP requirements authored by Local Claw as the second digestion transition.",
+  "admission_rationales": {
+    "R01": "Owns the evidence obligation of referent-range disambiguation (entity-type distribution + operator confirmation).",
+    "R02": "Owns the evidence obligation of the pharmacological-reading domain inventory (gated on R01).",
+    "R03": "Owns the evidence obligation of research-tool usage records under the pharmacological reading (gated on R01)."
+  }
+}

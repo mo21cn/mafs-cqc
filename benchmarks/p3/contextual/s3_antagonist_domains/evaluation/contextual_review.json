@@ -1,0 +1,27 @@
+{
+  "case_id": "s3_antagonist_domains",
+  "source_cqs_id": "CQS-CQC-P2-03-R1",
+  "source_cqs_sha256": "8afff47489df33baa9146b64d54540a637c4a12c68d94f59cf34ea34f775858",
+  "srp_artifact_id": "SRP-CQC-P3-03",
+  "srp_sha256": "c0ef444b0f5786cbf1b94638ee997e3bf3f8d96ceb7f3928fc73d220cf07d295",
+  "mechanical": {
+    "schema_valid": true,
+    "source_binding_valid": true,
+    "question_refs_valid": true,
+    "render_valid": true,
+    "execution_leak_free": true
+  },
+  "local_claw_preliminary_review": {
+    "source_context_contribution": "material — the narrative's extreme brevity (10 characters) is what makes R01's disambiguation obligation the gating requirement; the SRP's CONDITIONAL structure (R02/R03 gated on R01) exists because the source supports multiple referent readings",
+    "uncertainty_preserved": true,
+    "possible_overcommitment": "none; the pharmacological reading remains CONDITIONAL-gated, not assumed",
+    "possible_context_loss": "low",
+    "possible_question_type_routing_leak": "none observed in base SRP; T1 perturbation test (CQ-01 type → ENTITY_RESOLUTION) explicitly probes this",
+    "possible_requirement_overdecomposition": "none (3 requirements: disambiguation + 2 gated branches)",
+    "possible_missing_requirement": "none observed",
+    "shared_requirement_observed": false
+  },
+  "final_semantic_adjudication": {
+    "status": "PENDING_HO_CHATGPT"
+  }
+}

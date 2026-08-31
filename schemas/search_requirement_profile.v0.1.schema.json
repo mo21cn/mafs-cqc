@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SearchRequirementProfile",
+  "description": "CQC-P3 frozen artifact contract v0.1 (contract CQC-P3-CONTEXTUAL-SEARCH-REQUIREMENT-DIGESTION-v0.1 section 5). A search-requirement commitment, not a search execution plan.",
+  "type": "object",
+  "required": ["artifact_id", "schema_version", "source_cqs_id", "source_cqs_sha256", "source_narrative_sha256", "source_narrative", "requirements"],
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {"type": "string", "minLength": 1},
+    "schema_version": {"const": "0.1"},
+    "source_cqs_id": {"type": "string", "minLength": 1},
+    "source_cqs_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "source_narrative_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "source_narrative": {"type": "string", "minLength": 1},
+    "requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["requirement_id", "target_question_ids", "evidence_need", "epistemic_routes", "source_requirements", "stopping_condition", "uncertainty_binding"],
+        "additionalProperties": false,
+        "properties": {
+          "requirement_id": {"type": "string", "pattern": "^R[0-9]{2,}$"},
+          "target_question_ids": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^CQ-[0-9]{2,}$"}},
+          "evidence_need": {"type": "string", "minLength": 1},
+          "epistemic_routes": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["route_id", "purpose", "status", "condition"],
+              "additionalProperties": false,
+              "properties": {
+                "route_id": {"type": "string", "pattern": "^[a-z0-9_]{3,}$"},
+                "purpose": {"type": "string", "minLength": 1},
+                "status": {"enum": ["REQUIRED", "CONDITIONAL"]},
+                "condition": {"type": "string", "minLength": 1}
+              }
+            }
+          },
+          "source_requirements": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+          "stopping_condition": {"type": "string", "minLength": 1},
+          "uncertainty_binding": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

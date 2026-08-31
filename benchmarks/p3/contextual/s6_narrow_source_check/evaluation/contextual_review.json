@@ -1,0 +1,27 @@
+{
+  "case_id": "s6_narrow_source_check",
+  "source_cqs_id": "CQS-CQC-P2-06-R1",
+  "source_cqs_sha256": "a67dc5c5e98cc2d7198c492b4d46e69a73028b58b2eb63ba9d66ef17cbab6e3a",
+  "srp_artifact_id": "SRP-CQC-P3-06",
+  "srp_sha256": "d07a425f30a0388d098290ae70502402ed398c661c62f0af735ab94b7df50fb8",
+  "mechanical": {
+    "schema_valid": true,
+    "source_binding_valid": true,
+    "question_refs_valid": true,
+    "render_valid": true,
+    "execution_leak_free": true
+  },
+  "local_claw_preliminary_review": {
+    "source_context_contribution": "material — the narrative's fuzzy reference style (author+year+journal, no title/DOI) is exactly what makes the entity route CONDITIONAL; a fully specified reference would collapse it to unconditionally-REQUIRED source-content verification",
+    "uncertainty_preserved": true,
+    "possible_overcommitment": "none; the identity route remains CONDITIONAL (activated only if reference ambiguity becomes material), preserving the unresolved boundary from P2",
+    "possible_context_loss": "low",
+    "possible_question_type_routing_leak": "none; SOURCE_CONTENT type did not restrict the route set — the conditional identity route was added from the uncertainty binding, not from the type",
+    "possible_requirement_overdecomposition": "none (1 requirement mirrors the 1-CQ no-decomposition result)",
+    "possible_missing_requirement": "none observed",
+    "shared_requirement_observed": false
+  },
+  "final_semantic_adjudication": {
+    "status": "PENDING_HO_CHATGPT"
+  }
+}

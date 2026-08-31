@@ -1,0 +1,27 @@
+{
+  "case_id": "s1_vms_cellular_mechanism",
+  "source_cqs_id": "CQS-CQC-P2-01-R1",
+  "source_cqs_sha256": "92305bf11f98cecf2b4d13e73dfca4f573df506a27739da3d69ce234605b64a5",
+  "srp_artifact_id": "SRP-CQC-P3-01",
+  "srp_sha256": "67755617b29aef2f3d80f53b20fb9fb2434fe8512a4dae5472fe9263e83380ea",
+  "mechanical": {
+    "schema_valid": true,
+    "source_binding_valid": true,
+    "question_refs_valid": true,
+    "render_valid": true,
+    "execution_leak_free": true
+  },
+  "local_claw_preliminary_review": {
+    "source_context_contribution": "material — the raw narrative's phrase 请搜索 (search-request intent) and the unresolved 女性 population scope jointly justify R02's CONDITIONAL population-comparison route; without the source narrative, R02's existence would rest only on CQ-02's uncertainty field.",
+    "uncertainty_preserved": true,
+    "possible_overcommitment": "none observed; no mature mechanism anchors re-entered the SRP (P2-RA1 repair held)",
+    "possible_context_loss": "low; narrative is short and fully embedded in the SRP",
+    "possible_question_type_routing_leak": "none; routes chosen from statement/uncertainty content (mechanism_evidence was REQUIRED under MECHANISM type, but the observability route was REQUIRED under a different type — type did not collapse routes)",
+    "possible_requirement_overdecomposition": "none (3 requirements map 1:1 to 3 CQs, each with a distinct evidence obligation)",
+    "possible_missing_requirement": "none observed",
+    "shared_requirement_observed": false
+  },
+  "final_semantic_adjudication": {
+    "status": "PENDING_HO_CHATGPT"
+  }
+}

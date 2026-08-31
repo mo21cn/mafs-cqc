@@ -1,0 +1,21 @@
+{
+  "base_case": "s3_antagonist_domains",
+  "perturbed_question_id": "CQ-01",
+  "original_question_type": "TERMINOLOGY_OR_NAMING",
+  "perturbed_question_type": "ENTITY_RESOLUTION",
+  "mechanical": {
+    "non_type_fields_identical": true,
+    "source_context_identical": true,
+    "both_srp_valid": true
+  },
+  "local_claw_preliminary_review": {
+    "changed_requirements": [],
+    "changed_routes": [],
+    "changed_source_requirements": [],
+    "changed_stopping_conditions": [],
+    "possible_hard_routing_leak": "none — the independent re-digestion under ENTITY_RESOLUTION produced the same requirement set, because the disambiguation obligation comes from the statement/uncertainty content, not the label. This is the expected non-authority behavior: the entity_resource_identity route was already REQUIRED under the original TERMINOLOGY label because the route reflects the epistemic obligation, not the type."
+  },
+  "final_semantic_adjudication": {
+    "status": "PENDING_HO_CHATGPT"
+  }
+}

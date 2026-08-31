@@ -1,0 +1,10 @@
+{
+  "case_id": "s1_vms_cellular_mechanism",
+  "source_cqs_id": "CQS-CQC-P2-01-R1",
+  "source_cqs_sha256": "92305bf11f989cf22a0a8121e5705c74028c0fce0c785352c65715a05bcb31e7",
+  "source_narrative_sha256": "c0600db6f5bfd1be5e735f298c3ad4944b78c5c7560a4a907f409a42959bab42",
+  "input_status": "FINAL_P2_CQS+RAW (verbatim reuse; narrative bytes unchanged since P1)",
+  "case_family": "C_mechanism_causal",
+  "model_config": "zai/zai_auto via OpenClaw local claw; single model, frozen P0 digestion instruction + SRP v0.1 contract",
+  "run_timestamp": "2026-08-31T19:55:00Z"
+}

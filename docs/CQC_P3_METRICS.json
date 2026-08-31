@@ -1,0 +1,23 @@
+{
+  "contract_id": "CQC-P3-CONTEXTUAL-SEARCH-REQUIREMENT-DIGESTION-v0.1",
+  "evidence_commit_sha": "PENDING_EVIDENCE_COMMIT",
+  "evidence_ci_run_id": null,
+  "contextual_case_count": 6,
+  "source_cqs_binding_valid_count": 6,
+  "source_narrative_binding_valid_count": 6,
+  "srp_schema_valid_count": 6,
+  "question_ref_valid_count": 6,
+  "requirement_id_unique_count": 6,
+  "route_id_valid_count": 6,
+  "deterministic_render_valid_count": 6,
+  "execution_leak_free_count": 6,
+  "type_perturbation_case_count": 2,
+  "type_perturbation_non_type_identity_valid_count": 2,
+  "type_perturbation_srp_valid_count": 2,
+  "shared_requirement_observed_count": 1,
+  "orphan_requirement_count": 0,
+  "provider_or_query_terms_count": 0,
+  "test_count": 51,
+  "meaningful_push_ci_cycles": 1,
+  "manual_semantic_scope": "contextual_review / type_perturbation_review semantic fields are Local Claw preliminary observations; final status PENDING_HO_CHATGPT"
+}

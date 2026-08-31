@@ -1,0 +1,28 @@
+{
+  "case_id": "s4_avca_donor_data",
+  "source_cqs_id": "CQS-CQC-P2-04",
+  "source_cqs_sha256": "ba34208d5ba8b3f346e5db393972c853e06bcbc2b02556464609247893447cf6",
+  "srp_artifact_id": "SRP-CQC-P3-04",
+  "srp_sha256": "03355816136dd52e66e70f7c92125386bf62c5ee1d57bd2e9a30f0ecad0cad31",
+  "mechanical": {
+    "schema_valid": true,
+    "source_binding_valid": true,
+    "question_refs_valid": true,
+    "render_valid": true,
+    "execution_leak_free": true
+  },
+  "local_claw_preliminary_review": {
+    "source_context_contribution": "material — the narrative names a specific resource (Arc Virtual Cell Atlas) and three undefined judgment words; the named-object exception (target evidence object ≠ search provider) and R02's threshold-decidability obligation both exist only because the source narrative demands them",
+    "uncertainty_preserved": true,
+    "possible_overcommitment": "none; named resource preserved as target evidence object (contract §14 exception), not as a provider route; thresholds not invented",
+    "possible_context_loss": "low",
+    "possible_question_type_routing_leak": "none; SOURCE_CONTENT type on CQ-02 did not hard-code a content-database route — the route structure follows the dual-gate dependency (CQ-02←CQ-01+CQ-03)",
+    "possible_requirement_overdecomposition": "none (3 requirements mirror the 3 CQs and the dual-gate structure)",
+    "possible_missing_requirement": "none observed",
+    "shared_requirement_observed": true,
+    "shared_requirement_detail": "R01 (Atlas identity/scope/access) serves CQ-01 directly AND supplies the inventory-evidence source that CQ-02's existence check consumes — one obligation, two questions (contract section 17 case)"
+  },
+  "final_semantic_adjudication": {
+    "status": "PENDING_HO_CHATGPT"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "artifact_id": "P2B-C",
+  "revision": 1,
+  "content": {
+    "kind": "mini_downstream_preparation",
+    "artifact_id": "P2B-C",
+    "revision": 1,
+    "body": "derived state for P2B-C rev 1 (benchmark fixture content)"
+  },
+  "content_sha256": "7d65ed9683a51a752d52d80cf96764c0dd8f680ca538322e856fa0fbd233561b",
+  "source_bindings": [
+    {
+      "artifact_id": "P2B-A",
+      "revision": 1,
+      "content_sha256": "8bcf88e69fa0ce48a073ca24b2a9d661161d80e8d0ee05aa8e215f56c087902f"
+    }
+  ]
+}

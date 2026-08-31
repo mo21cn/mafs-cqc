@@ -1,0 +1,42 @@
+# CandidateQuestionSet: CQS-CQC-P2-04
+
+- schema_version: 0.1
+- source_narrative_sha256: 7b136c4d6ae8d77d9cae98e23e312dfec4fb0076099e295dd0d6a5053a747ae2
+- questions: 3
+
+## Source Narrative (verbatim)
+
+"Arc Virtual Cell Atlas"数据集资源里有没有有没有年轻健康血管/心脏原代供体数据
+
+## Questions
+
+### CQ-01
+
+- type: ENTITY_RESOLUTION
+- statement: Arc Virtual Cell Atlas 是什么实体（维护方、收录范围、数据组织方式、访问途径）？
+- source trace:
+  - ""Arc Virtual Cell Atlas"数据集资源"
+- dependencies: (none)
+- resolution condition: 证据条件：Atlas 官方文档、发布说明或论文对其身份、收录数据集清单与访问方式的记录。
+- uncertainty: 实体以原话引用名为准；官方名与引用名的出入记录为命名谱系问题而非静默更正。
+
+### CQ-03
+
+- type: MEASUREMENT_OR_OBSERVABILITY
+- statement: 『年轻』『健康』『原代』三个判定词在 Atlas 元数据体系中对应哪些可操作字段与阈值（年龄分箱、健康状态定义、primary vs cell line vs iPSC-derived 的区分）？
+- source trace:
+  - "年轻健康血管/心脏原代供体"
+- dependencies: (none)
+- resolution condition: 证据条件：Atlas 元数据 schema 的字段定义记录。每个判定词映射到『可判定/不可判定/部分可判定』三态之一即为解决状态。
+- uncertainty: 操作者未给任何阈值；判定标准只能来自数据集元数据体系与操作者补充。
+
+### CQ-02
+
+- type: SOURCE_CONTENT
+- statement: Atlas 收录的数据集中，是否存在来自年轻健康供体的血管/心脏原代细胞数据？
+- source trace:
+  - "有没有有没有年轻健康血管/心脏原代供体数据"
+- dependencies: CQ-01, CQ-03
+- resolution condition: 证据条件：Atlas 数据集清单/元数据中对目标数据的存在性记录——存在（给出数据集标识与供体元数据字段值）/不存在（清单可枚举前提下记录明确的不存在）。标题与描述层面的推断不足以裁决。
+- uncertainty: 三个判定词的判定标准必须显式绑定（来自 CQ-03 的产出）。原话存在『有没有有没有』重复，按单一疑问理解并在此记录。
+

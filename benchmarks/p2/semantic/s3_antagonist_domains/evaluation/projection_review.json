@@ -1,0 +1,42 @@
+{
+  "case_id": "s3_antagonist_domains",
+  "input_status": "RAW",
+  "source_sha256": "5975fee3490826bf06cd2005c2230bc19e7797ee4d46fdf4ac27c7068f7a4e6c",
+  "cqs_artifact_id": "CQS-CQC-P2-03",
+  "cqs_sha256": "79119974a7e8ee154a0323c473965c9323f734cf3de3e17142003e6f435b5d8a",
+  "mechanical": {
+    "schema_valid": true,
+    "source_hash_valid": true,
+    "source_trace_exact_valid": true,
+    "dependency_dag_valid": true,
+    "deterministic_render_valid": true
+  },
+  "local_claw_preliminary_review": {
+    "source_intent_elements": [
+      "对象：拮抗剂研究",
+      "目标：应用领域盘点"
+    ],
+    "preserved_elements": [
+      "指称消歧（CQ-01，重度歧义显式化）",
+      "领域盘点（CQ-02，受 CQ-01 门控）",
+      "工具用途线（CQ-03，同样声明受 CQ-01 约束）",
+      "盘点维度选择（CQ-04）"
+    ],
+    "possibly_lost_elements": [
+      "『研究』的双重语义（学术研究 vs 药物研发过程）未显式分支——隐含并入 CQ-02/CQ-03 的盘点范围"
+    ],
+    "possible_unsupported_commitments": [
+      "无重大：药理解读未被静默承诺（CQ-01 显式消歧 + CQ-02/CQ-03 门控）"
+    ],
+    "ambiguity_preserved": true,
+    "possible_false_precision": "无：4 问中 2 问的 uncertainty 明确记录歧义",
+    "possible_over_decomposition": "边界观察：10 字原话消化为 4 问，但消歧/盘点/工具/维度各有独立证据景观且歧义重度——判为忠实分解而非过度拆分；此判断留 HO 复核",
+    "possible_under_decomposition": "无",
+    "possible_context_loss": "低",
+    "possible_dependency_issue": "CQ-02→CQ-01 与 CQ-03→CQ-01 均通过 RA2 判据（消歧决定检索面；工具线预设药理解读）",
+    "possible_question_type_overcommitment": "边界发现：CQ-01 同时 plausible 于 TERMINOLOGY_OR_NAMING 与 ENTITY_RESOLUTION——选择为描述性判断，已在 uncertainty 中自曝；此为 v0.2 预期的结构性模糊而非失败"
+  },
+  "final_semantic_adjudication": {
+    "status": "PENDING_HO_CHATGPT"
+  }
+}

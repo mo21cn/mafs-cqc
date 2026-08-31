@@ -1,0 +1,47 @@
+{
+  "scenario": "R2_sequential_revision_partial_regeneration",
+  "stages": [
+    {
+      "stage": "initial_all_current",
+      "expected": {
+        "P2B-A@0": "current",
+        "P2B-B@0": "current",
+        "P2B-C@0": "current"
+      },
+      "actual": {
+        "P2B-A@0": "current",
+        "P2B-B@0": "current",
+        "P2B-C@0": "current"
+      },
+      "match": true
+    },
+    {
+      "stage": "after_A1_partial_regeneration_B_only",
+      "expected": {
+        "P2B-A@1": "current",
+        "P2B-B@1": "current",
+        "P2B-C@0": "stale"
+      },
+      "actual": {
+        "P2B-A@1": "current",
+        "P2B-B@1": "current",
+        "P2B-C@0": "stale"
+      },
+      "match": true
+    },
+    {
+      "stage": "after_A2_with_no_regeneration",
+      "expected": {
+        "P2B-A@2": "current",
+        "P2B-B@1": "stale",
+        "P2B-C@0": "stale"
+      },
+      "actual": {
+        "P2B-A@2": "current",
+        "P2B-B@1": "stale",
+        "P2B-C@0": "stale"
+      },
+      "match": true
+    }
+  ]
+}

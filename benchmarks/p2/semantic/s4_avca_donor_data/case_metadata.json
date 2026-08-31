@@ -1,0 +1,11 @@
+{
+  "case_id": "s4_avca_donor_data",
+  "case_family": "D_source_content_verification",
+  "input_status": "RAW",
+  "input_sha256": "7b136c4d6ae8d77d9cae98e23e312dfec4fb0076099e295dd0d6a5053a747ae2",
+  "input_sha256_basis": "sha256 of exact UTF-8 bytes of source_narrative.txt",
+  "source_origin": "verbatim reuse of P1 case_avca_donor_data raw bytes",
+  "model_config": "zai/zai_auto via OpenClaw local claw; single model, frozen P0 digestion instruction",
+  "run_timestamp": "2026-08-31T12:30:00Z",
+  "stress_purpose": "source-content + judgment-word thresholds; session-memory asymmetry observation point"
+}

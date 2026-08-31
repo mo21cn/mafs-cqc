@@ -1,0 +1,50 @@
+{
+  "artifact_id": "CQS-CQC-P2-01",
+  "schema_version": "0.1",
+  "source_narrative_sha256": "c0600db6f5bfd1be5e735f298c3ad4944b78c5c7560a4a907f409a42959bab42",
+  "source_narrative": "请搜索女性血管舒缩症状在细胞分辨率层面的机制解释\n",
+  "questions": [
+    {
+      "question_id": "CQ-01",
+      "statement": "女性血管舒缩症状（潮热/盗汗）的机制解释中，哪些已经在细胞类型分辨率上被确立或正在被检验（中枢 KNDy/kisspeptin/NK 神经元线 vs 血管内皮/平滑肌线）？",
+      "source_trace": [
+        {
+          "exact_quote": "女性血管舒缩症状"
+        },
+        {
+          "exact_quote": "细胞分辨率层面的机制解释"
+        }
+      ],
+      "question_type": "MECHANISM",
+      "dependencies": [],
+      "resolution_condition": "证据条件：在单细胞或细胞类型特异分辨率上刻画 VMS 相关组织（下丘脑体温调节核团、血管壁）细胞状态与症状关联的研究证据。某一机制线达到『细胞层面确立/修正/证伪』任一状态，即构成对该问题状态的实质改变。",
+      "uncertainty": "原话未指明症状人群（围绝经期自然 VMS vs 治疗诱导 VMS）；statement 中『潮热/盗汗』为消化时引入的术语具体化，源原话未含该词。"
+    },
+    {
+      "question_id": "CQ-02",
+      "statement": "『女性』的人群范围（自然围绝经期、手术/药物绝经、非绝经相关病因）是否改变血管舒缩症状的细胞机制构成？",
+      "source_trace": [
+        {
+          "exact_quote": "女性"
+        }
+      ],
+      "question_type": "GENERALIZATION",
+      "dependencies": [],
+      "resolution_condition": "证据条件：直接比较不同女性人群 VMS 细胞机制证据的研究或权威综述。存在人群间机制差异→机制解释按人群分层；证据显示共享核心机制→可合并处理。",
+      "uncertainty": "原话只写『女性』，人群边界完全未指定；这是消化必须保留的歧义。"
+    },
+    {
+      "question_id": "CQ-03",
+      "statement": "『细胞分辨率层面』对应哪些可观测技术（单细胞转录组、空间转录组、细胞类型特异成像/电生理），各技术能回答 VMS 机制问题的哪一部分？",
+      "source_trace": [
+        {
+          "exact_quote": "细胞分辨率层面"
+        }
+      ],
+      "question_type": "MEASUREMENT_OR_OBSERVABILITY",
+      "dependencies": [],
+      "resolution_condition": "证据条件：VMS 相关组织中各类单细胞/空间/细胞类型分辨率技术的应用现状与方法学边界记录。某技术『可行/不可行/仅部分可行』的确认即为该问题的解决状态。",
+      "uncertainty": "原话未定义『细胞分辨率』指组学分辨率还是显微成像分辨率。"
+    }
+  ]
+}

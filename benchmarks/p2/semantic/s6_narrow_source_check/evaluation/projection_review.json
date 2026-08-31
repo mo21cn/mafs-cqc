@@ -1,0 +1,42 @@
+{
+  "case_id": "s6_narrow_source_check",
+  "input_status": "SYNTHETIC_STRESS",
+  "source_sha256": "95f91f7c8deca5494b854aaec9f9be92f0f3b3a7f27e6e2e13a88e6be67a9a4d",
+  "cqs_artifact_id": "CQS-CQC-P2-06",
+  "cqs_sha256": "21a3b8a9c3b8cd85a125ff523d89e6d182983236c9955385edda0fe41f56e6d7",
+  "mechanical": {
+    "schema_valid": true,
+    "source_hash_valid": true,
+    "source_trace_exact_valid": true,
+    "dependency_dag_valid": true,
+    "deterministic_render_valid": true
+  },
+  "local_claw_preliminary_review": {
+    "source_intent_elements": [
+      "论文指称（模糊：作者+年份+期刊）",
+      "查证对象：补充材料中的单细胞海马体细胞类型注释表",
+      "存在性疑问"
+    ],
+    "preserved_elements": [
+      "单一 SOURCE_CONTENT 问题（CQ-01）",
+      "指称模糊显式化（uncertainty）",
+      "存在/不存在/无法确认三态 resolution"
+    ],
+    "possibly_lost_elements": [
+      "论文定位的执行细节（如何消歧指称）——保留在 resolution_condition 作为路径而非独立问题（有意为之：执行路径 ≠ 独立证据景观）"
+    ],
+    "possible_unsupported_commitments": [
+      "无"
+    ],
+    "ambiguity_preserved": true,
+    "possible_false_precision": "无",
+    "possible_over_decomposition": "无——本案例即 no-decomposition 压测：1 个 CQ 是忠实输出；拆成『找论文』+『查表格』两问即把执行路径误当证据景观（过度分解失败模式）",
+    "possible_under_decomposition": "边界检查：论文身份与表格存在性合并于一问——身份定位是回答问题的手段而非独立科学问题，判为正确的最小分解；留 HO 复核",
+    "possible_context_loss": "低",
+    "possible_dependency_issue": "无（0 边）",
+    "possible_question_type_overcommitment": "无（SOURCE_CONTENT 单一清晰）"
+  },
+  "final_semantic_adjudication": {
+    "status": "PENDING_HO_CHATGPT"
+  }
+}

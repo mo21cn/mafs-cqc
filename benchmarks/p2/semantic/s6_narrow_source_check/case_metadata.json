@@ -1,0 +1,11 @@
+{
+  "case_id": "s6_narrow_source_check",
+  "case_family": "SYNTHETIC_STRESS_minimal_no_decomposition",
+  "input_status": "SYNTHETIC_STRESS",
+  "input_sha256": "95f91f7c8dec4ece9f973a2607b8b8f5988963a83abf09fb11228c8a050da92d",
+  "input_sha256_basis": "sha256 of exact UTF-8 bytes of source_narrative.txt",
+  "source_origin": "benchmark-only synthetic stimulus: deliberately narrow source-content question where one CandidateQuestion may be sufficient and over-decomposition would itself be the failure; author-style fuzzy reference (author+year, no title) is intentional",
+  "model_config": "zai/zai_auto via OpenClaw local claw; single model, frozen P0 digestion instruction",
+  "run_timestamp": "2026-08-31T12:30:00Z",
+  "stress_purpose": "no-decomposition capacity: can CQC leave a narrow task narrow"
+}

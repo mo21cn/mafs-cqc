@@ -1,0 +1,12 @@
+{
+  "artifact_id": "P2B-A",
+  "revision": 1,
+  "content": {
+    "kind": "mini_downstream_preparation",
+    "artifact_id": "P2B-A",
+    "revision": 1,
+    "body": "REVISED P2B-A rev 1"
+  },
+  "content_sha256": "983c98d831c27fe971cae24b4c8b44881bcc680b9dc522e5c7392a5a0662bc7b",
+  "source_bindings": []
+}

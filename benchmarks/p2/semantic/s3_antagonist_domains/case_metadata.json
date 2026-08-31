@@ -1,0 +1,11 @@
+{
+  "case_id": "s3_antagonist_domains",
+  "case_family": "E_mixed_narrative",
+  "input_status": "RAW",
+  "input_sha256": "5975fee3490826bf06cd2005c2230bc19e7797ee4d46fdf4ac27c7068f7a4e6c",
+  "input_sha256_basis": "sha256 of exact UTF-8 bytes of source_narrative.txt",
+  "source_origin": "verbatim reuse of P1 case_antagonist_domains raw bytes",
+  "model_config": "zai/zai_auto via OpenClaw local claw; single model, frozen P0 digestion instruction",
+  "run_timestamp": "2026-08-31T12:30:00Z",
+  "stress_purpose": "heavy-ambiguity case; over/under-decomposition boundary"
+}

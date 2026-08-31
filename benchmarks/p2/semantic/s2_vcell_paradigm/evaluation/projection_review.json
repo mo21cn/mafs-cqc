@@ -1,0 +1,43 @@
+{
+  "case_id": "s2_vcell_paradigm",
+  "input_status": "RAW",
+  "source_sha256": "37f34e945191656a338bfec3cee788dd959cccc3bdbe94fc60171ff88a5a8df4",
+  "cqs_artifact_id": "CQS-CQC-P2-02",
+  "cqs_sha256": "aceec42e42d52562387bcfb47787c9313f06de0e161c67bdde1fe7a6471f8994",
+  "mechanical": {
+    "schema_valid": true,
+    "source_hash_valid": true,
+    "source_trace_exact_valid": true,
+    "dependency_dag_valid": true,
+    "deterministic_render_valid": true
+  },
+  "local_claw_preliminary_review": {
+    "source_intent_elements": [
+      "主语实体：『Virtual Cel』（拼写不全）",
+      "关系：『产生了』",
+      "目标：新的研究范式清单"
+    ],
+    "preserved_elements": [
+      "范式清单问题（CQ-01 + trace）",
+      "判定基准缺失（CQ-02 显式化）",
+      "谱系问题（CQ-03，依赖 CQ-01）",
+      "拼写歧义（CQ-01.uncertainty 显式记录）"
+    ],
+    "possibly_lost_elements": [
+      "『产生了』的隐含时间窗（近年？历史全部？）——源未指定，CQS 未显式提问时间范围；可从 source_narrative 恢复原意但无字段承载"
+    ],
+    "possible_unsupported_commitments": [
+      "『领域解读』假设（vs VCell 软件解读）已入 uncertainty——诚实保留而非静默承诺"
+    ],
+    "ambiguity_preserved": true,
+    "possible_false_precision": "无显著：范式判定基准的缺失被 CQ-02 显式承接而非暗中假设",
+    "possible_over_decomposition": "无（3 问对应 3 个独立证据景观）",
+    "possible_under_decomposition": "无",
+    "possible_context_loss": "低：单句叙事即全部上下文",
+    "possible_dependency_issue": "CQ-03→CQ-01 通过 RA2 判据（无清单则谱系无对象）",
+    "possible_question_type_overcommitment": "无（NOVELTY/TERMINOLOGY/HISTORICAL_LINEAGE 各司其职）"
+  },
+  "final_semantic_adjudication": {
+    "status": "PENDING_HO_CHATGPT"
+  }
+}

@@ -27,5 +27,6 @@
   "dangling_question_reference_count_after": 0,
   "test_count": 51,
   "meaningful_push_ci_cycles": 1,
-  "manual_semantic_scope": "contextual_review semantic fields and admission rationales are Local Claw preliminary; final PENDING_HO_CHATGPT except RA1-closure states assigned by HO+ChatGPT diagnoses"
+  "manual_semantic_scope": "contextual_review semantic fields and admission rationales are Local Claw preliminary; final PENDING_HO_CHATGPT except RA1-closure states assigned by HO+ChatGPT diagnoses",
+  "historical_record_only": true
 }

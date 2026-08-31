@@ -1,119 +1,104 @@
-# CQC-P3 — Structured Summary
+# CQC-P3 — Canonical Summary (Final)
 
-Human interpretation layer for HO + ChatGPT. Machine truth: `docs/CQC_P3_METRICS.json`,
-`docs/CQC_P3_SHA256_MANIFEST.txt`, per-case `evaluation/*`.
+Human-readable canonical summary of final P3 state. Counts source from
+`docs/CQC_P3_METRICS.json` (machine-derived from final artifacts by CQC-P3-RA3).
+Integrity: `docs/CQC_P3_RA3_SHA256_MANIFEST.txt` (validator-enforced).
 
 ## A — Acceptance Header
 
 ```yaml
 contract_id: CQC-P3-CONTEXTUAL-SEARCH-REQUIREMENT-DIGESTION-v0.1
-status: READY_FOR_REVIEW
+current_phase_state: CQC-P3-RA3-CLOSED
 repository: mo21cn/mafs-cqc
 branch: dev/cqc-p3
 contextual_case_count: 6
 type_perturbation_case_count: 2
-meaningful_push_ci_cycles: (see docs/CQC_P3_METRICS.json)
+meaningful_push_ci_cycles_current_step: 1 (RA3 finalization)
 ```
 
 The actual evidence commit SHA and CI run are reported externally in the Local Claw
 return note (self-pinning retired per P2-RA2 §7).
 
-## B — SRP v0.1 Schema Decision
+## B — SRP v0.1 Frozen Shape
 
 Final per-requirement fields: `requirement_id`, `target_question_ids`,
 `evidence_need`, `epistemic_routes[{route_id, purpose, status, condition}]`,
 `source_requirements`, `stopping_condition`, `uncertainty_binding`. Set envelope binds
-the source CQS by id+SHA and the source narrative verbatim by SHA.
+the source CQS by id+SHA and the source narrative verbatim by SHA. Schema unchanged
+since P3 freeze; no pressure earned a new field across 6 cases + 2 perturbations.
 
-- `target_question_ids` (1..n) exists so one obligation can serve several CQs (S4's
-  shared identity requirement) without duplicating requirements.
-- `epistemic_routes.status` carries exactly REQUIRED/CONDITIONAL — CONDITIONAL is the
-  mechanism that consumes uncertainty without collapsing it (P3-C).
-- `stopping_condition` is epistemic (what evidence state suffices), never budgetary.
-- `uncertainty_binding` is free text carrying forward what would change routes/sources.
-- **Rejected imagined fields**: route priority, route confidence, provider hints,
-  query templates, cost fields, a closed route ontology (six cases needed 6 distinct
-  descriptive route_ids across cases — open vocabulary sufficed), per-requirement
-  dependency edges between requirements (the CQS dependency edges already carry the
-  ordering information).
-- **Schema pressure observed**: none — all six cases represented honestly in the
-  provisional shape with zero structural deviations.
+## C — Final Contextual Case Matrix
 
-## C — Contextual SRP Matrix
+| Case | Final State | Conditional Routes | Key Boundary |
+|---|---|---:|---|
+| S1 | PASS | 2 | containment holds (population/resolution ambiguities stay conditional) |
+| S2 | REPAIRED | 0 | evidence-state semantics, not search strategy |
+| S3 | PRODUCTIVE_INSTABILITY_PRESERVED | 4 | terminology/entity ambiguity preserved |
+| S4 | PASS | 1 | shared requirement retained (identity serves CQ-01+CQ-02) |
+| S5 | REPAIRED | 1 | context resurrection closed |
+| S6 | BOUNDARY_UNRESOLVED_PRESERVED | 0 | identity granularity preserved |
 
-All final semantic statuses: **PENDING_HO_CHATGPT** (Local Claw preliminary only).
+Counts are machine-derived from final artifacts (`docs/CQC_P3_METRICS.json`).
 
-| Case | CQs | SRP Requirements | Conditional Routes | Source Context Contribution | Preliminary Concern | HO+ChatGPT Status |
-|---|---:|---:|---:|---|---|---|
-| s1_vms_cellular_mechanism | 3 | 3 | 2 | material (search-request intent + population scope justify R02) | none observed | FINALIZED (P3-RA2) |
-| s2_vcell_paradigm | 3 | 3 | 0 (1 gated by CQS dep) | material (narrative brevity justifies wide-net-then-filter) | none | FINALIZED (P3-RA2) |
-| s3_antagonist_domains | 3 | 3 | 4 | material (10-char narrative makes disambiguation the gate) | none | FINALIZED (P3-RA2) |
-| s4_avca_donor_data | 3 | 3 | 1 | material (named resource + undefined thresholds exist only in source) | none | FINALIZED (P3-RA2) |
-| s5_mixed_commitment | 3 | 3 | 1 | material (design-constraint linkage exists only in source) | none | FINALIZED (P3-RA2) |
-| s6_narrow_source_check | 1 | 1 | 1 | material (fuzzy reference style makes identity route conditional) | none | FINALIZED (P3-RA2) |
+## D — Productive Instability
 
-## D — Productive Instability Consumption
+S3 and S6 show productive instability can survive downstream as conditional routes:
+S3's referent ambiguity gates two inventory routes; S6's fuzzy reference keeps the
+identity route conditional on ambiguity materiality. Neither collapsed into a silent
+choice, and neither was a representation failure.
 
-```yaml
-s3_antagonist_domains:
-  uncertainty: 拮抗剂 referent range (pharmacological vs muscle vs other) + inventory dimension
-  conditional_route: domain_coverage_inventory [CONDITIONAL] gated on R01 disambiguation;
-    terminology_boundary [CONDITIONAL] on competing readings
-  silent_collapse_observed: false
-s6_narrow_source_check:
-  uncertainty: fuzzy author+year reference; identity granularity use-dependent
-  conditional_route: entity_resource_identity [CONDITIONAL] — activates only when
-    reference ambiguity becomes material; otherwise embedded in source-content verification
-  silent_collapse_observed: false
-```
+## E — Context Authority
 
-## E — Question-Type Non-Authority Stress
+Source context may interpret / qualify / condition admitted commitments. It may not
+mint or resurrect obligations beyond the CQS admission boundary (S5's resurrected
+animal-experiment-design obligation was removed and placed as importance context in
+uncertainty_binding; admission synchronized).
 
-| Case | Original Type | Perturbed Type | Non-type Fields Identical | SRP Structural Diff | Hard-Routing Leak | Status |
-|---|---|---|---|---|---|---|
-| T1 (s3 CQ-01) | TERMINOLOGY_OR_NAMING | ENTITY_RESOLUTION | yes (all five non-type fields) | none — identical requirement set/routes | none observed | FINALIZED (P3-RA2) |
-| T2 (s5 CQ-01) | MECHANISM | CAUSAL_CLAIM | yes | none — mechanism_evidence route unchanged | none observed | FINALIZED (P3-RA2) |
-
-T2 honesty caveat: CAUSAL_CLAIM's plausibility was not pre-registered in the P2
-record; the stress simultaneously probed whether an unregistered plausible relabeling
-changes SRP behavior — it did not.
-
-## F — Source Context Findings
-
-> **P2-RA1 CORRECTION**: the original claim "material in 6/6 cases" conflated preserved availability with isolated incremental necessity. Corrected statement: **source context was preserved and available in 6/6 cases; the present P3 design did not isolate its incremental causal contribution beyond the accepted CQS.** Per-case observations below are interpretive observations on how context was used, not isolated causal evidence.
-
-Per-case `source_context_contribution`: **preserved-and-available in 6/6 cases** (recorded in contextual_review.json with the specific justification; `incremental_necessity_tested: false`, `conclusion: NOT_ISOLATED`). Summarized: the
-source narrative materially shaped the SRP in every case — through the
-search-request phrasing (s1), brevity-driven strategy (s2), ambiguity weight (s3), named-object + threshold gaps (s4), design-linkage statement (s5), and reference
-fuzziness (s6). No case reported `none`; no value was manufactured. The causal-isolation claim is retired.
-
-## G — Requirement Admission
-
-Final requirement count: **16** across 6 SRPs (3/3/3/3/3/1). Requirements removed
-before freeze: **0** (first-pass admission held). Shared requirements observed: **1**
-(s4 R01 — Atlas identity serves CQ-01 and supplies CQ-02's inventory source).
-Orphan requirements: **0** (validator-enforced).
-
-## H — Execution Leakage Audit
+## F — Type Perturbation
 
 ```yaml
-provider_names_added: 0
-exact_queries_added: 0
-budget_fields_added: 0
-execution_order_fields_added: 0
+T1 (s3 CQ-01 TERMINOLOGY_OR_NAMING -> ENTITY_RESOLUTION): VALID_PASS
+T2 (s5 CQ-01 MECHANISM -> CAUSAL_CLAIM): INVALID_CONTROL_DESIGN
+mechanical_identity_valid: 2
+valid_experimental_controls: 1
+invalid_experimental_controls: 1
+second_valid_perturbation: NOT_AVAILABLE
 ```
 
-Named source objects inherited from narratives and reported separately: Arc Virtual
-Cell Atlas (s4, target evidence object), Gould 2022 Cell Reports paper (s6, target
-evidence object). Both are the §14 exception (named evidence object ≠ search
-provider); the leakage scanner (Crossref/PubMed/Google Scholar/top-k/API endpoint/
-HTTP/token budget/query string/provider fallback/resolver call) reports 0 hits.
+At least one valid perturbation (T1) supports the claim that `question_type` did not
+act as a hard router in that tested case. T2 is historical evidence of an invalid
+control design, not evidence of type invariance.
+
+## G — Canonical Machine Counts
+
+```yaml
+requirement_count_total: 16
+route_count_total: 20
+required_route_count: 12
+conditional_route_count: 8
+distinct_route_id_count: 8
+shared_requirement_count: 1
+orphan_requirement_count: 0
+type_perturbation_mechanical_identity_valid_count: 2
+type_perturbation_valid_control_count: 1
+type_perturbation_invalid_control_count: 1
+```
+
+## H — Review / Integrity Truth
+
+```yaml
+contextual_review_source_cqs_sha256_verified: 6/6
+contextual_review_srp_sha256_verified: 6/6
+contextual_review_mechanical_fields_recomputed: 6/6
+contextual_review_identity_fields_verified: 6/6
+final_integrity_manifest: docs/CQC_P3_RA3_SHA256_MANIFEST.txt (validator-enforced)
+```
 
 ## I — Architecture Delta
 
 ```yaml
-candidate_question_schema_changed: false
-srp_artifact_type_added: true
+cqs_schema_changed: false
+srp_schema_changed: false
 new_semantic_scorers: 0
 new_hard_routers: 0
 new_provider_routers: 0
@@ -123,32 +108,43 @@ mafs_integrated: false
 live_retrieval_added: false
 ```
 
-SRP v0.1 is the second artifact type earned by the development line (per master
-v0.2 §16: each artifact must earn its existence — P3's six cases are that evidence).
+## J — What P3 Earned / Did Not Earn
 
-## J — P3 Finding
+**Earned:**
+- SRP v0.1 is a viable second digestion artifact.
+- CQS remains the admission boundary.
+- Source context may interpret / qualify / condition admitted commitments.
+- Source context may not mint or resurrect obligations beyond CQS admission.
+- S3 and S6 show productive instability can survive downstream as conditional routes.
+- T1 is valid evidence that question_type is not acting as a hard router in that tested case.
+- Review artifacts can be mechanically bound to the artifacts they evaluate.
+- Source context was preserved in 6/6 cases.
 
-P3's central result is that the second digestion transition worked **by consuming,
-not collapsing**: every SRP was digested from the full contextual state (CQS +
-verbatim narrative), and every unresolved ambiguity in the CQS re-appeared in the
-SRP as a CONDITIONAL route or an uncertainty binding rather than a silent choice.
-The strongest evidence is structural: 8 of 20 routes are CONDITIONAL (16 requirements across 6 cases), and the
-two cases designed around productive instability (s3, s6) produced exactly the
-gated topologies the P2 findings predicted. The type-perturbation stress showed the
-one valid perturbation (T1, pre-registered plausible) supports that the type label did not act as a hard router; the second perturbation was an invalid control (unregistered plausibility) and is not counted —
-including an unregistered relabeling (T2) — meaning `question_type` currently has
-no hidden routing power. Source-context retention: **preserved and available in 6/6 cases; incremental
-causal necessity beyond the accepted CQS was not isolated in P3** - in each case,
-at least one SRP feature (a conditional route, a shared obligation, or a
-named-object exception) drew on content present only in the narrative, which is
-preserved-and-available evidence, not isolated causal proof.
-The honest limit: SRP quality itself (are these the right evidence obligations?) is
-a semantic judgment that remains with HO + ChatGPT, and no live retrieval has
-tested whether these obligations improve downstream search.
+**Not earned:**
+- universal question_type invariance
+- source-context incremental causal necessity beyond accepted CQS (NOT_ISOLATED)
+- live retrieval improvement
+- search-quality improvement
+- budget efficiency
 
-## K — Next Step Recommendation
+No broad Digestion Theory claim.
 
-**CQC-P4** — with SRP v0.1 frozen and P2/P3 semantics stable, the lightweight
-BudgetEnvelope phase (master v0.2 §19) can now be designed against a real artifact
-chain (CQS+context→SRP→cost shape) instead of the retired question-type→cost-shape
-model.
+## K — Next Step
+
+**CQC-P4** — the CQS→SRP chain is frozen with machine-enforced review truth and
+integrity manifest; BudgetEnvelope can now be designed against the real
+CQS+context→SRP→cost-shape chain.
+
+---
+
+# Historical Notes (superseded)
+
+> **SUPERSEDED — P2-RA1 CORRECTION (retained for history)**: the original claim
+> "material in 6/6 cases" conflated preserved availability with isolated incremental
+> necessity. Final statement: source context was preserved and available in 6/6
+> cases; incremental causal necessity beyond the accepted CQS was NOT_ISOLATED in P3.
+>
+> **SUPERSEDED — P3 pre-RA2 counts (retained for history)**: early P3 route and
+> perturbation accounting was corrected in P3-RA2; the final canonical counts live in
+> `docs/CQC_P3_METRICS.json` (16 requirements / 20 routes / 8 CONDITIONAL / 8
+> distinct route IDs / 1 valid + 1 invalid perturbation control).

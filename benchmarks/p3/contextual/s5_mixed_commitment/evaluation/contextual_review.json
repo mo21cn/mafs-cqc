@@ -34,5 +34,5 @@
     "incremental_necessity_tested": false,
     "conclusion": "NOT_ISOLATED"
   },
-  "source_context_contribution": "present-and-consumed - the narrative's explicit statement that measurability constrains animal-experiment design entered the SRP transition as importance context for CQ-03; incremental causal necessity beyond the accepted CQS was not isolated"
+  "source_context_contribution": "the source narrative supplies importance context explaining why CQ-03 matters; after P3 remediation this context is retained in uncertainty_binding and does not constitute an independent evidence obligation or stopping-condition requirement."
 }

@@ -1,0 +1,15 @@
+{
+  "case_id": "s2_vcell_paradigm",
+  "diagnosis_source": "HO+ChatGPT P2 acceptance",
+  "prior_artifact_id": "CQS-CQC-P2-02",
+  "prior_artifact_sha256": "aceec42e42d52562387bcfb47787c9313f06de0e161c67bdde1fe7a6471f8994",
+  "measured_failure": "CQ-01 statement and resolution injected comparison baselines and candidate paradigm families (classical mechanistic modeling, high-throughput screening, data-infrastructure-as-paradigm etc.) not present in the source — known high-density candidate space must not be mistaken for source-defined search space",
+  "repair_boundary": "CQ-01 only; keep entity ambiguity, criterion ambiguity, and lineage need",
+  "fields_implicated": [
+    "CQ-01.statement",
+    "CQ-01.resolution_condition"
+  ],
+  "repair_instruction": "Remove pre-populated candidate paradigms and comparison baselines from committed statements; prefer neutral resolution conditions that let evidence generate the candidate space",
+  "revised_artifact_id": "CQS-CQC-P2-02-R1",
+  "revised_artifact_sha256": "f71cd946587af8bebf977cfef04abab72febbe1b87a37aadb47464ec7132a0a4"
+}

@@ -43,6 +43,10 @@ def csha(content) -> str:
     return hashlib.sha256(json.dumps(content, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
 
 
+def sha256_file(p: Path) -> str:
+    return hashlib.sha256(p.read_bytes()).hexdigest()
+
+
 # --------------------------------------------------------------- semantic part
 def validate_semantic(errors: list) -> dict:
     cases = sorted([d for d in SEM.iterdir() if d.is_dir()])
@@ -55,6 +59,33 @@ def validate_semantic(errors: list) -> dict:
             continue
         art = json.loads((c / "candidate_question_set.json").read_text(encoding="utf-8"))
         v = validate_artifact(art)
+        # RA1: initial first-pass artifact must be preserved and recoverable
+        init_p = c / "candidate_question_set.initial.json"
+        if not init_p.is_file():
+            errors.append(f"p2/semantic/{c.name}: initial first-pass CQS not preserved (candidate_question_set.initial.json missing)")
+        # RA1: if a re-digestion record exists, lineage + revised validity must hold
+        rec_p = c / "evaluation" / "redigestion_record.json"
+        if rec_p.is_file():
+            rec = json.loads(rec_p.read_text(encoding="utf-8"))
+            if rec.get("prior_artifact_sha256") != sha256_file(init_p):
+                errors.append(f"p2/semantic/{c.name}: prior_artifact_sha256 does not bind the preserved initial CQS")
+            if rec.get("revised_artifact_sha256") != sha256_file(c / "candidate_question_set.json"):
+                errors.append(f"p2/semantic/{c.name}: revised_artifact_sha256 does not bind the current CQS")
+            if rec.get("revised_artifact_id") != art.get("artifact_id"):
+                errors.append(f"p2/semantic/{c.name}: revised_artifact_id does not match current CQS")
+            if rec.get("diagnosis_source") != "HO+ChatGPT P2 acceptance":
+                errors.append(f"p2/semantic/{c.name}: re-digestion diagnosis_source must be HO+ChatGPT P2 acceptance")
+            if rec.get("revised_artifact_id") == rec.get("prior_artifact_id"):
+                errors.append(f"p2/semantic/{c.name}: retry mislabeled as re-digestion (revised id == prior id)")
+        # RA1: final semantic adjudication must be present and no longer pending
+        pr = json.loads((c / "evaluation" / "projection_review.json").read_text(encoding="utf-8"))
+        fa = pr.get("final_semantic_adjudication") or {}
+        st = fa.get("status")
+        if not st or st == "PENDING_HO_CHATGPT":
+            errors.append(f"p2/semantic/{c.name}: final_semantic_adjudication missing or still pending")
+        if st and st not in ("FAIL_REPAIR_REQUIRED", "PASS_WITH_CAVEAT",
+                             "PRODUCTIVE_INSTABILITY_PRESERVED", "BOUNDARY_UNRESOLVED_PRESERVED", "PASS"):
+            errors.append(f"p2/semantic/{c.name}: illegal final_semantic_adjudication.status {st!r}")
         if v["schema_valid"]:
             out["schema_valid"] += 1
         if v["source_hash_valid"]:

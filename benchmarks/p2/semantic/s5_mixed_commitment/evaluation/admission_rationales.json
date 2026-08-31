@@ -1,0 +1,9 @@
+{
+  "case_id": "s5_mixed_commitment",
+  "note": "Admission rationale per final CQ: what independent evidence landscape does this question own? (contract section 15; stored here, NOT added to CQS schema)",
+  "admission_rationales": {
+    "CQ-01": "Owns the evidence landscape of cell/pathway-level cascade-effect studies under upstream inhibition in IDH1-mutant glioma.",
+    "CQ-02": "Owns the evidence landscape of prior direct-enzyme-targeting strategies and their recorded differences from upstream-inhibition strategies.",
+    "CQ-03": "Owns the evidence landscape of single-cell/near-single-cell metabolomics capability boundaries."
+  }
+}

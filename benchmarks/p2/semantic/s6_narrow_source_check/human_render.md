@@ -1,4 +1,4 @@
-# CandidateQuestionSet: CQS-CQC-P2-06
+# CandidateQuestionSet: CQS-CQC-P2-06-R1
 
 - schema_version: 0.1
 - source_narrative_sha256: 95f91f7c8dec4ece9f973a2607b8b8f5988963a83abf09fb11228c8a050da92d
@@ -18,6 +18,6 @@
   - "Gould 2022 年那篇 Cell Reports 论文的补充材料里"
   - "单细胞层面的海马体细胞类型注释表"
 - dependencies: (none)
-- resolution condition: 证据条件：先以作者/年份/期刊锚定论文身份（消解模糊指称），再核对其补充材料内容——存在该注释表（给出表标识）/不存在（记录明确的不存在）。身份未定或补充材料不可及时，状态为『无法确认』而非否定。
-- uncertainty: 指称模糊：『Gould 2022』与『Cell Reports』的组合可能对应多篇论文/多位 Gould；源未给标题或 DOI。论文定位是本问题的执行路径而非独立证据景观，故不拆分为单独问题。
+- resolution condition: 证据条件：论文身份（经指称消解确认）与其补充材料内容共同构成证据——身份确认且内容含该注释表→『存在』（给出表标识）；身份不可消解或材料不可及→『无法确认』；身份确认且材料明确不含→『明确不存在』。标题与描述层面的推断不足以裁决。
+- uncertainty: 指称模糊（『Gould 2022』×『Cell Reports』可能对应多篇论文；源未给标题/DOI）。论文身份在本案例中按执行前置处理（消解指称是回答手段）；若下游需要将论文身份作为独立证据对象（如引用谱系分析），边界依用途重开——当前保留未决。
 

@@ -38,6 +38,9 @@
     "possible_question_type_overcommitment": "无（MECHANISM/GENERALIZATION/MEASUREMENT 三类边界清晰）"
   },
   "final_semantic_adjudication": {
-    "status": "PENDING_HO_CHATGPT"
+    "status": "PASS",
+    "finding": "Destructive overcommitment: CQ-01 committed source-absent mechanism anchors (KNDy/kisspeptin/NK neurons, vascular endothelium/smooth muscle, hypothalamic nuclei).",
+    "action": "Re-digested (CQS-CQC-P2-01-R1): statements/conditions neutralized to source-authorized scope; ambiguities retained.",
+    "rationale": "Scientifically plausible elaboration is not source-authorized commitment; the neutral form still supports the same downstream work."
   }
 }

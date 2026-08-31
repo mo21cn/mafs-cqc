@@ -1,0 +1,16 @@
+{
+  "case_id": "s1_vms_cellular_mechanism",
+  "diagnosis_source": "HO+ChatGPT P2 acceptance",
+  "prior_artifact_id": "CQS-CQC-P2-01",
+  "prior_artifact_sha256": "bbf2efe61e3c64ef1c560ad84aacdf59cdaef4554977629abd103004478933e3",
+  "measured_failure": "CQ-01 statement and resolution introduced mature mechanism anchors absent from the source (KNDy/kisspeptin/NK neurons; vascular endothelium/smooth muscle; hypothalamic thermoregulatory nuclei) — scientifically plausible elaboration != source-authorized commitment",
+  "repair_boundary": "statements + resolution_condition only; preserve population and resolution ambiguities",
+  "fields_implicated": [
+    "CQ-01.statement",
+    "CQ-01.resolution_condition",
+    "CQ-01.uncertainty"
+  ],
+  "repair_instruction": "Remove specific mechanism families and tissue/nucleus commitments from committed statements and conditions; keep the cellular-resolution mechanism question neutral; keep population ambiguity",
+  "revised_artifact_id": "CQS-CQC-P2-01-R1",
+  "revised_artifact_sha256": "3c55e201d400fd99ba98059a327f200cc6cd753f071295c1abafefa5814733cb"
+}

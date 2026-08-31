@@ -37,6 +37,9 @@
     "possible_question_type_overcommitment": "核心发现：本案证明混合认知承诺**可以**在七字段内诚实呈现——前提是 question_type 不被当作权威路由（类型分散 + uncertainty 承接判定基准缺失）"
   },
   "final_semantic_adjudication": {
-    "status": "PENDING_HO_CHATGPT"
+    "status": "PRODUCTIVE_INSTABILITY_PRESERVED",
+    "finding": "CQ-04 converted a downstream consequence (animal-experiment design) into an upstream question; the mixed-type dispersion of CQ-01/02/03 is a positive result.",
+    "action": "Re-digested (CQS-CQC-P2-05-R1): CQ-04 removed; consequence demoted to context in CQ-03 condition; mixed types preserved.",
+    "rationale": "Mixed epistemic structure is not a failure; downstream consequence is not an upstream CandidateQuestion."
   }
 }

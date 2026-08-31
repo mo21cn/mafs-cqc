@@ -1,8 +1,8 @@
-# CandidateQuestionSet: CQS-CQC-P2-05
+# CandidateQuestionSet: CQS-CQC-P2-05-R1
 
 - schema_version: 0.1
 - source_narrative_sha256: 21c183e3b096f988d3a80c6ebbd145a1255efab08052009380b154ff48ec7d8d
-- questions: 4
+- questions: 3
 
 ## Source Narrative (verbatim)
 
@@ -38,16 +38,6 @@
 - source trace:
   - "高分辨质谱平台能不能在单个细胞或者接近单个细胞的分辨率上把 relevant 的代谢物水平测出来"
 - dependencies: (none)
-- resolution condition: 证据条件：单细胞/近单细胞代谢组学的技术能力边界记录（检出限、代谢物覆盖面、通量）。『可行/不可行/仅部分可行』的确认即为解决状态。
+- resolution condition: 证据条件：单细胞/近单细胞代谢组学的技术能力边界记录（检出限、代谢物覆盖面、通量）。『可行/不可行/仅部分可行』的确认即为解决状态。（操作者明示该结论直接约束后续动物实验设计——记录为此问题的重要性语境，不构成独立问题。）
 - uncertainty: 源写『relevant 的代谢物』但未列明具体代谢物种类；操作者语境下存在常见候选，但消化不代为指定。
-
-### CQ-04
-
-- type: INTERVENTION_OR_CONTROL
-- statement: CQ-03 的可测性结论如何约束后续动物实验的测量方案设计？
-- source trace:
-  - "这直接决定后面动物实验的设计"
-- dependencies: CQ-03
-- resolution condition: 证据条件：以 CQ-03 的可测性边界为输入的动物实验测量方案设计约束（取样方式、分辨率妥协、必要对照）。约束集明确即为解决状态。
-- uncertainty: (none)
 

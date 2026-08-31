@@ -1,4 +1,4 @@
-# CandidateQuestionSet: CQS-CQC-P2-01
+# CandidateQuestionSet: CQS-CQC-P2-01-R1
 
 - schema_version: 0.1
 - source_narrative_sha256: c0600db6f5bfd1be5e735f298c3ad4944b78c5c7560a4a907f409a42959bab42
@@ -13,13 +13,13 @@
 ### CQ-01
 
 - type: MECHANISM
-- statement: 女性血管舒缩症状（潮热/盗汗）的机制解释中，哪些已经在细胞类型分辨率上被确立或正在被检验（中枢 KNDy/kisspeptin/NK 神经元线 vs 血管内皮/平滑肌线）？
+- statement: 女性血管舒缩症状的机制解释中，哪些已经在细胞类型分辨率上被确立或正在被检验？
 - source trace:
   - "女性血管舒缩症状"
   - "细胞分辨率层面的机制解释"
 - dependencies: (none)
-- resolution condition: 证据条件：在单细胞或细胞类型特异分辨率上刻画 VMS 相关组织（下丘脑体温调节核团、血管壁）细胞状态与症状关联的研究证据。某一机制线达到『细胞层面确立/修正/证伪』任一状态，即构成对该问题状态的实质改变。
-- uncertainty: 原话未指明症状人群（围绝经期自然 VMS vs 治疗诱导 VMS）；statement 中『潮热/盗汗』为消化时引入的术语具体化，源原话未含该词。
+- resolution condition: 证据条件：在单细胞或细胞类型特异分辨率上刻画血管舒缩症状相关细胞状态与症状关联的研究证据。任一机制解释达到『确立/修正/证伪』任一状态，即构成对该问题状态的实质改变。
+- uncertainty: 原话未指明症状人群（围绝经期自然 VMS vs 治疗诱导 VMS）；人群边界是本问题保留的歧义。
 
 ### CQ-02
 

@@ -1,0 +1,15 @@
+{
+  "case_id": "s5_mixed_commitment",
+  "diagnosis_source": "HO+ChatGPT P2 acceptance",
+  "prior_artifact_id": "CQS-CQC-P2-05",
+  "prior_artifact_sha256": "f992080ecf169c90e19437ee811c611aa7039bb941a3c15f73bbaba6792fc333",
+  "measured_failure": "CQ-04 converts a downstream consequence (animal-experiment design constraint) into a new upstream CandidateQuestion — downstream consequence != new upstream CandidateQuestion; the mixed-type structure of CQ-01/02/03 is a positive result",
+  "repair_boundary": "remove CQ-04; keep CQ-01/02/03 and mixed-type dispersion; animal-design consequence demoted to context explaining why CQ-03 matters",
+  "fields_implicated": [
+    "remove CQ-04",
+    "CQ-03.resolution_condition"
+  ],
+  "repair_instruction": "Remove CQ-04. Keep the three mixed epistemic commitments and their dependency structure. The animal-experiment consequence may remain only as context in CQ-03's condition, not as a question.",
+  "revised_artifact_id": "CQS-CQC-P2-05-R1",
+  "revised_artifact_sha256": "f292844819554ece8ed3a3f1dd9fdf1946de924e4a8bd2291b25d27faecafa82"
+}

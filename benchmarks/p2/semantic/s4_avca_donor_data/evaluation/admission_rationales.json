@@ -1,0 +1,9 @@
+{
+  "case_id": "s4_avca_donor_data",
+  "note": "Admission rationale per final CQ: what independent evidence landscape does this question own? (contract section 15; stored here, NOT added to CQS schema)",
+  "admission_rationales": {
+    "CQ-01": "Owns the evidence landscape of the Atlas entity itself (maintainer, scope, data organization, access path).",
+    "CQ-02": "Owns the evidence landscape of donor-data existence inside the Atlas inventory (dataset identifiers + metadata field values).",
+    "CQ-03": "Owns the evidence landscape of metadata-schema decidability for the three judgment words (young/healthy/primary)."
+  }
+}

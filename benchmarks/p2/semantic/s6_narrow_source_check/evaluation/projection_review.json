@@ -37,6 +37,9 @@
     "possible_question_type_overcommitment": "无（SOURCE_CONTENT 单一清晰）"
   },
   "final_semantic_adjudication": {
-    "status": "PENDING_HO_CHATGPT"
+    "status": "BOUNDARY_UNRESOLVED_PRESERVED",
+    "finding": "CQ-01 RC contained procedural sequencing; identity-resolution vs execution-prerequisite boundary remains genuinely unresolved.",
+    "action": "Bounded re-digestion (CQS-CQC-P2-06-R1): RC de-proceduralized into evidence states; 1-CQ structure preserved; boundary recorded as use-dependent.",
+    "rationale": "No-decomposition capacity is valuable; identity granularity can remain context-dependent; boundary unresolved != failed artifact."
   }
 }

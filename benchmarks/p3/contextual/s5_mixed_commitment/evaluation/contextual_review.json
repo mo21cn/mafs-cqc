@@ -12,7 +12,7 @@
     "execution_leak_free": true
   },
   "local_claw_preliminary_review": {
-    "source_context_contribution": "material — the narrative's explicit statement that measurability 决定后面动物实验的设计 is the sole justification for keeping the design-constraint implication inside R03's stopping scope; without the source narrative, that design linkage would be an unsupported addition",
+    "source_context_contribution": "initial/pre-repair observation — the source narrative supplied the importance context linking measurability to downstream animal-experiment design; after P3 remediation this context is retained in uncertainty_binding and does not constitute an independent evidence obligation or stopping-condition requirement.",
     "uncertainty_preserved": true,
     "possible_overcommitment": "none; metabolite species left unspecified (relevant 的代谢物 carried forward as open); no paradigm winners pre-populated",
     "possible_context_loss": "low-moderate: the clinical-queue framing (患者队列、影像变化) compresses into CQ-01's evidence_need; recoverable from source_narrative reservoir",

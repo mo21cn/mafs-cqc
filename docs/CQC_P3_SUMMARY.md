@@ -80,12 +80,12 @@ changes SRP behavior — it did not.
 
 ## F — Source Context Findings
 
-Per-case `source_context_contribution`: **material in 6/6 cases** (recorded in
-contextual_review.json with the specific justification). Summarized honestly: the
-source narrative materially constrained the SRP in every case — through the
-search-request phrasing (s1), brevity-driven strategy (s2), ambiguity weight (s3),
-named-object + threshold gaps (s4), design-linkage statement (s5), and reference
-fuzziness (s6). No case reported `none`; no value was manufactured.
+> **P2-RA1 CORRECTION**: the original claim "material in 6/6 cases" conflated preserved availability with isolated incremental necessity. Corrected statement: **source context was preserved and available in 6/6 cases; the present P3 design did not isolate its incremental causal contribution beyond the accepted CQS.** Per-case observations below are interpretive observations on how context was used, not isolated causal evidence.
+
+Per-case `source_context_contribution`: **preserved-and-available in 6/6 cases** (recorded in contextual_review.json with the specific justification; `incremental_necessity_tested: false`, `conclusion: NOT_ISOLATED`). Summarized: the
+source narrative materially shaped the SRP in every case — through the
+search-request phrasing (s1), brevity-driven strategy (s2), ambiguity weight (s3), named-object + threshold gaps (s4), design-linkage statement (s5), and reference
+fuzziness (s6). No case reported `none`; no value was manufactured. The causal-isolation claim is retired.
 
 ## G — Requirement Admission
 

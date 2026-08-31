@@ -1,7 +1,7 @@
 {
   "case_id": "s1_vms_cellular_mechanism",
   "source_cqs_id": "CQS-CQC-P2-01-R1",
-  "source_cqs_sha256": "92305bf11f98cecf2b4d13e73dfca4f573df506a27739da3d69ce234605b64a5",
+  "source_cqs_sha256": "92305bf11f989cf22a0a8121e5705c74028c0fce0c785352c65715a05bcb31e7",
   "srp_artifact_id": "SRP-CQC-P3-01",
   "srp_sha256": "67755617b29aef2f3d80f53b20fb9fb2434fe8512a4dae5472fe9263e83380ea",
   "mechanical": {
@@ -22,6 +22,15 @@
     "shared_requirement_observed": false
   },
   "final_semantic_adjudication": {
-    "status": "PENDING_HO_CHATGPT"
+    "initial_status": "PENDING_HO_CHATGPT",
+    "finding": "Containment review: R02 operationalizes admitted CQ-02 (population comparison), R03 operationalizes CQ-03; no obligation exceeds the accepted CQS boundary.",
+    "action": "none (no re-digestion required)",
+    "final_state": "PASS",
+    "rationale": "Context authority holds: source narrative qualifies and conditions the admitted commitments without minting new obligations."
+  },
+  "source_context_use": {
+    "observed": "context used to qualify/condition admitted obligations (conditional routes, importance context); no obligation minted beyond CQS boundary after RA1 repairs",
+    "incremental_necessity_tested": false,
+    "conclusion": "NOT_ISOLATED"
   }
 }

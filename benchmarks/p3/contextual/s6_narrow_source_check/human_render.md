@@ -1,4 +1,4 @@
-# SearchRequirementProfile: SRP-CQC-P3-06
+# SearchRequirementProfile: SRP-CQC-P3-06-R1
 
 - schema_version: 0.1
 - source_cqs_id: CQS-CQC-P2-06-R1
@@ -17,11 +17,11 @@
 - target_question_ids: CQ-01
 - evidence_need: 被指称论文（Gould 2022 × Cell Reports 的模糊指称，经消解确认）的补充材料内容证据——目标注释表的存在、缺失或材料不可及三态之一。
 - epistemic routes:
-  - source_content_verification [REQUIRED] — 在确认身份的论文补充材料中核对目标注释表的存在性
-    condition: 指称消解成功且补充材料可及时激活
-  - entity_resource_identity [CONDITIONAL] — 消解模糊指称（确定具体论文）
-    condition: 指称歧义成为实质性障碍（无法唯一确定论文）时，身份验证升级为显式前置路线；否则作为 R01 的内嵌执行路径
+  - source_content_verification [REQUIRED] — 在身份已确认的论文补充材料中核对目标注释表的存在性
+    condition: 指称消解成功且补充材料可及
+  - entity_resource_identity [CONDITIONAL] — 消解模糊指称以确定目标论文身份
+    condition: 指称歧义成为实质性障碍（无法唯一确定论文）时激活；指称可唯一确定时，该义务内嵌于 R01 的消解前提，不单独成义务
 - source_requirements: supplementary material, primary study
-- stopping_condition: 三态之一（存在/明确不存在/无法确认）达成且指称消解依据被记录。
-- uncertainty_binding: 指称模糊（作者+年份+期刊，无标题/DOI）保留——身份粒度（独立证据对象 vs 执行前置）依下游用途未决；重复表述已按单一疑问理解并记录。
+- stopping_condition: 三态之一（存在/明确不存在/无法确认）达成，且指称消解依据被记录。
+- uncertainty_binding: 指称模糊（作者+年份+期刊，无标题/DOI）保留——身份粒度（独立证据对象 vs 执行前置）依下游用途未决。
 

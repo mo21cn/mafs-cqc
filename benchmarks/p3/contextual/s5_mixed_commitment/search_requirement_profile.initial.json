@@ -1,5 +1,5 @@
 {
-  "artifact_id": "SRP-CQC-P3-05-R1",
+  "artifact_id": "SRP-CQC-P3-05",
   "schema_version": "0.1",
   "source_cqs_id": "CQS-CQC-P2-05-R1",
   "source_cqs_sha256": "03d9fd18edc8343bddbbd5e88adf0b197113818369b33cc5391b310b08b82cd0",
@@ -11,7 +11,7 @@
       "target_question_ids": [
         "CQ-01"
       ],
-      "evidence_need": "上游通路抑制在 IDH1 突变胶质瘤背景下产生下游代谢连锁效应的细胞/通路层面证据——确立、修正或证伪任一状态均实质改变 CQ-01。",
+      "evidence_need": "上游通路抑制在 IDH1 突变胶质瘤背景下产生下游代谢连锁效应的细胞/通路层面研究证据——确立、修正或证伪任一状态均实质改变 CQ-01。",
       "epistemic_routes": [
         {
           "route_id": "mechanism_evidence",
@@ -59,20 +59,20 @@
       "target_question_ids": [
         "CQ-03"
       ],
-      "evidence_need": "单细胞/近单细胞代谢组学的技术能力边界证据：检出限、代谢物覆盖面、通量，以及单细胞/近单细胞分辨率的可行性与边界。",
+      "evidence_need": "单细胞/近单细胞代谢组学的技术能力边界记录（检出限、代谢物覆盖面、通量），以及该边界对动物实验测量方案的约束含义。",
       "epistemic_routes": [
         {
           "route_id": "measurement_observability",
-          "purpose": "确认质谱平台在目标分辨率下的能力边界（检出限、覆盖、通量、可行性）",
+          "purpose": "确认质谱平台在目标分辨率下的能力与边界",
           "status": "REQUIRED",
-          "condition": "始终需要"
+          "condition": "始终需要；其结论直接约束操作者明示的动物实验设计"
         }
       ],
       "source_requirements": [
         "methods literature",
         "authoritative review"
       ],
-      "stopping_condition": "可行/不可行/仅部分可行三态判定达成。（重要性语境：操作者在源叙事中明示该结论直接约束后续动物实验设计——该语境解释 CQ-03 为何重要，不构成独立证据义务。）",
+      "stopping_condition": "可行/不可行/仅部分可行三态判定达成。",
       "uncertainty_binding": "『relevant 的代谢物』种类未指定——证据检索保持开放，不代为指定。"
     }
   ]

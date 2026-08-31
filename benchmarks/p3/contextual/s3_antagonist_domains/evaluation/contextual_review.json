@@ -1,7 +1,7 @@
 {
   "case_id": "s3_antagonist_domains",
   "source_cqs_id": "CQS-CQC-P2-03-R1",
-  "source_cqs_sha256": "8afff47489df33baa9146b64d54540a637c4a12c68d94f59cf34ea34f775858",
+  "source_cqs_sha256": "8afff47489dfa03eb90ce643456f30dd31e77b5826e564520532c5946e8c210b",
   "srp_artifact_id": "SRP-CQC-P3-03",
   "srp_sha256": "c0ef444b0f5786cbf1b94638ee997e3bf3f8d96ceb7f3928fc73d220cf07d295",
   "mechanical": {
@@ -22,6 +22,15 @@
     "shared_requirement_observed": false
   },
   "final_semantic_adjudication": {
-    "status": "PENDING_HO_CHATGPT"
+    "initial_status": "PENDING_HO_CHATGPT",
+    "finding": "R01/R02/R03 remain contained; CONDITIONAL gates preserve referent ambiguity; type duality (TERMINOLOGY vs ENTITY_RESOLUTION) is productive instability.",
+    "action": "none (no re-digestion required)",
+    "final_state": "PRODUCTIVE_INSTABILITY_PRESERVED",
+    "rationale": "Boundary ambiguity is not representation failure; gates follow the CQS dependency edges."
+  },
+  "source_context_use": {
+    "observed": "context used to qualify/condition admitted obligations (conditional routes, importance context); no obligation minted beyond CQS boundary after RA1 repairs",
+    "incremental_necessity_tested": false,
+    "conclusion": "NOT_ISOLATED"
   }
 }

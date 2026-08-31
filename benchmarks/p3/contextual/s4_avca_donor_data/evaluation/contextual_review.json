@@ -1,7 +1,7 @@
 {
   "case_id": "s4_avca_donor_data",
   "source_cqs_id": "CQS-CQC-P2-04",
-  "source_cqs_sha256": "ba34208d5ba8b3f346e5db393972c853e06bcbc2b02556464609247893447cf6",
+  "source_cqs_sha256": "ba34208d5ba862e7bdf4498ebe19efcee87efe695c4b61200fe573f1dcef2c15",
   "srp_artifact_id": "SRP-CQC-P3-04",
   "srp_sha256": "03355816136dd52e66e70f7c92125386bf62c5ee1d57bd2e9a30f0ecad0cad31",
   "mechanical": {
@@ -23,6 +23,15 @@
     "shared_requirement_detail": "R01 (Atlas identity/scope/access) serves CQ-01 directly AND supplies the inventory-evidence source that CQ-02's existence check consumes — one obligation, two questions (contract section 17 case)"
   },
   "final_semantic_adjudication": {
-    "status": "PENDING_HO_CHATGPT"
+    "initial_status": "PENDING_HO_CHATGPT",
+    "finding": "R01 is one genuine evidence obligation (Atlas identity/scope/access record) serving CQ-01 directly and CQ-02 as inventory source — semantically contained, not two bundled obligations.",
+    "action": "none (shared requirement retained)",
+    "final_state": "PASS",
+    "rationale": "Shared requirement survives the containment review; no split performed for normalization."
+  },
+  "source_context_use": {
+    "observed": "context used to qualify/condition admitted obligations (conditional routes, importance context); no obligation minted beyond CQS boundary after RA1 repairs",
+    "incremental_necessity_tested": false,
+    "conclusion": "NOT_ISOLATED"
   }
 }

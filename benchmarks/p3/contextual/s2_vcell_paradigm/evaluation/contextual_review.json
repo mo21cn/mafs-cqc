@@ -1,9 +1,9 @@
 {
   "case_id": "s2_vcell_paradigm",
   "source_cqs_id": "CQS-CQC-P2-02-R1",
-  "source_cqs_sha256": "39b0f15a28d684e93c74c01233261995be7f15bd6e6bc4d2e05a575e5606ee11",
+  "source_cqs_sha256": "39b0f15a28d663bd3ee6d8453ddf45379714b6b721c773a23719e11248e4081d",
   "srp_artifact_id": "SRP-CQC-P3-02",
-  "srp_sha256": "77bff6df815ce9337ad817bbd1414ceb78b02875ccdb77256a390d2708a98819",
+  "srp_sha256": "67036a5c48d02608a25ba00c85260162dc6bce74a78ba4079f0c12f18e6cf1a0",
   "mechanical": {
     "schema_valid": true,
     "source_binding_valid": true,
@@ -22,6 +22,15 @@
     "shared_requirement_observed": false
   },
   "final_semantic_adjudication": {
-    "status": "PENDING_HO_CHATGPT"
+    "initial_status": "PENDING_HO_CHATGPT",
+    "finding": "Search-strategy language (wide-net, multi-source saturation-by-search) mixed into R01/R03 evidence fields — how-to-search != what-evidence-state.",
+    "action": "re-digested (SRP-CQC-P3-02-R1): saturation now defined against the CQ-02 criterion, not against search process",
+    "final_state": "REPAIRED",
+    "rationale": "Evidence saturation != search-strategy prescription."
+  },
+  "source_context_use": {
+    "observed": "context used to qualify/condition admitted obligations (conditional routes, importance context); no obligation minted beyond CQS boundary after RA1 repairs",
+    "incremental_necessity_tested": false,
+    "conclusion": "NOT_ISOLATED"
   }
 }

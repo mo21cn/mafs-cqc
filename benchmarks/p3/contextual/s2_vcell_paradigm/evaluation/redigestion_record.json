@@ -1,0 +1,13 @@
+{
+  "case_id": "s2_vcell_paradigm",
+  "diagnosis_source": "HO+ChatGPT P3 acceptance",
+  "prior_srp_artifact_id": "SRP-CQC-P3-02",
+  "prior_srp_sha256": "77bff6df815ce9337ad817bbd1414ceb78b02875ccdb77256a390d2708a98819",
+  "measured_failure": "SRP R01/R03 mixed search-strategy language (wide-net strategy, multi-source saturation-by-search) into evidence-requirement fields — how-to-search != what-evidence-state",
+  "repair_boundary": "requirements only; envelope, schema, source bindings unchanged",
+  "fields_changed": [
+    "requirements"
+  ],
+  "revised_srp_artifact_id": "SRP-CQC-P3-02-R1",
+  "revised_srp_sha256": "67036a5c48d02608a25ba00c85260162dc6bce74a78ba4079f0c12f18e6cf1a0"
+}

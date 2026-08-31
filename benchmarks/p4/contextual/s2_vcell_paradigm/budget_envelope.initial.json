@@ -1,5 +1,5 @@
 {
-  "artifact_id": "BE-CQC-P4-S2-R1",
+  "artifact_id": "BE-CQC-P4-S2",
   "schema_version": "0.1",
   "source_srp_id": "SRP-CQC-P3-02-R1",
   "source_srp_sha256": "67036a5c48d02608a25ba00c85260162dc6bce74a78ba4079f0c12f18e6cf1a0",
@@ -25,7 +25,7 @@
       "activation": "COMMITTED",
       "wall_clock_target_minutes": 10,
       "model_token_target": 120000,
-      "rationale": "R01 receives the largest allocation because its stopping condition requires candidate paradigm categories to reach evidential saturation under the admitted paradigm criterion."
+      "rationale": "候选范式盘点是 S2 最大义务：宽收由证据生成，类别饱和为停机条件。"
     },
     {
       "allocation_id": "AL02",

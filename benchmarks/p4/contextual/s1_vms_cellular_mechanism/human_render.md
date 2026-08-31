@@ -1,4 +1,4 @@
-# BudgetEnvelope: BE-CQC-P4-S1
+# BudgetEnvelope: BE-CQC-P4-S1-R1
 
 - schema_version: 0.1
 - source_srp_id: SRP-CQC-P3-01
@@ -15,7 +15,7 @@
 - route_id: mechanism_evidence [COMMITTED]
 - wall_clock_target_minutes: 10
 - model_token_target: 120000
-- rationale: S1 的核心义务：细胞/细胞类型分辨率的 VMS 机制证据是本案最大的单一证据景观，中枢与血管两条线共用此分配。
+- rationale: R01/mechanism_evidence is the largest evidence obligation in S1 and therefore receives the largest committed allocation. ( formerly named specific unadmitted mechanism lines )
 
 ### AL02
 

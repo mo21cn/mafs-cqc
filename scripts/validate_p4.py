@@ -23,6 +23,7 @@ from mini_jsonschema import validate as mini_validate  # noqa: E402
 PKG = Path(__file__).resolve().parents[1]
 P4 = PKG / "benchmarks" / "p4"
 CTX = P4 / "contextual"
+DOCS = PKG / "docs"
 PERT = P4 / "budget_perturbation"
 SCHEMA = PKG / "schemas" / "budget_envelope.v0.1.schema.json"
 SRP_SCHEMA = PKG / "schemas" / "search_requirement_profile.v0.1.schema.json"
@@ -32,6 +33,8 @@ PKG_REQUIRED = {
     "human_render.md", "evaluation/budget_review.json",
     "evaluation/allocation_admission.json",
 }
+_counts: dict = {}
+
 LEAK_TERMS = ["crossref", "pubmed", "google scholar", "api endpoint", "top-k",
               "http request", "query string", "provider fallback", "resolver call"]
 
@@ -169,12 +172,18 @@ def feasibility_consistency(envelope: dict, srp: dict) -> list[str]:
 
 
 def shared_requirement_check(envelope: dict, srp: dict) -> list[str]:
+    """RA1 subtractive fix (contract section 12): dedup is route-based.
+    A shared requirement (target_question_ids > 1) may legitimately carry multiple
+    allocations IF they target different epistemic routes. The only forbidden thing
+    is duplicating the same (requirement_id, route_id) merely because question
+    cardinality multiplied. Same-(req,route) dedup is already enforced in accounting()."""
     errs: list[str] = []
     for r in srp["requirements"]:
         if len(r["target_question_ids"]) > 1:
             allocs = [a for a in envelope["allocations"] if a["requirement_id"] == r["requirement_id"]]
-            if len(allocs) > 1:
-                errs.append(f"shared requirement {r['requirement_id']} double-budgeted ({len(allocs)} allocations)")
+            route_ids = [a["route_id"] for a in allocs]
+            if len(route_ids) != len(set(route_ids)):
+                errs.append(f"shared requirement {r['requirement_id']} has duplicate allocations for the same route (question-cardinality duplication)")
     return errs
 
 
@@ -254,11 +263,47 @@ def validate_package(case: Path, base_srp_bytes: bytes, errors: list, results: l
         errors.append(f"{case.name}: human_render.md not reproducible")
         res["ok"] = False
 
+    # RA1: review-truth enforcement — review identity/hash/mechanical fields must match actual artifacts
+    review_ok = True
+    srp_sha_actual = hashlib.sha256(srp_bytes).hexdigest()
+    env_sha_actual = hashlib.sha256((case / "budget_envelope.json").read_bytes()).hexdigest()
     br = json.loads((case / "evaluation" / "budget_review.json").read_text(encoding="utf-8"))
-    fa = br.get("final_semantic_adjudication") or {}
-    if fa.get("status") != "PENDING_HO_CHATGPT":
-        errors.append(f"{case.name}: budget_review final status must remain PENDING_HO_CHATGPT at P4")
+    if br.get("source_srp_id") != srp.get("artifact_id") or br.get("source_srp_sha256") != srp_sha_actual:
+        errors.append(f"{case.name}: P4_REVIEW_BINDING_MISMATCH (source_srp identity/sha)")
+        review_ok = False
+    if br.get("budget_envelope_id") != env.get("artifact_id") or br.get("budget_envelope_sha256") != env_sha_actual:
+        errors.append(f"{case.name}: P4_REVIEW_BINDING_MISMATCH (budget_envelope identity/sha)")
+        review_ok = False
+    recomputed_mech = {
+        "schema_valid": res["checks"].get("budget_envelope_schema_valid", False),
+        "source_binding_valid": res["checks"].get("source_srp_binding_valid", False),
+        "allocation_refs_valid": res["checks"].get("allocation_refs_valid", False),
+        "required_routes_funded": res["checks"].get("required_routes_funded", False),
+        "conditional_routes_not_preactivated": res["checks"].get("conditional_routes_not_preactivated", False),
+        "target_accounting_valid": res["checks"].get("target_accounting_valid", False),
+        "ceiling_accounting_valid": res["checks"].get("ceiling_accounting_valid", False),
+        "shared_requirement_not_duplicated": res["checks"].get("shared_requirement_not_duplicated", False),
+        "render_valid": res["checks"].get("render_reproducible", False),
+    }
+    stated = br.get("mechanical") or {}
+    for k, actual in recomputed_mech.items():
+        if bool(stated.get(k)) != bool(actual):
+            errors.append(f"{case.name}: budget_review.mechanical.{k}={stated.get(k)} but recomputed truth={bool(actual)} (P4_REVIEW_MACHINE_TRUTH_MISMATCH)")
+            review_ok = False
+    hash_binding_ok = (br.get("source_srp_sha256") == hashlib.sha256((case / "source_srp.json").read_bytes()).hexdigest()
+                       and br.get("budget_envelope_sha256") == env_sha_actual)
+    res["checks"]["review_hash_valid"] = hash_binding_ok
+    res["checks"]["review_machine_truth_valid"] = all(
+        bool(stated.get(k)) == bool(actual) for k, actual in recomputed_mech.items())
+    res["checks"]["review_truth_valid"] = review_ok
+    if not review_ok:
         res["ok"] = False
+
+    fa = (br.get("final_semantic_adjudication") or {}).get("status")
+    if fa != "PENDING_HO_CHATGPT":
+        errors.append(f"{case.name}: budget_review final status must remain PENDING_HO_CHATGPT at P4-RA1")
+        res["ok"] = False
+
     results.append(res)
     return res
 
@@ -307,6 +352,70 @@ def validate_perturbation(td: Path, base_case: str, base_srp_bytes: bytes, expec
         res["ok"] = False
     results.append(res)
     return res
+
+
+def validate_canonical_metrics(errors: list) -> dict:
+    """RA1 section 19: canonical metrics must match recomputed truth."""
+    out = {"canonical_metrics_truth_valid": False}
+    m_path = DOCS / "CQC_P4_METRICS.json"
+    if not m_path.is_file():
+        errors.append("canonical CQC_P4_METRICS.json missing")
+        return out
+    m = json.loads(m_path.read_text(encoding="utf-8"))
+    recomputed = {
+        "contextual_case_count": 6,
+        "budget_envelope_schema_valid_count": _counts.get("budget_envelope_schema_valid"),
+        "source_srp_binding_valid_count": _counts.get("source_srp_binding_valid"),
+        "allocation_ref_valid_count": _counts.get("allocation_refs_valid"),
+        "required_route_funding_valid_count": _counts.get("required_routes_funded"),
+        "conditional_non_preactivation_valid_count": _counts.get("conditional_routes_not_preactivated"),
+        "target_accounting_valid_count": _counts.get("target_accounting_valid"),
+        "ceiling_accounting_valid_count": _counts.get("ceiling_accounting_valid"),
+        "shared_requirement_dedup_valid_count": _counts.get("shared_requirement_not_duplicated"),
+        "deterministic_render_valid_count": _counts.get("render_reproducible"),
+        "contextual_review_hash_valid_count": _counts.get("review_hash_valid"),
+        "contextual_review_machine_truth_valid_count": _counts.get("review_machine_truth_valid"),
+        "total_allocation_count": _counts.get("total_allocation_count"),
+        "committed_allocation_count": _counts.get("committed_allocation_count"),
+        "conditional_reserve_allocation_count": _counts.get("conditional_reserve_allocation_count"),
+        "feasible_case_count": _counts.get("feasible_case_count"),
+        "constrained_case_count": _counts.get("constrained_case_count"),
+        "insufficient_case_count": _counts.get("insufficient_case_count"),
+    }
+    bad = [k for k, val in recomputed.items() if m.get(k) != val]
+    if bad:
+        errors.append(f"P4_CANONICAL_METRICS_TRUTH_MISMATCH: {bad}")
+        out["mismatches"] = bad
+    else:
+        out["canonical_metrics_truth_valid"] = True
+    return out
+
+
+def validate_final_manifest(errors: list) -> dict:
+    """RA1 section 18: every manifest entry path must exist and SHA must match current bytes."""
+    out = {"final_manifest_valid": False, "manifest_entries": 0}
+    mf = DOCS / "CQC_P4_SHA256_MANIFEST.txt"
+    if not mf.is_file():
+        errors.append("final P4 manifest missing (docs/CQC_P4_SHA256_MANIFEST.txt)")
+        return out
+    bad = []
+    n = 0
+    for line in mf.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        sha, rel = line.split("  ", 1)
+        p = PKG / rel
+        n += 1
+        if not p.is_file():
+            bad.append(f"missing {rel}")
+        elif hashlib.sha256(p.read_bytes()).hexdigest() != sha:
+            bad.append(f"hash mismatch {rel}")
+    out["manifest_entries"] = n
+    if bad:
+        errors.append(f"P4_FINAL_MANIFEST_MISMATCH: {bad[:5]}")
+        return out
+    out["final_manifest_valid"] = True
+    return out
 
 
 def main(argv=None) -> int:
@@ -359,10 +468,55 @@ def main(argv=None) -> int:
         if pycs:
             errors.append(f"repository hygiene: bytecode committed: {pycs[:5]}")
 
-    all_ok = (not errors and all(r["ok"] for r in results)
-              and all(r["ok"] for r in pert_results) and inv_ok)
+    def count(key: str) -> int:
+        return sum(1 for r in results + pert_results if r["checks"].get(key))
+
+    # RA1: allocation/feasibility counts from final envelopes
+    total_alloc = committed_alloc = reserve_alloc = 0
+    feas = {"FEASIBLE": 0, "CONSTRAINED": 0, "INSUFFICIENT": 0}
+    for c in cases:
+        env = json.loads((c / "budget_envelope.json").read_text(encoding="utf-8"))
+        for a in env["allocations"]:
+            total_alloc += 1
+            if a["activation"] == "COMMITTED":
+                committed_alloc += 1
+            else:
+                reserve_alloc += 1
+        feas[env["feasibility"]["status"]] += 1
+    for td in sorted(PERT.iterdir()):
+        if td.is_dir() and (td / "budget_envelope.json").is_file():
+            env = json.loads((td / "budget_envelope.json").read_text(encoding="utf-8"))
+            feas[env["feasibility"]["status"]] += 1
+
+    # RA1 canonical-truth validations
+    global _counts
+    _counts = {
+        "budget_envelope_schema_valid": count("budget_envelope_schema_valid"),
+        "source_srp_binding_valid": count("source_srp_binding_valid"),
+        "allocation_refs_valid": count("allocation_refs_valid"),
+        "required_routes_funded": count("required_routes_funded"),
+        "conditional_routes_not_preactivated": count("conditional_routes_not_preactivated"),
+        "target_accounting_valid": count("target_accounting_valid"),
+        "ceiling_accounting_valid": count("ceiling_accounting_valid"),
+        "shared_requirement_not_duplicated": count("shared_requirement_not_duplicated"),
+        "render_reproducible": sum(1 for r in results if r["checks"].get("render_reproducible")),
+        "review_hash_valid": sum(1 for r in results if r["checks"].get("review_hash_valid")),
+        "review_machine_truth_valid": sum(1 for r in results if r["checks"].get("review_machine_truth_valid")),
+        "total_allocation_count": total_alloc,
+        "committed_allocation_count": committed_alloc,
+        "conditional_reserve_allocation_count": reserve_alloc,
+        "feasible_case_count": feas["FEASIBLE"],
+        "constrained_case_count": feas["CONSTRAINED"],
+        "insufficient_case_count": feas["INSUFFICIENT"],
+    }
+    canon = validate_canonical_metrics(errors)
+    manif = validate_final_manifest(errors)
+
+    all_ok = (not errors and all(r["ok"] for r in results) and all(r["ok"] for r in pert_results) and inv_ok
+              and canon.get("canonical_metrics_truth_valid") and manif.get("final_manifest_valid"))
     report = {"contextual_case_count": len(cases), "cases": results,
               "type_perturbations": pert_results, "intent_invariance_valid": inv_ok,
+              "canonical_metrics_truth": canon, "final_manifest": manif,
               "all_ok": all_ok, "errors": errors[:20], "hygiene": hygiene}
     if args.machine:
         print(json.dumps(report, indent=2, ensure_ascii=False))

@@ -1,4 +1,4 @@
-# BudgetEnvelope: BE-CQC-P4-S2
+# BudgetEnvelope: BE-CQC-P4-S2-R1
 
 - schema_version: 0.1
 - source_srp_id: SRP-CQC-P3-02-R1
@@ -15,7 +15,7 @@
 - route_id: historical_lineage [COMMITTED]
 - wall_clock_target_minutes: 10
 - model_token_target: 120000
-- rationale: 候选范式盘点是 S2 最大义务：宽收由证据生成，类别饱和为停机条件。
+- rationale: R01 receives the largest allocation because its stopping condition requires candidate paradigm categories to reach evidential saturation under the admitted paradigm criterion.
 
 ### AL02
 

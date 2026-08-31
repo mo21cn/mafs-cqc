@@ -1,0 +1,108 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BudgetEnvelope",
+  "description": "CQC-P4 frozen artifact contract v0.1 (contract CQC-P4-BUDGET-ENVELOPE-v0.1 section 7-16). A bounded resource commitment over admitted evidence obligations - resource authority only, never epistemic authority.",
+  "type": "object",
+  "required": ["artifact_id", "schema_version", "source_srp_id", "source_srp_sha256", "budget_intent", "total_envelope", "allocations", "escalation_policy", "feasibility"],
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {"type": "string", "minLength": 1},
+    "schema_version": {"const": "0.1"},
+    "source_srp_id": {"type": "string", "minLength": 1},
+    "source_srp_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "budget_intent": {
+      "type": "object",
+      "required": ["mode", "operator_goal"],
+      "additionalProperties": false,
+      "properties": {
+        "mode": {"enum": ["QUICK", "STANDARD", "DEEP", "CUSTOM"]},
+        "operator_goal": {"type": "string", "minLength": 1}
+      }
+    },
+    "total_envelope": {
+      "type": "object",
+      "required": ["wall_clock", "model_tokens"],
+      "additionalProperties": false,
+      "properties": {
+        "wall_clock": {
+          "type": "object",
+          "required": ["target_minutes", "hard_ceiling_minutes"],
+          "additionalProperties": false,
+          "properties": {
+            "target_minutes": {"type": "number", "exclusiveMinimum": 0},
+            "hard_ceiling_minutes": {"type": "number", "exclusiveMinimum": 0}
+          }
+        },
+        "model_tokens": {
+          "type": "object",
+          "required": ["target_tokens", "hard_ceiling_tokens"],
+          "additionalProperties": false,
+          "properties": {
+            "target_tokens": {"type": "number", "exclusiveMinimum": 0},
+            "hard_ceiling_tokens": {"type": "number", "exclusiveMinimum": 0}
+          }
+        }
+      }
+    },
+    "allocations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["allocation_id", "requirement_id", "route_id", "activation", "wall_clock_target_minutes", "model_token_target", "rationale"],
+        "additionalProperties": false,
+        "properties": {
+          "allocation_id": {"type": "string", "pattern": "^AL[0-9]{2,}$"},
+          "requirement_id": {"type": "string", "pattern": "^R[0-9]{2,}$"},
+          "route_id": {"type": "string", "pattern": "^[a-z0-9_]{3,}$"},
+          "activation": {"enum": ["COMMITTED", "RESERVE_CONDITIONAL"]},
+          "wall_clock_target_minutes": {"type": "number", "exclusiveMinimum": 0},
+          "model_token_target": {"type": "number", "exclusiveMinimum": 0},
+          "rationale": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "escalation_policy": {
+      "type": "object",
+      "required": ["triggers"],
+      "additionalProperties": false,
+      "properties": {
+        "triggers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["trigger", "action"],
+            "additionalProperties": false,
+            "properties": {
+              "trigger": {"type": "string", "minLength": 1},
+              "action": {"enum": ["REALLOCATE_WITHIN_CEILING", "REQUEST_ENVELOPE_EXPANSION", "RETURN_INSUFFICIENT"]}
+            }
+          }
+        }
+      }
+    },
+    "feasibility": {
+      "type": "object",
+      "required": ["status", "unfunded_obligations", "constraint_note"],
+      "additionalProperties": false,
+      "properties": {
+        "status": {"enum": ["FEASIBLE", "CONSTRAINED", "INSUFFICIENT"]},
+        "unfunded_obligations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["requirement_id", "route_id", "reason"],
+            "additionalProperties": false,
+            "properties": {
+              "requirement_id": {"type": "string", "pattern": "^R[0-9]{2,}$"},
+              "route_id": {"type": "string", "pattern": "^[a-z0-9_]{3,}$"},
+              "reason": {"type": "string", "minLength": 1}
+            }
+          }
+        },
+        "constraint_note": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

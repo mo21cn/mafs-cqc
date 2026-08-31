@@ -32,5 +32,7 @@ jobs:
         run: python scripts/validate_p2.py --hygiene
       - name: Validate P3 contextual SRP packages (if present)
         run: python scripts/validate_p3.py --hygiene
+      - name: Validate P4 budget envelope packages (if present)
+        run: python scripts/validate_p4.py --hygiene
       - name: Run tests (validation rules + deterministic rendering reproducibility)
         run: python -m pytest -q

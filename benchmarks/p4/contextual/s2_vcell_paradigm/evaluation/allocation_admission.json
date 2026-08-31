@@ -1,0 +1,9 @@
+{
+  "case_id": "s2_vcell_paradigm",
+  "note": "Why each allocation corresponds to a real SRP route and why its activation is legal. Evaluation-only; the BudgetEnvelope schema carries no evaluation prose.",
+  "allocations": {
+    "AL01": "R01/historical_lineage REQUIRED -> COMMITTED.",
+    "AL02": "R02/terminology_boundary REQUIRED -> COMMITTED.",
+    "AL03": "R03/historical_lineage REQUIRED -> COMMITTED (dependency CQ-03->CQ-01 carried by SRP, not by budget)."
+  }
+}

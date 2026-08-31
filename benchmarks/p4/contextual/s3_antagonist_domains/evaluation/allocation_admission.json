@@ -1,0 +1,10 @@
+{
+  "case_id": "s3_antagonist_domains",
+  "note": "Why each allocation corresponds to a real SRP route and why its activation is legal. Evaluation-only; the BudgetEnvelope schema carries no evaluation prose.",
+  "allocations": {
+    "AL01": "R01/entity_resource_identity REQUIRED -> COMMITTED.",
+    "AL02": "R01/terminology_boundary CONDITIONAL -> RESERVE_CONDITIONAL (competing-reading check).",
+    "AL03": "R02/domain_coverage_inventory CONDITIONAL (gated on CQ-01 disambiguation) -> RESERVE_CONDITIONAL.",
+    "AL04": "R03/domain_coverage_inventory CONDITIONAL -> RESERVE_CONDITIONAL."
+  }
+}

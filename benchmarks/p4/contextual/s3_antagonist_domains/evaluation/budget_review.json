@@ -1,0 +1,30 @@
+{
+  "case_id": "s3_antagonist_domains",
+  "source_srp_id": "SRP-CQC-P3-03",
+  "source_srp_sha256": "c0ef444b0f5786cbf1b94638ee997e3bf3f8d96ceb7f3928fc73d220cf07d295",
+  "budget_envelope_id": "BE-CQC-P4-S3",
+  "budget_envelope_sha256": "2c96176cd1304712927b0d24b37f28172c8126688fbab1a218c60496c2eff4e9",
+  "mechanical": {
+    "schema_valid": false,
+    "source_binding_valid": false,
+    "allocation_refs_valid": false,
+    "required_routes_funded": false,
+    "conditional_routes_not_preactivated": false,
+    "target_accounting_valid": false,
+    "ceiling_accounting_valid": false,
+    "shared_requirement_not_duplicated": false,
+    "render_valid": false
+  },
+  "local_claw_preliminary_review": {
+    "resource_shape_rationale": "STANDARD: 1 REQUIRED (disambiguation) with 3 conditional reserves; the envelope deliberately leaves the two domain-inventory routes unfunded until CQ-01 resolves - productive instability survives as reserve, not pre-activation.",
+    "possible_overallocation": "none observed",
+    "possible_underallocation": "if disambiguation resolves to the pharmacological reading, both inventory routes activate and the 14-minute reserve may compress target headroom.",
+    "conditional_reserve_honest": true,
+    "feasibility_status_honest": true,
+    "scientific_obligation_mutation_observed": false,
+    "budget_intent_semantic_leak_observed": false
+  },
+  "final_semantic_adjudication": {
+    "status": "PENDING_HO_CHATGPT"
+  }
+}

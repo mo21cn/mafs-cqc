@@ -1,0 +1,26 @@
+{
+  "case_id": "quick_constraint_s5",
+  "source_srp_id": "SRP-CQC-P3-05-R1",
+  "source_srp_sha256": "be9c573eb78bb32deaf6fae1b73fcee009245ec1554d33f424a199a749674d35",
+  "budget_envelope_id": "BE-CQC-P4-S5-QUICK",
+  "budget_envelope_sha256": "ff4376ba591a7f5568cfc65275bd43be857d1d617abef7c361b5c13ee3730fe6",
+  "mechanical": {
+    "source_srp_identity_valid": true,
+    "intent_mode": "QUICK",
+    "feasibility_status": "INSUFFICIENT",
+    "accounting_valid": true,
+    "render_valid": true
+  },
+  "local_claw_preliminary_review": {
+    "resource_shape_rationale": "QUICK: tight 8/12-minute envelope funds 2 of 3 REQUIRED routes; R02/historical_lineage cannot be honestly funded within the hard ceiling - reported INSUFFICIENT with exact unfunded reference. No SRP obligation weakened.",
+    "possible_overallocation": "none observed",
+    "possible_underallocation": "intentional (the stress is under-budget truth)",
+    "conditional_reserve_honest": true,
+    "feasibility_status_honest": true,
+    "scientific_obligation_mutation_observed": false,
+    "budget_intent_semantic_leak_observed": false
+  },
+  "final_semantic_adjudication": {
+    "status": "PENDING_HO_CHATGPT"
+  }
+}

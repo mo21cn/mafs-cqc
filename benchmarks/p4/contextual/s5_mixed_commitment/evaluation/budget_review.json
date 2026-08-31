@@ -1,0 +1,30 @@
+{
+  "case_id": "s5_mixed_commitment",
+  "source_srp_id": "SRP-CQC-P3-05-R1",
+  "source_srp_sha256": "be9c573eb78bb32deaf6fae1b73fcee009245ec1554d33f424a199a749674d35",
+  "budget_envelope_id": "BE-CQC-P4-S5",
+  "budget_envelope_sha256": "b3457ad94f6d7dcde101d9d91b5318d8b69e2a45376a898e521f5e9e499d6a2a",
+  "mechanical": {
+    "schema_valid": false,
+    "source_binding_valid": false,
+    "allocation_refs_valid": false,
+    "required_routes_funded": false,
+    "conditional_routes_not_preactivated": false,
+    "target_accounting_valid": false,
+    "ceiling_accounting_valid": false,
+    "shared_requirement_not_duplicated": false,
+    "render_valid": false
+  },
+  "local_claw_preliminary_review": {
+    "resource_shape_rationale": "STANDARD: three mixed-dimension REQUIRED routes funded in parallel (no privileged route); 1 conditional reserve for counterexample retrieval.",
+    "possible_overallocation": "none observed",
+    "possible_underallocation": "none observed",
+    "conditional_reserve_honest": true,
+    "feasibility_status_honest": true,
+    "scientific_obligation_mutation_observed": false,
+    "budget_intent_semantic_leak_observed": false
+  },
+  "final_semantic_adjudication": {
+    "status": "PENDING_HO_CHATGPT"
+  }
+}

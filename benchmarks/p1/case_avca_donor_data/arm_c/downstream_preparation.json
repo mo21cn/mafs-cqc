@@ -2,6 +2,10 @@
   "case_id": "case_avca_donor_data",
   "arm": "C",
   "generated_from": "arm_c/revised_candidate_question_set.json (CQS-CQC-P1-05-RC1)",
+  "source_artifact_id": "CQS-CQC-P1-05-RC1",
+  "source_artifact_sha256": "2d5c90f6b34d20041f24935f70cccbc1628e93a8aedd4bb98958a4d4cfb8258d",
+  "prior_arm_b_artifact_id": "CQS-CQC-P1-05",
+  "redigestion_note": "regenerated in CQC-P1-RA2 from revised CQS after earned re-digestion; CQ-02 now blocked by both CQ-01 (atlas identity) and CQ-03 (threshold decidability) per the revised dependency graph",
   "raw_input_sha256": "7b136c4d6ae8d77d9cae98e23e312dfec4fb0076099e295dd0d6a5053a747ae2",
   "question_ids_to_search": [
     {
@@ -16,7 +20,7 @@
     },
     {
       "question_id": "CQ-02",
-      "search_question": "在 Atlas 清单中核查目标数据存在性（blocked by CQ-01；回答须绑定 CQ-03 的标准声明）",
+      "search_question": "在 Atlas 清单中核查目标数据存在性（blocked by CQ-01 and CQ-03；回答须绑定 CQ-03 的标准声明）",
       "resolution_condition_ref": "见 CQ-02.resolution_condition"
     }
   ],
@@ -25,9 +29,15 @@
     "CQ-03",
     "CQ-02"
   ],
-  "reason_for_order": "CQ-01 实体确认先行（CQ-02 被其阻塞，依赖边 CQ-02→CQ-01）；CQ-03 判定标准核查与 CQ-01 并行，其产出直接决定 CQ-02 回答的绑定标准",
+  "reason_for_order": "CQ-01 and CQ-03 are the two declared prerequisites of CQ-02 and both must resolve before the existence check; their internal order is a heuristic (identity first, standards parallel)",
   "questions_blocked_by_prerequisite": [
-    "CQ-02 (blocked by CQ-01 per dependency edge)"
+    {
+      "question_id": "CQ-02",
+      "prerequisites": [
+        "CQ-01",
+        "CQ-03"
+      ]
+    }
   ],
   "questions_independently_searchable": [
     "CQ-01",
@@ -37,8 +47,5 @@
     "三个判定词阈值未定义——显式保留于 CQ-02/CQ-03，不可判定时上浮操作者确认请求",
     "原话『有没有有没有』重复——在 CQ-02.uncertainty 显式记录（按单一疑问理解）"
   ],
-  "natural_reasoning_notes": "Explicit digestion arm: threshold borrowing becomes an operable question (CQ-03) whose three-state answer determines whether CQ-02 can be answered at all; the textual repetition is durably recorded.",
-  "raw_input_sha256_note": "corrected in CQC-P1-RA1 Closure A (mechanical provenance fix; value was hand-copied incorrectly at P1)",
-  "prior_arm_b_artifact_id": "CQS-CQC-P1-05",
-  "redigestion_note": "regenerated from revised CQS after earned re-digestion (CQC-P1-RA1); see failure_diagnosis.json"
+  "natural_reasoning_notes": "RA2 state propagation: the stage-referential contradiction found at P1 (prep said CQ-03 binds the answer while the artifact did not gate on it) is now closed in both artifact and preparation."
 }

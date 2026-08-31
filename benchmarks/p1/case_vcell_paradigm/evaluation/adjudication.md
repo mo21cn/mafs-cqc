@@ -1,3 +1,5 @@
+> **HISTORICAL / SUPERSEDED** — Current machine-readable comparison source: \evaluation/comparison.json\ (CQC-P1-RA2). This file is retained as development history.
+
 # Adjudication — case_vcell_paradigm (preliminary, pending HO + ChatGPT)
 
 **Coverage**: both arms cover inventory and lineage. The decisive difference is the undefined "paradigm" criterion: Arm A adopted a loose proxy (self-claimed paradigms) silently; Arm B converted the gap into CQ-02 — an operable question that surfaces to the operator before final filtering.

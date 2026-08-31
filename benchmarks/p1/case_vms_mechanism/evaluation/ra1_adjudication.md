@@ -1,3 +1,5 @@
+> **HISTORICAL / SUPERSEDED** — Current machine-readable comparison source: \evaluation/comparison.json\ (CQC-P1-RA2). This file is retained as development history.
+
 # RA1 Re-adjudication — case_vms_mechanism
 
 ## Reference-set separation (contract §5)

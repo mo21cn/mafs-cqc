@@ -1,0 +1,19 @@
+{
+  "contract_id": "CQC-P1-RA2-ARTIFACT-RECURSIVE-DIGESTION-DOWNSTREAM-STATE-PROPAGATION-CLOSURE-v0.1",
+  "verified_commit_sha": "14c22c75c6b7f5d305e18cd4030b8234d70487b6",
+  "ci_run_id": null,
+  "benchmark_case_count": 5,
+  "arm_c_triggered_count": 3,
+  "arm_c_completed_count": 3,
+  "revised_hash_valid_count": 3,
+  "downstream_source_binding_valid_count": 3,
+  "dependency_state_consistency_valid_count": 3,
+  "raw_hash_valid_count": 5,
+  "source_trace_exact_valid_count": 5,
+  "dependency_dag_valid_count": 5,
+  "deterministic_render_valid_count": 5,
+  "test_count": 28,
+  "meaningful_push_ci_cycles": 2,
+  "current_comparison_source_count": 5,
+  "cycle_truth_note": "RA1 used 2 meaningful push->CI cycles: cycle 1 c75864a failed CI on a real byte-level lineage failure (EOL drift); cycle 2 fc6e367 remediated and passed. RA1 metrics corrected in this round per RA2 contract section 13."
+}

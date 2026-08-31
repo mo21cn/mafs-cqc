@@ -1,46 +1,33 @@
 {
   "case_id": "case_vcell_scope",
+  "current_source": "CQC-P1-RA2 (supersedes P1 initial adjudication and RA1 re-adjudication; history preserved in adjudication.md / ra1_adjudication.md)",
   "machine_facts": {
     "arm_b_cqs_questions": 3,
-    "arm_b_dependency_edges": 1,
-    "arm_b_edges": [["CQ-01", "CQ-02"]],
-    "arm_b_schema_valid": true,
-    "arm_b_source_hash_valid": true,
-    "arm_b_exact_trace_valid": true,
-    "arm_b_dag_valid": true,
-    "arm_b_render_reproducible": true,
+    "arm_c_revised_questions": 3,
     "arm_a_prepared_questions": 5,
-    "arm_b_prepared_questions": 3
+    "arm_c_triggered": true,
+    "final_explicit_artifact": "arm_c CQS-CQC-P1-02-RC1 (prior CQS-CQC-P1-02 preserved)",
+    "lineage": {"prior_sha": "bound in failure_diagnosis.json", "revised_sha": "bound + verified", "downstream_source_binding": "verified"},
+    "all_structural_checks": "PASS (schema/hash/trace/DAG/render/source-binding/dependency-consistency)"
   },
   "manual_adjudication": {
     "adjudicator": "local_claw_preliminary",
     "status": "PENDING_HO_PLUS_CHATGPT_FINAL_ADJUDICATION",
-    "critical_question_coverage": {
-      "reference_set_basis": "minimal critical set from operator intent: (1) saturated direction inventory; (2) terminology boundary as inventory search-surface; (3) disposition of the 'Virtual Cel' typo",
-      "critical_questions_expected": ["direction inventory", "terminology boundary", "typo disposition"],
-      "arm_a_recovered": ["direction inventory (QA-01..05)", "terminology boundary (QA-05 adjacent-term line)", "typo disposition — behaviorally handled (silently normalized), not recorded"],
-      "arm_b_recovered": ["direction inventory (CQ-01, blocked by CQ-02)", "terminology boundary (CQ-02, durable)", "typo disposition (CQ-03 explicit disambiguation question + uncertainty fields)"],
-      "arm_a_missed": ["typo disposition is unauditable in Arm A (interpretation choice left no trace)"],
-      "arm_b_missed": []
+    "comparison_framing": "direct downstream artifact (Arm A) vs typed intermediate CQS + downstream (Arm B→C)",
+    "substantive_targets": ["saturated inventory of Virtual Cell research directions"],
+    "interpretive_constraints": ["'Virtual Cel' typo disposition (entity risk: field vs VCell software)", "adjacent-terminology boundary as inventory search surface"],
+    "noncritical_input_noise": [],
+    "substantive_coverage": {"arm_a": "1/1", "final_explicit": "1/1 (parity; CQS-CQC-P1-02-RC1)"},
+    "interpretive_state_capture": {
+      "arm_a": "typo normalized silently inside prep; boundary handled by an adjacent-term search line",
+      "final_explicit": "typo is CQ-03 (explicit disambiguation incl. VCell-software alternative) + uncertainty fields; boundary is CQ-02 (constraint question, not a blocker)"
     },
-    "unnecessary_questions": {"arm_a": [], "arm_b": []},
-    "intent_preservation": {
-      "arm_a": "behaviorally preserved; the silent typo normalization is an unrecorded interpretation choice",
-      "arm_b": "preserved; typo is a durable uncertainty on two questions plus an explicit disambiguation question (CQ-03) including the VCell-software alternative reading"
+    "dependency_truth": {
+      "initial_arm_b_failure": "CQ-01→CQ-02 was a false prerequisite (measured; earned Arm C)",
+      "final_edges": [],
+      "note": "prep order (CQ-02 first) is a heuristic/coverage preference, explicitly not a blocking dependency"
     },
-    "granularity_failures": {"arm_a": [], "arm_b": []},
-    "dependency_failures": {
-      "arm_a": "not applicable",
-      "arm_b": "edge CQ-01→CQ-02 survives the RA2 test: terminology boundary defines the inventory search surface (whole-cell-model lineage is invisible to a bare 'virtual cell' search); flagged for HO confirmation"
-    },
-    "cross_stage_drift": {
-      "arm_a": "not applicable",
-      "arm_b": "none: prep order (CQ-02→CQ-01→CQ-03) matches the dependency edge and rationale"
-    },
-    "traceability": {
-      "arm_a": "none",
-      "arm_b": "full (verbatim trace incl. the raw quoted typo; uncertainty on 2/3)"
-    },
-    "repeated_reasoning_cost": {"model_calls": "1 per arm", "token_use": null, "wall_time": null, "manual_intervention_count": 0}
+    "local_repairability": "RA1 re-digestion removed one edge (CQ-01.dependencies=[]) without regenerating any other content; RA2 propagated the state into the prep",
+    "repeated_reasoning_cost": {"model_calls": "1 per arm + 1 re-digestion pass (earned)", "token_use": null, "manual_intervention_count": 0}
   }
 }

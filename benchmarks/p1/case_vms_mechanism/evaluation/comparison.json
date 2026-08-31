@@ -1,53 +1,28 @@
 {
   "case_id": "case_vms_mechanism",
-  "contract_id": "CQC-P1-REAL-TASK-DIGESTION-REPLAY-REDIGESTION-LINEAGE-v0.1",
+  "current_source": "CQC-P1-RA2 (supersedes P1 initial adjudication and RA1 re-adjudication; history preserved in adjudication.md / ra1_adjudication.md)",
   "machine_facts": {
     "arm_b_cqs_questions": 3,
     "arm_b_dependency_edges": 0,
-    "arm_b_schema_valid": true,
-    "arm_b_source_hash_valid": true,
-    "arm_b_exact_trace_valid": true,
-    "arm_b_dag_valid": true,
-    "arm_b_render_reproducible": true,
     "arm_a_prepared_questions": 5,
-    "arm_b_prepared_questions": 3
+    "arm_c_triggered": false,
+    "final_explicit_artifact": "arm_b CQS-CQC-P1-01",
+    "all_structural_checks": "PASS (schema/hash/trace/DAG/render)"
   },
   "manual_adjudication": {
     "adjudicator": "local_claw_preliminary",
     "status": "PENDING_HO_PLUS_CHATGPT_FINAL_ADJUDICATION",
-    "critical_question_coverage": {
-      "reference_set_basis": "minimal critical set constructed from operator intent: (1) core mechanism landscape at cell resolution (central KNDy + vascular lines); (2) explicit handling of population-scope ambiguity (女性 unqualified); (3) operational meaning of 细胞分辨率 (omics vs imaging)",
-      "critical_questions_expected": ["core mechanism at cell resolution", "population scope ambiguity", "cell-resolution observability"],
-      "arm_a_recovered": ["core mechanism at cell resolution (QA-01..04)", "population scope ambiguity (inline note)", "cell-resolution observability (QA-02 implicit)"],
-      "arm_b_recovered": ["core mechanism at cell resolution (CQ-01)", "population scope ambiguity (CQ-02, durable)", "cell-resolution observability (CQ-03, durable)"],
-      "arm_a_missed": [],
-      "arm_b_missed": [],
-      "notes": "Arm A additionally prepared a translation cross-check line (QA-05 NK3R antagonists); adjudicated as search-strategy enrichment rather than a distinct operator-critical question — not counted as B-missed."
+    "comparison_framing": "direct downstream artifact (Arm A) vs typed intermediate CQS + downstream (Arm B)",
+    "substantive_targets": ["cell-resolution mechanism landscape for female vasomotor symptoms (central KNDy + vascular lines)"],
+    "interpretive_constraints": ["population scope of 女性 unspecified", "细胞分辨率 means omics vs imaging unspecified"],
+    "noncritical_input_noise": [],
+    "substantive_coverage": {"arm_a": "1/1", "final_explicit": "1/1 (parity)"},
+    "interpretive_state_capture": {
+      "arm_a": "both constraints recorded as free-form notes inside the prep document (missing_information_before_search)",
+      "final_explicit": "both constraints are durable per-question uncertainty fields (CQ-02/CQ-03), question-addressable"
     },
-    "unnecessary_questions": {"arm_a": [], "arm_b": []},
-    "intent_preservation": {
-      "arm_a": "preserved in behavior; interpretation choices (population scope, omics-vs-imaging) not durably recorded",
-      "arm_b": "preserved; both ambiguities are durable uncertainty fields; no silent narrowing"
-    },
-    "granularity_failures": {"arm_a": [], "arm_b": []},
-    "dependency_failures": {
-      "arm_a": "not applicable (no structured dependencies)",
-      "arm_b": "none; 0 edges, all three questions independently searchable (RA2 test applied: each question answerable without the others)"
-    },
-    "cross_stage_drift": {
-      "arm_a": "not applicable (no intermediate artifact)",
-      "arm_b": "none: prep question order cites CQ ids consistently with CQS; no question disappearance/mutation"
-    },
-    "traceability": {
-      "arm_a": "none (no artifact; interpretation choices unauditable)",
-      "arm_b": "full: verbatim traces on all 3 questions, uncertainty fields on 2/3, artifact lineage to raw hash"
-    },
-    "repeated_reasoning_cost": {
-      "model_calls": "1 generation pass per arm (observable)",
-      "token_use": null,
-      "wall_time": null,
-      "manual_intervention_count": 0,
-      "note": "Arm B additionally required one mechanical assembly step (deterministic script), not a model call"
-    }
+    "dependency_truth": {"final_edges": [], "note": "all three questions independently searchable; RA2 test applied"},
+    "local_repairability": "amending a constraint answer touches one uncertainty field; Arm A requires re-reading the whole prep",
+    "repeated_reasoning_cost": {"model_calls": "1 per arm", "token_use": null, "manual_intervention_count": 0}
   }
 }

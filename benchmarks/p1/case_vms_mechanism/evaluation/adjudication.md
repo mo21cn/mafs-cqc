@@ -1,3 +1,5 @@
+> **HISTORICAL / SUPERSEDED** — Current machine-readable comparison source: \evaluation/comparison.json\ (CQC-P1-RA2). This file is retained as development history.
+
 # Adjudication — case_vms_mechanism (preliminary, pending HO + ChatGPT)
 
 **Machine facts** (validate_p1): Arm B CQS 3 questions, 0 edges, schema/hash/trace/DAG/render all PASS. Arm A: 5 prepared lines.

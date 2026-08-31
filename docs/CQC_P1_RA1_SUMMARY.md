@@ -14,7 +14,7 @@ verified_commit_sha: (pinned in docs/CQC_P1_RA1_METRICS.json)
 ci_run_id: (pinned in docs/CQC_P1_RA1_METRICS.json)
 benchmark_case_count: 5
 arm_c_triggered_count: 3
-meaningful_push_ci_cycles: 1
+meaningful_push_ci_cycles: 2  (corrected in CQC-P1-RA2 per contract section 13: c75864a CI failure was a real lineage failure, not infrastructure-only)
 ```
 
 ## B — Machine Lineage Closure

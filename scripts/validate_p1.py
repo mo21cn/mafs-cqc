@@ -145,11 +145,26 @@ def validate_case(case_dir: Path, errors: list, case_results: list) -> dict:
             if prior_ref != sha256_file(prior_artifact):
                 lineage_errors.append("prior_artifact_sha256 does not match arm_b CQS file hash")
                 prior_ok = False
+        # RA2 Closure E: revised hash binding in diagnosis
+        rev_actual = sha256_file(arm_c_dir / "revised_candidate_question_set.json")
+        if fd.get("revised_artifact_sha256") != rev_actual:
+            lineage_errors.append("revised_artifact_sha256 in failure_diagnosis does not match revised CQS file hash (REDIGESTION_REVISED_HASH_INVALID)")
         if sha256_text(json.dumps(revised, sort_keys=True)) == sha256_text(
                 json.dumps(cqs_b, sort_keys=True)):
             lineage_errors.append("revised CQS is byte-identical to prior: retry mislabeled as re-digestion")
         if not vr["ok"]:
             lineage_errors.append(f"revised CQS invalid: {vr['errors'][:3]}")
+        # RA2 Closure C: downstream source binding
+        prep_c = json.loads((arm_c_dir / "downstream_preparation.json").read_text(encoding="utf-8"))
+        src_id_ok = prep_c.get("source_artifact_id") == revised.get("artifact_id")
+        src_sha_ok = prep_c.get("source_artifact_sha256") == rev_actual
+        if not (src_id_ok and src_sha_ok):
+            lineage_errors.append("arm_c downstream does not bind the revised artifact (STALE_DOWNSTREAM_ARTIFACT)")
+        res["checks"]["arm_c_downstream_source_binding_valid"] = src_id_ok and src_sha_ok
+        # RA2 Closure D: dependency-state consistency (revised CQS vs structured downstream fields)
+        dep_errors = _dependency_state_consistency(revised, prep_c)
+        res["checks"]["arm_c_dependency_state_consistency_valid"] = not dep_errors
+        lineage_errors.extend(dep_errors)
         res["checks"]["arm_c_lineage_valid"] = not lineage_errors
         if lineage_errors:
             errors.append(f"{case_dir.name}: arm_c lineage errors: {lineage_errors[:4]}")
@@ -164,6 +179,45 @@ def validate_case(case_dir: Path, errors: list, case_results: list) -> dict:
 
     case_results.append(res)
     return res
+
+
+def _dependency_state_consistency(revised_cqs: dict, prep_c: dict) -> list[str]:
+    """RA2 Closure D: revised CQS dependency state vs structured downstream fields.
+    Blocked entries must be structured: {question_id, prerequisites: [...]}."""
+    errors: list[str] = []
+    blocked = prep_c.get("questions_blocked_by_prerequisite") or []
+    independent = prep_c.get("questions_independently_searchable") or []
+
+    def as_ids(items):
+        out = []
+        for it in items:
+            if isinstance(it, str):
+                out.append(it)
+            elif isinstance(it, dict) and it.get("question_id"):
+                out.append(it["question_id"])
+        return out
+
+    blocked_ids = as_ids(blocked)
+    independent_ids = as_ids(independent)
+    structured_blocked = {b["question_id"]: list(b.get("prerequisites") or [])
+                          for b in blocked if isinstance(b, dict) and b.get("question_id")}
+
+    for q in revised_cqs.get("questions", []):
+        qid = q["question_id"]
+        deps = list(q.get("dependencies") or [])
+        if not deps and qid in blocked_ids:
+            errors.append(f"{qid}: no dependencies in revised CQS but listed as blocked downstream")
+        if deps and qid in independent_ids:
+            errors.append(f"{qid}: has dependencies {deps} but listed as independently searchable downstream")
+        if deps:
+            if qid not in blocked_ids:
+                errors.append(f"{qid}: dependency-bearing question missing from questions_blocked_by_prerequisite")
+            elif qid in structured_blocked:
+                declared = sorted(deps)
+                listed = sorted(structured_blocked[qid])
+                if declared != listed:
+                    errors.append(f"{qid}: declared prerequisites {declared} != propagated {listed}")
+    return errors
 
 
 def main(argv=None) -> int:

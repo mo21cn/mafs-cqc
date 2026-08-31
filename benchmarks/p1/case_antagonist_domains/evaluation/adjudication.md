@@ -1,3 +1,5 @@
+> **HISTORICAL / SUPERSEDED** — Current machine-readable comparison source: \evaluation/comparison.json\ (CQC-P1-RA2). This file is retained as development history.
+
 # Adjudication — case_antagonist_domains (preliminary, pending HO + ChatGPT)
 
 **Coverage**: this is the heaviest-ambiguity case, and it exposes the sharpest arm difference. Arm A defaulted to the pharmacological reading and dismissed the antagonist-muscle reading by intuition — behaviorally reasonable, but the choice is unauditable and unrecoverable from its outputs. Arm B made the interpretation choice the first question (CQ-01) and gated the domain inventory on it (blocking edge).

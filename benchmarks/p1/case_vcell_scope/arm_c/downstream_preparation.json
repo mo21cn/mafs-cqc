@@ -2,6 +2,10 @@
   "case_id": "case_vcell_scope",
   "arm": "C",
   "generated_from": "arm_c/revised_candidate_question_set.json (CQS-CQC-P1-02-RC1)",
+  "source_artifact_id": "CQS-CQC-P1-02-RC1",
+  "source_artifact_sha256": "5767b00560755456d91c545d70cdd42bf87d226e72db98b38a7c0d1650618791",
+  "prior_arm_b_artifact_id": "CQS-CQC-P1-02",
+  "redigestion_note": "regenerated in CQC-P1-RA2 from revised CQS after earned re-digestion; stale dependency state (CQ-01 blocked by CQ-02) removed",
   "raw_input_sha256": "aac9f8ba4abad9f60cc0c517f1d2f217435e4c0ac473a2df7f7a5801f243a1f7",
   "question_ids_to_search": [
     {
@@ -11,7 +15,7 @@
     },
     {
       "question_id": "CQ-01",
-      "search_question": "方向盘点（在术语边界确定后的检索面上做饱和盘点）",
+      "search_question": "方向盘点（饱和盘点；可先于或并行于 CQ-02）",
       "resolution_condition_ref": "见 CQ-01.resolution_condition"
     },
     {
@@ -25,19 +29,15 @@
     "CQ-01",
     "CQ-03"
   ],
-  "reason_for_order": "CQ-02 的术语边界决定 CQ-01 盘点的检索面（依赖边 CQ-01→CQ-02）；CQ-03 的拼写消歧可并行但结论应尽早汇报给操作者",
-  "questions_blocked_by_prerequisite": [
-    "CQ-01 (blocked by CQ-02 per dependency edge)"
-  ],
+  "reason_for_order": "heuristic / coverage preference only: placing CQ-02 first tends to widen the term surface before the inventory sweep, but no blocking dependency exists — all three questions are independently searchable per the revised CQS (CQ-01.dependencies = [])",
+  "questions_blocked_by_prerequisite": [],
   "questions_independently_searchable": [
+    "CQ-01",
     "CQ-02",
     "CQ-03"
   ],
   "missing_information_before_search": [
     "拼写歧义（显式保留于 CQ-01/CQ-03 uncertainty；不擅自合并）"
   ],
-  "natural_reasoning_notes": "Explicit digestion arm: the typo is a durable uncertainty field on two questions; interpretation choice is inspectable rather than silent.",
-  "raw_input_sha256_note": "corrected in CQC-P1-RA1 Closure A (mechanical provenance fix; value was hand-copied incorrectly at P1)",
-  "prior_arm_b_artifact_id": "CQS-CQC-P1-02",
-  "redigestion_note": "regenerated from revised CQS after earned re-digestion (CQC-P1-RA1); see failure_diagnosis.json"
+  "natural_reasoning_notes": "RA2 state propagation: stale prerequisite state from the pre-re-digestion artifact has been removed; ordering is a coverage heuristic, not a dependency."
 }

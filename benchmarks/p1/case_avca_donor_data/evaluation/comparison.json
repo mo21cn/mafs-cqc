@@ -1,46 +1,33 @@
 {
   "case_id": "case_avca_donor_data",
+  "current_source": "CQC-P1-RA2 (supersedes P1 initial adjudication and RA1 re-adjudication; history preserved in adjudication.md / ra1_adjudication.md)",
   "machine_facts": {
     "arm_b_cqs_questions": 3,
-    "arm_b_dependency_edges": 1,
-    "arm_b_edges": [["CQ-02", "CQ-01"]],
-    "arm_b_schema_valid": true,
-    "arm_b_source_hash_valid": true,
-    "arm_b_exact_trace_valid": true,
-    "arm_b_dag_valid": true,
-    "arm_b_render_reproducible": true,
+    "arm_c_revised_questions": 3,
     "arm_a_prepared_questions": 4,
-    "arm_b_prepared_questions": 3
+    "arm_c_triggered": true,
+    "final_explicit_artifact": "arm_c CQS-CQC-P1-05-RC1 (prior CQS-CQC-P1-05 preserved)",
+    "lineage": {"prior_sha": "bound in failure_diagnosis.json", "revised_sha": "bound + verified", "downstream_source_binding": "verified"},
+    "all_structural_checks": "PASS (schema/hash/trace/DAG/render/source-binding/dependency-consistency)"
   },
   "manual_adjudication": {
     "adjudicator": "local_claw_preliminary",
     "status": "PENDING_HO_PLUS_CHATGPT_FINAL_ADJUDICATION",
-    "critical_question_coverage": {
-      "reference_set_basis": "minimal critical set from operator intent: (1) Atlas entity confirmation; (2) existence answer bound to explicit judgment standards; (3) decidability of the three judgment words (年轻/健康/原代); (4) disposition of the textual repetition 有没有有没有",
-      "critical_questions_expected": ["atlas entity confirmation", "existence answer bound to standards", "threshold decidability", "repetition disposition"],
-      "arm_a_recovered": ["atlas entity (QA-01)", "existence check (QA-02)", "thresholds — borrowed common conventions implicitly (unrecorded)", "repetition normalized silently"],
-      "arm_b_recovered": ["atlas entity (CQ-01, gating)", "existence check (CQ-02, blocked; answer must bind CQ-03 standards)", "threshold decidability (CQ-03 three-state mapping: decidable/undecidable/partial)", "repetition durably recorded in CQ-02.uncertainty"],
-      "arm_a_missed": ["threshold provenance is unauditable in Arm A (borrowed conventions, no record)"],
-      "arm_b_missed": []
+    "comparison_framing": "direct downstream artifact (Arm A) vs typed intermediate CQS + downstream (Arm B→C)",
+    "substantive_targets": ["existence of young-healthy vascular/cardiac primary donor data in Arc Virtual Cell Atlas"],
+    "interpretive_constraints": ["young/healthy/primary threshold decidability (materially binds the existence claim)", "atlas entity identity/scope confirmation"],
+    "noncritical_input_noise": ["'有没有有没有' textual repetition (single-question reading, recorded in uncertainty)"],
+    "substantive_coverage": {"arm_a": "1/1", "final_explicit": "1/1 (parity; CQS-CQC-P1-05-RC1)"},
+    "interpretive_state_capture": {
+      "arm_a": "threshold conventions borrowed silently; repetition normalized silently",
+      "final_explicit": "threshold decidability is CQ-03 (three-state mapping); repetition durably recorded; existence answer (CQ-02) bound to both prerequisites"
     },
-    "unnecessary_questions": {"arm_a": [], "arm_b": []},
-    "intent_preservation": {
-      "arm_a": "behaviorally preserved; threshold borrowing and repetition normalization unrecorded",
-      "arm_b": "preserved; three-state decidability question (CQ-03) forces the standard problem into the open before an existence claim is made"
+    "dependency_truth": {
+      "initial_arm_b_failure": "CQ-02 not gated on CQ-03 although prep stated CQ-03 binds the answer (stage-referential contradiction; earned Arm C)",
+      "final_edges": [["CQ-02", "CQ-01"], ["CQ-02", "CQ-03"]],
+      "note": "downstream blocked list propagates both prerequisites; independent list = [CQ-01, CQ-03]"
     },
-    "granularity_failures": {"arm_a": [], "arm_b": []},
-    "dependency_failures": {
-      "arm_a": "not applicable",
-      "arm_b": "edge CQ-02→CQ-01 survives the RA2 test: existence inside a resource cannot be evaluated before the resource's identity, scope and access path are confirmed; flagged for HO confirmation"
-    },
-    "cross_stage_drift": {
-      "arm_a": "not applicable",
-      "arm_b": "none: prep blocked-question and order match the CQS edge; CQ-03 positioned before CQ-02 execution because its output binds the answer"
-    },
-    "traceability": {
-      "arm_a": "none",
-      "arm_b": "full (verbatim traces including the duplicated 有没有有没有 fragment preserved in uncertainty)"
-    },
-    "repeated_reasoning_cost": {"model_calls": "1 per arm", "token_use": null, "wall_time": null, "manual_intervention_count": 0}
+    "local_repairability": "RA1 re-digestion edited CQ-02.dependencies only; RA2 propagated the two-prerequisite state into the prep, closing the cross-stage contradiction",
+    "repeated_reasoning_cost": {"model_calls": "1 per arm + 1 re-digestion pass (earned)", "token_use": null, "manual_intervention_count": 0}
   }
 }

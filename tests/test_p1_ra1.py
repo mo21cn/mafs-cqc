@@ -79,16 +79,20 @@ def build_case(root: Path, *, arm_a_sha=None, arm_b_sha=None, arm_c=None) -> Pat
         cdir.mkdir()
         prior_path = case / "arm_b" / "candidate_question_set.json"
         prior_sha = hashlib.sha256(prior_path.read_bytes()).hexdigest()
+        (cdir / "revised_candidate_question_set.json").write_text(json.dumps(arm_c, ensure_ascii=False) + "\n", encoding="utf-8")
+        rev_file_sha = hashlib.sha256((cdir / "revised_candidate_question_set.json").read_bytes()).hexdigest()
         (cdir / "failure_diagnosis.json").write_text(json.dumps({
             "case_id": "case_test", "diagnosis_source": "test",
             "prior_artifact_id": "CQS-T-1", "prior_artifact_sha256": prior_sha,
             "observed_conflict": "c", "diagnosis": "d", "implicated_fields": ["CQ-01.dependencies"],
             "repair_instruction": "r", "revised_artifact_id": "CQS-T-1-RC1",
-            "revised_artifact_sha256": hashlib.sha256(json.dumps(arm_c, sort_keys=True).encode()).hexdigest(),
+            "revised_artifact_sha256": rev_file_sha,
         }, ensure_ascii=False), encoding="utf-8")
-        (cdir / "revised_candidate_question_set.json").write_text(json.dumps(arm_c, ensure_ascii=False), encoding="utf-8")
         (cdir / "downstream_preparation.json").write_text(json.dumps(
-            prep_dict("C", raw_sha), ensure_ascii=False), encoding="utf-8")
+            {**prep_dict("C", raw_sha),
+             "source_artifact_id": "CQS-T-1-RC1",
+             "source_artifact_sha256": rev_file_sha},
+            ensure_ascii=False), encoding="utf-8")
         (cdir / "human_render.md").write_text(render(arm_c), encoding="utf-8")
     return case
 

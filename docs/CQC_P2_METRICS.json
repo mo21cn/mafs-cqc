@@ -1,7 +1,7 @@
 {
   "contract_id": "CQC-P2-ARTIFACT-COMMITMENT-BOUNDARY-PROJECTION-LOSS-STRESS-v0.1",
-  "verified_commit_sha": "PENDING_PIN",
-  "ci_run_id": null,
+  "verified_commit_sha": "9dcbe8c9dd838093ee555852b62067d1ba4f70c",
+  "ci_run_id": "33357451991",
   "semantic_case_count": 6,
   "raw_reused_case_count": 4,
   "synthetic_stress_case_count": 2,

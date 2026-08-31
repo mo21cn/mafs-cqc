@@ -1,7 +1,7 @@
 {
   "contract_id": "CQC-P2-RA1-COMMITMENT-ADJUDICATION-PRODUCTIVE-INSTABILITY-SEVEN-FIELD-REPAIR-v0.1",
-  "evidence_commit_sha": "9dcbe8c9dd838093ee555852b62067d1ba4f70c",
-  "evidence_ci_run_id": "33357451991",
+  "evidence_commit_sha": "a35b0bf",
+  "evidence_ci_run_id": "33377496972",
   "metrics_pin_commit_sha": "866d5b2",
   "semantic_case_count": 6,
   "initial_artifact_preserved_count": 6,

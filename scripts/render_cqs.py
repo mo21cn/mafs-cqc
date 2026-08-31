@@ -66,9 +66,9 @@ def main(argv=None) -> int:
     text = render(artifact)
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(text, encoding="utf-8")
+        args.output.write_bytes(text.encode("utf-8"))  # byte-deterministic across platforms
     else:
-        sys.stdout.write(text)
+        sys.stdout.buffer.write(text.encode("utf-8"))
     return 0
 
 

@@ -2,7 +2,7 @@
   "case_id": "s3_antagonist_domains",
   "diagnosis_source": "HO+ChatGPT P2 acceptance",
   "prior_artifact_id": "CQS-CQC-P2-03",
-  "prior_artifact_sha256": "79119974a7e8ee154a0323c473965c9323f734cf3de3e17142003e6f435b5d8a",
+  "prior_artifact_sha256": "c71a236f0522ff74abd837325e4ede8d3c370ca385e96bb2c00273a2c816463f",
   "measured_failure": "(1) CQ-04 artifactizes answer organization/output structure as an independent question; (2) CQ-01 resolution_condition regressed into search procedure ('以原词检索得到的实体类型分布'); ambiguity itself is legitimate",
   "repair_boundary": "remove CQ-04; de-proceduralize CQ-01 RC; drop source-unsupported evidence-type examples (ATC) from CQ-02 RC; preserve type ambiguity in uncertainty",
   "fields_implicated": [
@@ -12,5 +12,5 @@
   ],
   "repair_instruction": "Remove CQ-04 (answer organization is not an independent evidence landscape). Resolution conditions must describe evidence states, not retrieval procedures. Preserve TERMINOLOGY_OR_NAMING vs ENTITY_RESOLUTION ambiguity as productive instability in CQ-01.uncertainty.",
   "revised_artifact_id": "CQS-CQC-P2-03-R1",
-  "revised_artifact_sha256": "882f7bd0286a10763c09a31924747434624aa5f638b35e47ef9f8724d01fa886"
+  "revised_artifact_sha256": "450f32529e4ace6947287a6422b0f3b393d0a4f99de79c228412476d8a71fcdf"
 }

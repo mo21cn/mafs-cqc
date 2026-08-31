@@ -163,8 +163,8 @@ def validate_topology(scenario_dir: Path, errors: list) -> dict:
                                  "actual": actual, "match": match})
         if not match:
             errors.append(f"{scenario_dir.name}/{stage['stage']}: state mismatch")
-    (scenario_dir / "validation_report.json").write_text(
-        json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    (scenario_dir / "validation_report.json").write_bytes(
+        (json.dumps(report, indent=2, ensure_ascii=False) + "\n").encode("utf-8"))
     return {"ok": ok, "scenario": expected["scenario"]}
 
 

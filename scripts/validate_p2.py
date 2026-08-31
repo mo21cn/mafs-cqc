@@ -32,6 +32,7 @@ from render_cqs import render  # noqa: E402
 PKG = Path(__file__).resolve().parents[1]
 SEM = PKG / "benchmarks" / "p2" / "semantic"
 RT = PKG / "benchmarks" / "p2" / "revision_topology"
+DOCS = PKG / "docs"
 
 SEM_REQUIRED = {
     "source_narrative.txt", "case_metadata.json", "candidate_question_set.json",
@@ -59,6 +60,19 @@ def validate_semantic(errors: list) -> dict:
             continue
         art = json.loads((c / "candidate_question_set.json").read_text(encoding="utf-8"))
         v = validate_artifact(art)
+        # RA2: dangling CQ reference check — semantic text fields must not point to
+        # non-existent CQ-* ids (e.g. a deleted question's residue). Narrow scope:
+        # only explicit CQ-xx tokens in statement/uncertainty/resolution_condition.
+        import re as _re
+        qids = {q["question_id"] for q in art.get("questions", [])}
+        for q in art.get("questions", []):
+            for field in ("statement", "uncertainty", "resolution_condition"):
+                txt = q.get(field)
+                if not isinstance(txt, str):
+                    continue
+                for ref in _re.findall(r"CQ-\d+", txt):
+                    if ref not in qids and ref != q["question_id"]:
+                        errors.append(f"p2/semantic/{c.name}: {q['question_id']}.{field} references non-existent {ref} (dangling question reference)")
         # RA1: initial first-pass artifact must be preserved and recoverable
         init_p = c / "candidate_question_set.initial.json"
         if not init_p.is_file():
@@ -168,11 +182,60 @@ def validate_topology(scenario_dir: Path, errors: list) -> dict:
     return {"ok": ok, "scenario": expected["scenario"]}
 
 
+def validate_provenance_truth(errors: list) -> dict:
+    """RA2: provenance truth — full-length real SHAs, no invalid legacy SHA,
+    no self-referential pin, RA1 cycle truth."""
+    out = {"ra1_metrics_valid": False, "p2_metrics_valid": False}
+    CANON_P2_SHA = "9dcbe8c3efb28485ab4a2119e4415692a637fc35"
+    CANON_RA1_SHA = "a35b0bfbfa160577141ddfb34e8f6cadd7f82185"
+    INVALID_P2_SHA = "9dcbe8c9dd838093ee555852b62067d1ba4f70c"
+
+    ra1_p = DOCS / "CQC_P2_RA1_METRICS.json"
+    if ra1_p.is_file():
+        d = json.loads(ra1_p.read_text(encoding="utf-8"))
+        sha = d.get("evidence_commit_sha", "")
+        ok = (
+            len(sha) == 40 and sha == CANON_RA1_SHA
+            and str(d.get("evidence_ci_run_id")) == "33377496972"
+            and d.get("meaningful_push_ci_cycles") == 2
+            and "metrics_pin_commit_sha" not in d
+        )
+        out["ra1_metrics_valid"] = ok
+        if not ok:
+            errors.append(f"RA1 metrics provenance truth failed: evidence_commit_sha={sha!r}, cycles={d.get('meaningful_push_ci_cycles')}")
+
+    p2_p = DOCS / "CQC_P2_METRICS.json"
+    if p2_p.is_file():
+        raw = p2_p.read_text(encoding="utf-8")
+        d = json.loads(raw)
+        ok = (
+            d.get("evidence_commit_sha") == CANON_P2_SHA
+            and str(d.get("evidence_ci_run_id")) == "33357451991"
+            and INVALID_P2_SHA not in raw
+            and "metrics_pin_commit_sha" not in d
+            and "verified_commit_sha" not in d
+        )
+        out["p2_metrics_valid"] = ok
+        if not ok:
+            errors.append("P2 metrics provenance truth failed: invalid/abbreviated SHA, duplicate fields, or pin field present")
+
+    closure_p = DOCS / "CQC_P2_RA2_CLOSURE.json"
+    if closure_p.is_file():
+        raw = closure_p.read_text(encoding="utf-8")
+        if INVALID_P2_SHA in raw:
+            errors.append("RA2 closure record contains the invalid legacy P2 SHA")
+            out["closure_record_valid"] = False
+        else:
+            out["closure_record_valid"] = True
+    return out
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", action="store_true", dest="machine")
     ap.add_argument("--hygiene", action="store_true")
     args = ap.parse_args(argv)
+
 
     if not (PKG / "benchmarks" / "p2").is_dir():
         print("NO_P2_BENCHMARK: benchmarks/p2 not present; nothing to validate.")
@@ -180,6 +243,7 @@ def main(argv=None) -> int:
 
     errors: list[str] = []
     sem = validate_semantic(errors)
+    prov = validate_provenance_truth(errors)
     topo = []
     for sd in sorted(RT.iterdir()):
         if sd.is_dir() and (sd / "expected_state.json").is_file():
@@ -196,6 +260,7 @@ def main(argv=None) -> int:
 
     report = {
         "semantic": sem,
+        "provenance_truth": prov,
         "revision_topology": [{"scenario": t["scenario"], "ok": t["ok"]} for t in topo],
         "all_ok": not errors and all(t["ok"] for t in topo),
         "errors": errors[:20],
@@ -207,6 +272,8 @@ def main(argv=None) -> int:
         print(f"semantic cases={sem['case_count']} (schema {sem['schema_valid']}/"
               f"hash {sem['hash_valid']}/trace {sem['trace_valid']}/dag {sem['dag_valid']}/"
               f"render {sem['render_valid']}/review {sem['review_present']})")
+        print(f"provenance truth: ra1={prov['ra1_metrics_valid']} p2={prov['p2_metrics_valid']} "
+              f"closure={prov.get('closure_record_valid')}")
         for t in topo:
             print(("PASS" if t["ok"] else "FAIL"), t["scenario"])
         for e in errors:

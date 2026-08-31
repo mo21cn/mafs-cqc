@@ -1,6 +1,5 @@
 {
   "contract_id": "CQC-P2-ARTIFACT-COMMITMENT-BOUNDARY-PROJECTION-LOSS-STRESS-v0.1",
-  "verified_commit_sha": "9dcbe8c9dd838093ee555852b62067d1ba4f70c",
   "ci_run_id": "33357451991",
   "semantic_case_count": 6,
   "raw_reused_case_count": 4,
@@ -24,7 +23,7 @@
   "test_count": 28,
   "meaningful_push_ci_cycles": 1,
   "manual_semantic_observations_scope": "projection_review.local_claw_preliminary_review fields are manual observations pending HO+ChatGPT final adjudication; not machine truth",
-  "evidence_commit_sha": "9dcbe8c9dd838093ee555852b62067d1ba4f70c",
+  "evidence_commit_sha": "9dcbe8c3efb28485ab4a2119e4415692a637fc35",
   "evidence_ci_run_id": "33357451991",
-  "metrics_pin_commit_sha": "866d5b2"
+  "provenance_note": "canonical full-length evidence SHA corrected in CQC-P2-RA2 (previously contained an invalid hand-copied SHA); self-referential pin retired"
 }

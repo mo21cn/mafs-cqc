@@ -1,7 +1,7 @@
 {
   "contract_id": "CQC-P2-RA1-COMMITMENT-ADJUDICATION-PRODUCTIVE-INSTABILITY-SEVEN-FIELD-REPAIR-v0.1",
-  "evidence_commit_sha": "a35b0bf",
-  "evidence_ci_run_id": "33377496972",
+  "evidence_commit_sha": "9dcbe8c3efb28485ab4a2119e4415692a637fc35",
+  "evidence_ci_run_id": "33357451991",
   "metrics_pin_commit_sha": "866d5b2",
   "semantic_case_count": 6,
   "initial_artifact_preserved_count": 6,
@@ -20,7 +20,7 @@
   "schema_changed": false,
   "new_production_artifact_types": 0,
   "resolution_condition_leak_count_after": 0,
-  "test_count": 34,
+  "test_count": 40,
   "meaningful_push_ci_cycles": 1,
   "manual_semantic_scope": "adjudication/admission rationales are manual facts (Local Claw preliminary); machine layer verifies lineage/structure only"
 }

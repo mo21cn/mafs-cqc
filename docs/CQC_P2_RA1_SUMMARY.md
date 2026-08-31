@@ -11,10 +11,10 @@ contract_id: CQC-P2-RA1-COMMITMENT-ADJUDICATION-PRODUCTIVE-INSTABILITY-SEVEN-FIE
 status: READY_FOR_REVIEW
 repository: mo21cn/mafs-cqc
 branch: dev/cqc-p2
-evidence_commit_sha: (pinned in docs/CQC_P2_RA1_METRICS.json)
-evidence_ci_run_id: (pinned in docs/CQC_P2_RA1_METRICS.json)
-metrics_pin_commit_sha: (pinned in docs/CQC_P2_RA1_METRICS.json)
-meaningful_push_ci_cycles: (see METRICS)
+evidence_commit_sha: a35b0bfbfa160577141ddfb34e8f6cadd7f82185
+evidence_ci_run_id: "33377496972"
+metrics_pin_commit_sha: RETIRED (self-referential; Git owns the containing-commit identity — see P2-RA2 Final Closure appendix)
+meaningful_push_ci_cycles: 2 (corrected in P2-RA2: cycle 1 94a2520 failed CI on a real byte-level lineage failure; cycle 2 a35b0bf succeeded)
 ```
 
 ## B — Initial P2 Adjudication Matrix
@@ -168,3 +168,23 @@ without schema pressure; the schema earned another round of trust by *not* growi
 **CQC-P3** — commitment boundary adjudicated, productive instability preserved,
 seven-field repair proven; the next digestion transition (CQS + source context →
 SRP) is the master v0.2 sequence's next bounded phase.
+
+---
+
+# P2-RA2 Final Closure
+
+```yaml
+s3_dangling_reference_closed: true
+seven_field_schema_changed: false
+productive_instability_preserved: true
+ra1_meaningful_push_ci_cycles: 2
+ra1_evidence_commit_sha: a35b0bfbfa160577141ddfb34e8f6cadd7f82185
+ra1_evidence_ci_run_id: "33377496972"
+legacy_p2_provenance_corrected: true
+self_referential_metrics_pin_retired: true
+p2b_r1: PASS
+p2b_r2: PASS
+mafs_modified: false
+```
+
+> artifact content pins upstream evidence; Git pins the artifact itself.

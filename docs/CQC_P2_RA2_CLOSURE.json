@@ -1,0 +1,29 @@
+{
+  "contract_id": "CQC-P2-RA2-FINAL-SEMANTIC-REFERENCE-PROVENANCE-TRUTH-CLOSURE-v0.1",
+  "parent_phase": "CQC-P2-RA1",
+  "closures": {
+    "s3_dangling_reference_closed": true,
+    "ra1_cycle_count_corrected": true,
+    "ra1_evidence_provenance_corrected": true,
+    "legacy_p2_provenance_corrected": true,
+    "self_referential_metrics_pin_retired": true
+  },
+  "semantic": {
+    "candidate_question_schema_changed": false,
+    "s3_question_count": 3,
+    "productive_instability_preserved": true
+  },
+  "regression": {
+    "resolution_condition_leak_count_after": 0,
+    "dangling_question_reference_count_after": 0,
+    "r1_diamond_valid": true,
+    "r2_sequential_valid": true
+  },
+  "architecture": {
+    "new_production_artifact_types": 0,
+    "new_semantic_scorers": 0,
+    "new_graph_frameworks": 0,
+    "mafs_modified": false
+  },
+  "provenance_rule": "artifact content pins upstream evidence; Git pins the artifact itself. No machine artifact claims to know its own containing commit SHA. The RA2 closure commit identity is owned by Git/GitHub and reported externally in the RA2 return note."
+}

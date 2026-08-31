@@ -12,5 +12,6 @@
   ],
   "repair_instruction": "Remove CQ-04 (answer organization is not an independent evidence landscape). Resolution conditions must describe evidence states, not retrieval procedures. Preserve TERMINOLOGY_OR_NAMING vs ENTITY_RESOLUTION ambiguity as productive instability in CQ-01.uncertainty.",
   "revised_artifact_id": "CQS-CQC-P2-03-R1",
-  "revised_artifact_sha256": "450f32529e4ace6947287a6422b0f3b393d0a4f99de79c228412476d8a71fcdf"
+  "revised_artifact_sha256": "8afff47489dfa03eb90ce643456f30dd31e77b5826e564520532c5946e8c210b",
+  "ra2_note": "revised_artifact_sha256 rebound after CQC-P2-RA2 dangling-reference repair (CQ-02.uncertainty wording only)"
 }

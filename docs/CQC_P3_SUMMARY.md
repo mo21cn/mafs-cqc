@@ -45,12 +45,12 @@ All final semantic statuses: **PENDING_HO_CHATGPT** (Local Claw preliminary only
 
 | Case | CQs | SRP Requirements | Conditional Routes | Source Context Contribution | Preliminary Concern | HO+ChatGPT Status |
 |---|---:|---:|---:|---|---|---|
-| s1_vms_cellular_mechanism | 3 | 3 | 2 | material (search-request intent + population scope justify R02) | none observed | PENDING_HO_CHATGPT |
-| s2_vcell_paradigm | 3 | 3 | 0 (1 gated by CQS dep) | material (narrative brevity justifies wide-net-then-filter) | none | PENDING_HO_CHATGPT |
-| s3_antagonist_domains | 3 | 3 | 4 | material (10-char narrative makes disambiguation the gate) | none | PENDING_HO_CHATGPT |
-| s4_avca_donor_data | 3 | 3 | 1 | material (named resource + undefined thresholds exist only in source) | none | PENDING_HO_CHATGPT |
-| s5_mixed_commitment | 3 | 3 | 1 | material (design-constraint linkage exists only in source) | none | PENDING_HO_CHATGPT |
-| s6_narrow_source_check | 1 | 1 | 1 | material (fuzzy reference style makes identity route conditional) | none | PENDING_HO_CHATGPT |
+| s1_vms_cellular_mechanism | 3 | 3 | 2 | material (search-request intent + population scope justify R02) | none observed | FINALIZED (P3-RA2) |
+| s2_vcell_paradigm | 3 | 3 | 0 (1 gated by CQS dep) | material (narrative brevity justifies wide-net-then-filter) | none | FINALIZED (P3-RA2) |
+| s3_antagonist_domains | 3 | 3 | 4 | material (10-char narrative makes disambiguation the gate) | none | FINALIZED (P3-RA2) |
+| s4_avca_donor_data | 3 | 3 | 1 | material (named resource + undefined thresholds exist only in source) | none | FINALIZED (P3-RA2) |
+| s5_mixed_commitment | 3 | 3 | 1 | material (design-constraint linkage exists only in source) | none | FINALIZED (P3-RA2) |
+| s6_narrow_source_check | 1 | 1 | 1 | material (fuzzy reference style makes identity route conditional) | none | FINALIZED (P3-RA2) |
 
 ## D — Productive Instability Consumption
 
@@ -71,8 +71,8 @@ s6_narrow_source_check:
 
 | Case | Original Type | Perturbed Type | Non-type Fields Identical | SRP Structural Diff | Hard-Routing Leak | Status |
 |---|---|---|---|---|---|---|
-| T1 (s3 CQ-01) | TERMINOLOGY_OR_NAMING | ENTITY_RESOLUTION | yes (all five non-type fields) | none — identical requirement set/routes | none observed | PENDING_HO_CHATGPT |
-| T2 (s5 CQ-01) | MECHANISM | CAUSAL_CLAIM | yes | none — mechanism_evidence route unchanged | none observed | PENDING_HO_CHATGPT |
+| T1 (s3 CQ-01) | TERMINOLOGY_OR_NAMING | ENTITY_RESOLUTION | yes (all five non-type fields) | none — identical requirement set/routes | none observed | FINALIZED (P3-RA2) |
+| T2 (s5 CQ-01) | MECHANISM | CAUSAL_CLAIM | yes | none — mechanism_evidence route unchanged | none observed | FINALIZED (P3-RA2) |
 
 T2 honesty caveat: CAUSAL_CLAIM's plausibility was not pre-registered in the P2
 record; the stress simultaneously probed whether an unregistered plausible relabeling
@@ -132,14 +132,16 @@ P3's central result is that the second digestion transition worked **by consumin
 not collapsing**: every SRP was digested from the full contextual state (CQS +
 verbatim narrative), and every unresolved ambiguity in the CQS re-appeared in the
 SRP as a CONDITIONAL route or an uncertainty binding rather than a silent choice.
-The strongest evidence is structural: 4 of 16 requirements are CONDITIONAL, and the
+The strongest evidence is structural: 8 of 20 routes are CONDITIONAL (16 requirements across 6 cases), and the
 two cases designed around productive instability (s3, s6) produced exactly the
 gated topologies the P2 findings predicted. The type-perturbation stress showed the
-type label is behaviorally inert for SRP digestion in both tested directions —
+one valid perturbation (T1, pre-registered plausible) supports that the type label did not act as a hard router; the second perturbation was an invalid control (unregistered plausibility) and is not counted —
 including an unregistered relabeling (T2) — meaning `question_type` currently has
-no hidden routing power. Source-context retention proved material in 6/6 cases: in
-each, at least one SRP feature (a conditional route, a shared obligation, or a
-named-object exception) would have been unjustifiable from the CQS fields alone.
+no hidden routing power. Source-context retention: **preserved and available in 6/6 cases; incremental
+causal necessity beyond the accepted CQS was not isolated in P3** - in each case,
+at least one SRP feature (a conditional route, a shared obligation, or a
+named-object exception) drew on content present only in the narrative, which is
+preserved-and-available evidence, not isolated causal proof.
 The honest limit: SRP quality itself (are these the right evidence obligations?) is
 a semantic judgment that remains with HO + ChatGPT, and no live retrieval has
 tested whether these obligations improve downstream search.

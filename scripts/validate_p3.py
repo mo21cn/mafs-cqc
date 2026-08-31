@@ -160,8 +160,44 @@ def validate_semantic_case(case: Path, errors: list, results: list) -> dict:
         res["ok"] = False
 
     review = json.loads((case / "evaluation" / "contextual_review.json").read_text(encoding="utf-8"))
-    res["checks"]["contextual_review_pending"] = (
-        review.get("final_semantic_adjudication", {}).get("status") == "PENDING_HO_CHATGPT")
+    # RA2 Closure D: review-truth — review identity/hash/mechanical fields must match actual artifacts
+    review_ok = True
+    if review.get("source_cqs_id") != cqs.get("artifact_id"):
+        errors.append(f"{case.name}: contextual_review.source_cqs_id mismatch (CONTEXTUAL_REVIEW_MACHINE_TRUTH_MISMATCH)")
+        review_ok = False
+    if review.get("source_cqs_sha256") != cqs_sha:
+        errors.append(f"{case.name}: contextual_review.source_cqs_sha256 does not match source_cqs.json bytes")
+        review_ok = False
+    if review.get("srp_artifact_id") != srp.get("artifact_id"):
+        errors.append(f"{case.name}: contextual_review.srp_artifact_id mismatch")
+        review_ok = False
+    if review.get("srp_sha256") != sha256_file(case / "search_requirement_profile.json"):
+        errors.append(f"{case.name}: contextual_review.srp_sha256 does not match search_requirement_profile.json bytes")
+        review_ok = False
+    recomputed = {
+        "schema_valid": not errs,
+        "source_binding_valid": ok,
+        "question_refs_valid": res["checks"].get("question_refs_valid", False),
+        "render_valid": res["checks"].get("render_reproducible", False),
+        "execution_leak_free": not leak_terms,
+    }
+    stated = review.get("mechanical") or {}
+    for k, actual in recomputed.items():
+        if bool(stated.get(k)) != bool(actual):
+            errors.append(f"{case.name}: contextual_review.mechanical.{k}={stated.get(k)} but recomputed truth={bool(actual)} (CONTEXTUAL_REVIEW_MACHINE_TRUTH_MISMATCH)")
+            review_ok = False
+    res["checks"]["review_truth_valid"] = review_ok
+    if not review_ok:
+        res["ok"] = False
+    fa = review.get("final_semantic_adjudication") or {}
+    fa_status = fa.get("status")
+    if not fa_status or fa_status == "PENDING_HO_CHATGPT":
+        errors.append(f"{case.name}: final_semantic_adjudication missing or still pending (RA2 requires finalized state)")
+        res["ok"] = False
+    allowed = {"PASS", "PASS_WITH_CAVEAT", "REPAIRED", "PRODUCTIVE_INSTABILITY_PRESERVED", "BOUNDARY_UNRESOLVED_PRESERVED"}
+    if fa_status not in allowed and fa_status != "PENDING_HO_CHATGPT":
+        errors.append(f"{case.name}: illegal final_semantic_adjudication.status {fa_status!r}")
+        res["ok"] = False
     results.append(res)
     return res
 
@@ -209,7 +245,13 @@ def validate_perturbation(td: Path, base_dir: Path, errors: list, results: list)
         errors.append(f"{td.name}: perturbation mechanical checks failed")
         res["ok"] = False
     if review.get("final_semantic_adjudication", {}).get("status") != "PENDING_HO_CHATGPT":
-        errors.append(f"{td.name}: type_perturbation_review must remain PENDING_HO_CHATGPT at P3")
+        pass  # RA2: perturbation reviews are finalized (T1 VALID_PASS / T2 INVALID_CONTROL_DESIGN)
+    st = review.get("final_semantic_adjudication", {}).get("status")
+    if review["base_case"] == "s3_antagonist_domains" and st != "VALID_PASS":
+        errors.append(f"{td.name}: T1 final state must be VALID_PASS (got {st!r})")
+        res["ok"] = False
+    if review["base_case"] == "s5_mixed_commitment" and st != "INVALID_CONTROL_DESIGN":
+        errors.append(f"{td.name}: T2 final state must be INVALID_CONTROL_DESIGN (got {st!r})")
         res["ok"] = False
     results.append(res)
     return res

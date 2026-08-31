@@ -72,8 +72,8 @@
         "methods literature",
         "authoritative review"
       ],
-      "stopping_condition": "可行/不可行/仅部分可行三态判定达成。（重要性语境：操作者在源叙事中明示该结论直接约束后续动物实验设计——该语境解释 CQ-03 为何重要，不构成独立证据义务。）",
-      "uncertainty_binding": "『relevant 的代谢物』种类未指定——证据检索保持开放，不代为指定。"
+      "stopping_condition": "可行/不可行/仅部分可行三态判定达成。",
+      "uncertainty_binding": "『relevant 的代谢物』种类未指定——证据检索保持开放，不代为指定。 重要性语境：操作者在源叙事中明示该结论直接约束后续动物实验设计——该语境解释 CQ-03 为何重要，记录于此而不构成独立证据义务（P2-RA1 裁决，P3-RA2 完成字段归位）。"
     }
   ]
 }

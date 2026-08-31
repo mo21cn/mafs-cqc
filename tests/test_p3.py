@@ -119,10 +119,12 @@ class TestTypePerturbation(unittest.TestCase):
                 self.assertEqual(bq.get(f), pq.get(f), f"{td_name}: non-type field {f} changed")
             self.assertEqual(base["source_narrative"], pert["source_narrative"], td_name)
 
-    def test_perturbation_reviews_pending(self):
-        for td_name in ("t1_s3_cq01", "t2_s5_cq01"):
-            review = _load(PKG / "benchmarks" / "p3" / "type_perturbation" / td_name / "evaluation" / "type_perturbation_review.json")
-            self.assertEqual(review["final_semantic_adjudication"]["status"], "PENDING_HO_CHATGPT")
+    def test_perturbation_reviews_finalized(self):
+        # P3-RA2: T1 finalized VALID_PASS; T2 finalized INVALID_CONTROL_DESIGN
+        t1 = _load(PKG / "benchmarks" / "p3" / "type_perturbation" / "t1_s3_cq01" / "evaluation" / "type_perturbation_review.json")
+        t2 = _load(PKG / "benchmarks" / "p3" / "type_perturbation" / "t2_s5_cq01" / "evaluation" / "type_perturbation_review.json")
+        self.assertEqual(t1["final_semantic_adjudication"]["status"], "VALID_PASS")
+        self.assertEqual(t2["final_semantic_adjudication"]["status"], "INVALID_CONTROL_DESIGN")
 
 
 if __name__ == "__main__":

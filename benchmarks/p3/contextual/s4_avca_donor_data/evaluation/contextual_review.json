@@ -27,7 +27,8 @@
     "finding": "R01 is one genuine evidence obligation (Atlas identity/scope/access record) serving CQ-01 directly and CQ-02 as inventory source — semantically contained, not two bundled obligations.",
     "action": "none (shared requirement retained)",
     "final_state": "PASS",
-    "rationale": "Shared requirement survives the containment review; no split performed for normalization."
+    "rationale": "Shared requirement survives the containment review; no split performed for normalization.",
+    "status": "PASS"
   },
   "source_context_use": {
     "observed": "context used to qualify/condition admitted obligations (conditional routes, importance context); no obligation minted beyond CQS boundary after RA1 repairs",

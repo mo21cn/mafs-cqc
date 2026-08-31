@@ -26,7 +26,8 @@
     "finding": "R01/R02/R03 remain contained; CONDITIONAL gates preserve referent ambiguity; type duality (TERMINOLOGY vs ENTITY_RESOLUTION) is productive instability.",
     "action": "none (no re-digestion required)",
     "final_state": "PRODUCTIVE_INSTABILITY_PRESERVED",
-    "rationale": "Boundary ambiguity is not representation failure; gates follow the CQS dependency edges."
+    "rationale": "Boundary ambiguity is not representation failure; gates follow the CQS dependency edges.",
+    "status": "PRODUCTIVE_INSTABILITY_PRESERVED"
   },
   "source_context_use": {
     "observed": "context used to qualify/condition admitted obligations (conditional routes, importance context); no obligation minted beyond CQS boundary after RA1 repairs",

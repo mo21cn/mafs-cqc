@@ -26,7 +26,8 @@
     "finding": "Containment review: R02 operationalizes admitted CQ-02 (population comparison), R03 operationalizes CQ-03; no obligation exceeds the accepted CQS boundary.",
     "action": "none (no re-digestion required)",
     "final_state": "PASS",
-    "rationale": "Context authority holds: source narrative qualifies and conditions the admitted commitments without minting new obligations."
+    "rationale": "Context authority holds: source narrative qualifies and conditions the admitted commitments without minting new obligations.",
+    "status": "PASS"
   },
   "source_context_use": {
     "observed": "context used to qualify/condition admitted obligations (conditional routes, importance context); no obligation minted beyond CQS boundary after RA1 repairs",

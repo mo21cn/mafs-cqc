@@ -16,6 +16,9 @@
     "possible_hard_routing_leak": "none — re-digestion under CAUSAL_CLAIM produced the same mechanism_evidence route, because the obligation (cascade-effect evidence at cell/pathway resolution) is grounded in the statement and narrative. Honest caveat: the CAUSAL_CLAIM plausibility was not pre-registered in the P2 record (unlike T1); this stress simultaneously probes whether an unregistered plausible relabeling changes SRP behavior — it did not."
   },
   "final_semantic_adjudication": {
-    "status": "PENDING_HO_CHATGPT"
+    "status": "INVALID_CONTROL_DESIGN",
+    "finding": "Alternate label CAUSAL_CLAIM was not pre-registered as plausible in the P2 record — the perturbation violated the pre-registered plausibility requirement.",
+    "action": "retained as historical experimental evidence; marked INVALID_CONTROL_DESIGN; not counted as a valid type-non-authority control",
+    "rationale": "Plausibility must come from accepted P2 evidence, not be invented after the fact. SECOND_VALID_TYPE_PERTURBATION_NOT_AVAILABLE is recorded honestly."
   }
 }

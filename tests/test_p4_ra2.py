@@ -135,7 +135,7 @@ class TestManifestCoverage(unittest.TestCase):
             import validate_p4 as vp
             old_docs, old_pkg = vp.DOCS, vp.PKG
             vp.DOCS = tmp_docs
-            vp.PKG = td
+            vp.PKG = Path(td)
             try:
                 out = vp.validate_final_manifest(errors)
             finally:

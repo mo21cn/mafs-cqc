@@ -1,7 +1,6 @@
 # CQC_P5_SHA256_MANIFEST.txt - canonical Git-byte SHA-256 of P5 closure surface
 # contract: CQC-P5-RA1-CROSS-REPO-CI-INTEGRATION-TRUTH-FINAL-CLOSURE-v0.1 §18
 # package: cqc_dev_cqc-p5
-# generated from HEAD: b121a1acd39ee3f4a6280b9e3e6f24df563a7aee
 # pinned MAFS baseline: cd09699fc8cc160ab5cfff00a41e714961dd2109
 # P4 source baseline: 8028e17a6eaab364c744cfa72b714f0f0bd6cf01
 # total entries: 68

@@ -36,7 +36,7 @@
   "mafs_production_modified": false,
   "optional_live_discovery_attempted": false,
   "optional_live_discovery_status": "NOT_RUN",
-  "test_count": 96,
+  "test_count": 101,
   "meaningful_push_ci_cycles_current_step": 1,
   "provenance_note": "no self-referential commit SHA; Git owns outer identity (reported externally in the return note). P4 source baseline corrected from intermediate 529ccc63 to the P4-RA2 final-gate commit 8028e17a6eaab364c744cfa72b714f0f0bd6cf01 per CQC-P5-RA1-CI1 Closure B. Review inventory split into 6 contextual (NOT_APPLICABLE for planning-specific fields) + 3 planning (Local Claw preliminary review completed; final adjudication remains PENDING_HO_CHATGPT) = 9 total per CQC-P5-RA1-CI1 Closure C."
 }

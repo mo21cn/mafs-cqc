@@ -1,0 +1,23 @@
+{
+  "contract_id": "CQC-UPSTREAM-FREEZE-v0.1",
+  "current_state": "READY_FOR_FREEZE_ACCEPTANCE",
+  "accepted_p5_source_head": "35ac05b269016a15c90564dca736b54129ce4d82",
+  "accepted_p4_source_commit": "8028e17a6eaab364c744cfa72b714f0f0bd6cf01",
+  "pinned_mafs_compatibility_commit": "cd09699fc8cc160ab5cfff00a41e714961dd2109",
+  "phase_count": 6,
+  "contextual_binding_case_count": 6,
+  "planning_case_count": 3,
+  "planning_semantic_acceptance_count": 3,
+  "integration_review_count": 9,
+  "cqc_test_count": 101,
+  "p5_ci_success": true,
+  "p0_p4_regression_ci_success": true,
+  "cqs_schema_changed_in_freeze": false,
+  "srp_schema_changed_in_freeze": false,
+  "budget_envelope_schema_changed_in_freeze": false,
+  "mafs_schema_changed_in_freeze": false,
+  "new_cognitive_artifact_types_in_freeze": 0,
+  "mafs_production_modified": false,
+  "repository_integration_path": "PATH_C",
+  "governance_exception_count": 1
+}

@@ -286,7 +286,8 @@ cqc_p4_source_commit: 8028e17a6eaab364c744cfa72b714f0f0bd6cf01
 ```
 
 The exact 40-char SHA of the P4-RA2 final-gate acceptance commit
-(`CQC-P4-RA2: resource rationale & canonical closure finalization`) is
+(`CQC-P4-RA2-FINAL-GATE: coverage fixture uses Path object for PKG
+monkeypatch + manifest entry rebound for tests/test_p4_ra2.py`) is
 written directly into this summary and into `docs/CQC_P5_METRICS.json`. No
 indirect "see docs/CQC_P4_METRICS.json" reference; no use of the current
 P5 HEAD as a substitute for the P4 source baseline.

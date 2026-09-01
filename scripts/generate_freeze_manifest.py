@@ -85,7 +85,7 @@ def main(argv=None) -> int:
         "# contract: CQC-UPSTREAM-FREEZE-v0.1 §14",
         "#",
         "# Stable inner provenance only:",
-        "#   P4 source baseline: 8028e17a6eaab364c744cfa72b714961dd2109",
+        "#   P4 source baseline: 8028e17a6eaab364c744cfa72b714f0f0bd6cf01",
         "#   pinned MAFS baseline: cd09699fc8cc160ab5cfff00a41e714961dd2109",
         "#",
         "# Git owns outer identity; this manifest does not encode HEAD.",

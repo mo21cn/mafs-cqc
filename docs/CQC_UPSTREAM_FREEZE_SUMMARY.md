@@ -171,9 +171,10 @@ The freeze step records the event; it is not erased.
 Standing rule (preserved for the next dev cycle):
 
 > CI success cannot be predicted by an artifact committed before CI
-> runs. Force-amend docs-only fixup is permitted by RA1 precedent but
-> must be reported in the next contract's governance exception
-> section.
+> runs. The CI1 force-amend / second push is a
+> recorded exception;
+> establishes no authorization precedent;
+> future second push requires HO+ChatGPT authorization.
 
 ## H. Repository Ownership / Path C
 

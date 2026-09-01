@@ -1,0 +1,78 @@
+{
+  "axes": [
+    {
+      "axis_id": "A1",
+      "family": "resource-identity-confirmation",
+      "proposition": "confirm Arc Virtual Cell Atlas entity identity, dataset inventory scope, and access path (shared obligation serving CQ-01 and CQ-02)",
+      "admission": "admitted",
+      "essential": true,
+      "gate_scopes": [
+        "source-content-verification"
+      ],
+      "blocking_role": "essential"
+    },
+    {
+      "axis_id": "A2",
+      "family": "metadata-decidability",
+      "proposition": "three-state decidability mapping for young/healthy/primary in the Atlas metadata schema",
+      "admission": "admitted",
+      "essential": true,
+      "gate_scopes": [
+        "source-content-verification"
+      ],
+      "blocking_role": "essential"
+    }
+  ],
+  "search_orders": [
+    {
+      "search_order_id": "SO-A1-1",
+      "axis_id": "A1",
+      "operation_type": "lookup_by_id",
+      "required_capabilities": [
+        "resource-documentation-inspection"
+      ],
+      "query_representation": {
+        "target": "Arc Virtual Cell Atlas",
+        "intent": "entity identity, dataset inventory scope, access path"
+      },
+      "expected_output": "raw_snapshot",
+      "gate_scope": "source-content-verification",
+      "blocking_role": "essential",
+      "essential": true
+    },
+    {
+      "search_order_id": "SO-A2-1",
+      "axis_id": "A2",
+      "operation_type": "lookup_by_id",
+      "required_capabilities": [
+        "metadata-schema-inspection"
+      ],
+      "query_representation": {
+        "target": "Atlas metadata schema",
+        "intent": "decidability of young/healthy/primary fields"
+      },
+      "expected_output": "raw_snapshot",
+      "gate_scope": "source-content-verification",
+      "blocking_role": "essential",
+      "essential": true
+    }
+  ],
+  "route_bindings": [
+    {
+      "requirement_id": "R01",
+      "route_id": "entity_resource_identity",
+      "mafs_axis_id": "A1",
+      "mafs_search_order_ids": [
+        "SO-A1-1"
+      ]
+    },
+    {
+      "requirement_id": "R02",
+      "route_id": "measurement_observability",
+      "mafs_axis_id": "A2",
+      "mafs_search_order_ids": [
+        "SO-A2-1"
+      ]
+    }
+  ]
+}

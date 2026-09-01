@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CQCMAFSIntegrationBinding",
+  "description": "CQC-P5 lineage sidecar (contract CQC-P5-MAFS-INTEGRATION-ADAPTER-ARTIFACT-LINEAGE-CLOSURE-v0.1 section 10). Identity/hash/route-join/activation/stale-state only. Contains no scientific judgment: it records what was handed across the boundary, it does not decide what the science means.",
+  "type": "object",
+  "required": ["artifact_id", "schema_version", "source_chain", "mafs_baseline", "active_routes", "held_conditional_routes", "unfunded_required_routes", "status", "stale_state"],
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {"type": "string", "minLength": 1},
+    "schema_version": {"const": "0.1"},
+    "source_chain": {
+      "type": "object",
+      "required": ["cqs_id", "cqs_sha256", "srp_id", "srp_sha256", "budget_envelope_id", "budget_envelope_sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "cqs_id": {"type": "string", "minLength": 1},
+        "cqs_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "srp_id": {"type": "string", "minLength": 1},
+        "srp_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "budget_envelope_id": {"type": "string", "minLength": 1},
+        "budget_envelope_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    "mafs_baseline": {
+      "type": "object",
+      "required": ["repository", "commit_sha", "interface_state"],
+      "additionalProperties": false,
+      "properties": {
+        "repository": {"type": "string", "minLength": 1},
+        "commit_sha": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+        "interface_state": {"type": "string", "minLength": 1}
+      }
+    },
+    "active_routes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["requirement_id", "route_id", "allocation_id", "allocation_activation"],
+        "additionalProperties": false,
+        "properties": {
+          "requirement_id": {"type": "string", "pattern": "^R[0-9]{2,}$"},
+          "route_id": {"type": "string", "pattern": "^[a-z0-9_]{3,}$"},
+          "allocation_id": {"type": "string", "pattern": "^AL[0-9]{2,}$"},
+          "allocation_activation": {"enum": ["COMMITTED"]},
+          "mafs_axis_id": {"type": ["string", "null"]},
+          "mafs_search_order_ids": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "held_conditional_routes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["requirement_id", "route_id", "allocation_id", "activation"],
+        "additionalProperties": false,
+        "properties": {
+          "requirement_id": {"type": "string", "pattern": "^R[0-9]{2,}$"},
+          "route_id": {"type": "string", "pattern": "^[a-z0-9_]{3,}$"},
+          "allocation_id": {"type": "string", "pattern": "^AL[0-9]{2,}$"},
+          "activation": {"enum": ["RESERVE_CONDITIONAL"]}
+        }
+      }
+    },
+    "unfunded_required_routes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["requirement_id", "route_id", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "requirement_id": {"type": "string", "pattern": "^R[0-9]{2,}$"},
+          "route_id": {"type": "string", "pattern": "^[a-z0-9_]{3,}$"},
+          "reason": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "status": {"enum": ["READY_FOR_MAFS_PLANNING", "READY_FOR_MAFS_PREFLIGHT", "INTEGRATION_BLOCKED_BUDGET_INSUFFICIENT", "STALE_SOURCE_CHAIN", "MAFS_BASELINE_MISMATCH"]},
+    "stale_state": {"enum": ["CURRENT", "STALE"]}
+  }
+}

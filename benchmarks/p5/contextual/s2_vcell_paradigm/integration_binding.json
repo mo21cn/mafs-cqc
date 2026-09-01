@@ -1,0 +1,47 @@
+{
+  "artifact_id": "BIND-s2_vcell_paradigm",
+  "schema_version": "0.1",
+  "source_chain": {
+    "cqs_id": "CQS-CQC-P2-02-R1",
+    "cqs_sha256": "39b0f15a28d663bd3ee6d8453ddf45379714b6b721c773a23719e11248e4081d",
+    "srp_id": "SRP-CQC-P3-02-R1",
+    "srp_sha256": "67036a5c48d02608a25ba00c85260162dc6bce74a78ba4079f0c12f18e6cf1a0",
+    "budget_envelope_id": "BE-CQC-P4-S2-R1",
+    "budget_envelope_sha256": "0ca314756380044a26d69ef6a125996e670f92442d58a4b0da2d36e6e58b2937"
+  },
+  "mafs_baseline": {
+    "repository": "mo21cn/mafs-v3-p0",
+    "commit_sha": "cd09699fc8cc160ab5cfff00a41e714961dd2109",
+    "interface_state": "MAFS v3.0-P1.5-RA3 closed execution-boundary state"
+  },
+  "active_routes": [
+    {
+      "requirement_id": "R01",
+      "route_id": "historical_lineage",
+      "allocation_id": "AL01",
+      "allocation_activation": "COMMITTED",
+      "mafs_axis_id": null,
+      "mafs_search_order_ids": []
+    },
+    {
+      "requirement_id": "R02",
+      "route_id": "terminology_boundary",
+      "allocation_id": "AL02",
+      "allocation_activation": "COMMITTED",
+      "mafs_axis_id": null,
+      "mafs_search_order_ids": []
+    },
+    {
+      "requirement_id": "R03",
+      "route_id": "historical_lineage",
+      "allocation_id": "AL03",
+      "allocation_activation": "COMMITTED",
+      "mafs_axis_id": null,
+      "mafs_search_order_ids": []
+    }
+  ],
+  "held_conditional_routes": [],
+  "unfunded_required_routes": [],
+  "status": "READY_FOR_MAFS_PREFLIGHT",
+  "stale_state": "CURRENT"
+}

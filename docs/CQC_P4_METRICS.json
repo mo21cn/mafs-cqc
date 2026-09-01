@@ -1,6 +1,6 @@
 {
   "contract_id": "CQC-P4-BUDGET-ENVELOPE-v0.1",
-  "current_phase_state": "CQC-P4-RA2-CLOSED",
+  "current_phase_state": "CQC-P5-CLOSED (P4 superseded by P5 freeze)",
   "contextual_case_count": 6,
   "budget_envelope_schema_valid_count": 6,
   "source_srp_binding_valid_count": 6,

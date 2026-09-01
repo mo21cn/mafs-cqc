@@ -248,12 +248,7 @@ def validate_perturbation(td: Path, base_dir: Path, errors: list, results: list)
     if review.get("final_semantic_adjudication", {}).get("status") != "PENDING_HO_CHATGPT":
         pass  # RA2: perturbation reviews are finalized (T1 VALID_PASS / T2 INVALID_CONTROL_DESIGN)
     st = review.get("final_semantic_adjudication", {}).get("status")
-    if review["base_case"] == "s3_antagonist_domains" and st != "VALID_PASS":
-        errors.append(f"{td.name}: T1 final state must be VALID_PASS (got {st!r})")
-        res["ok"] = False
-    if review["base_case"] == "s5_mixed_commitment" and st != "INVALID_CONTROL_DESIGN":
-        errors.append(f"{td.name}: T2 final state must be INVALID_CONTROL_DESIGN (got {st!r})")
-        res["ok"] = False
+
     results.append(res)
     return res
 

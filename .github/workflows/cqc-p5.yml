@@ -35,4 +35,9 @@ jobs:
       - name: Run all CQC tests
         env:
           MAFS_BASELINE_DIR: ${{ github.workspace }}/external/mafs-v3-p0
-        run: python -m pytest -q
+        # Closure A: scope pytest collection to CQC's own ./tests only.
+        # The MAFS checkout under external/mafs-v3-p0 contains its own
+        # tests/test_p1_ra1.py which collides with CQC's tests/test_p1_ra1.py.
+        # MAFS is a read-only compatibility dependency, not part of the
+        # CQC test collection.
+        run: python -m pytest -q tests

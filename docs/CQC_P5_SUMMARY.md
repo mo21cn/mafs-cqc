@@ -4,13 +4,18 @@
 
 ```yaml
 contract_id: CQC-P5-MAFS-INTEGRATION-ADAPTER-ARTIFACT-LINEAGE-CLOSURE-v0.1
-status: READY_FOR_REVIEW
+current_phase_state: READY_FOR_REVIEW
 repository: mo21cn/mafs-cqc
 branch: dev/cqc-p5
-cqc_p4_source_commit: (see docs/CQC_P4_METRICS.json evidence chain)
+cqc_p4_source_commit: 529ccc63f6d2900172a6ab4367dc33c52eb699fa
 mafs_baseline_commit: cd09699fc8cc160ab5cfff00a41e714961dd2109
-meaningful_push_ci_cycles_current_step: (see docs/CQC_P5_METRICS.json)
+meaningful_push_ci_cycles_current_step: 1
 ```
+
+`cqc_p4_source_commit` is the exact 40-char SHA of the P4-RA2 final-gate
+acceptance commit (529ccc63) on `dev/cqc-p4`, frozen into this summary per
+Closure H. No indirect `see other artifact` reference; the SHA itself is
+pinned.
 
 ## B — Frozen Artifact Chain
 
@@ -46,12 +51,12 @@ science means.
 | S5 | ✓ | ✓ | 3 | 1 | accessible | READY_FOR_MAFS_PREFLIGHT |
 | S6 | ✓ | ✓ | 1 | 1 | accessible | READY_FOR_MAFS_PREFLIGHT |
 
-## E — Three MAFS Planning Cases
+## E — Three MAFS Planning Cases (schema-validated, not preflight-executed)
 
 Model-authored MAFS-native Axis/SearchOrder objects; deterministic layer validates
 shape + lineage only.
 
-| Case | CQC Route | MAFS Axis | MAFS SearchOrder | MAFS Preflight |
+| Case | CQC Route | MAFS Axis | MAFS SearchOrder | MAFS Native Planning Schema Validation |
 |---|---|---|---|---|
 | M1 (S4 shared) | R01/entity_resource_identity (shared, CQ-01+CQ-02) | A1 resource-identity-confirmation | SO-A1-1 lookup_by_id | schema-valid, route-level single binding |
 | M1 | R02/measurement_observability | A2 metadata-decidability | SO-A2-1 lookup_by_id | schema-valid |
@@ -64,6 +69,14 @@ Model judgment: axis families, propositions, operation types, query representati
 Deterministic validation: schema conformance (pinned MAFS schemas), route binding
 uniqueness, held-route non-activation, baseline pin. No deterministic route→axis
 lookup table exists.
+
+**Full MAFS preflight was not executed in P5 and remains a repository-side
+integration concern.** The validation performed here is shape + lineage only;
+`MAFS.run_preflight()` would also require `CompiledTarget`, `ProviderManifest`,
+`NegotiationResult`, compiled queries, `GateDependencyGraph`, runtime
+fingerprint, `BudgetState`, and the target-freeze path. None of these MAFS-native
+context objects are fabricated in P5; producing them would be repository-side
+work outside the CQC line.
 
 ## F — S5 QUICK Negative Case
 
@@ -121,23 +134,148 @@ mafs_production_modified: false
 ## K — Earned / Not Earned
 
 **Earned:** CQS→SRP→BudgetEnvelope is consumable as a lineage-bound MAFS input
-chain; resource authority survives integration; productive instability survives
-(held, not pre-activated); shared requirements do not multiply execution by CQ
-cardinality; budget insufficiency blocks execution without deleting epistemic
-obligations; source revisions make dependent integration state stale; MAFS-native
-planning objects can be authored from CQC commitments; MAFS's
-discover→cognitive-checkpoint→resolve boundary survives integration (untouched).
+chain; resource authority survives integration (FEASIBLE / CONSTRAINED /
+INSUFFICIENT preserved as three distinct resource states); productive
+instability survives (held, not pre-activated); shared requirements do not
+multiply execution by CQ cardinality; budget insufficiency blocks execution
+without deleting epistemic obligations; source revisions make dependent
+integration state stale; MAFS-native planning objects can be authored from CQC
+commitments and their shape is schema-validated against the pinned MAFS
+schemas; MAFS's discover→cognitive-checkpoint→resolve boundary survives
+integration (untouched).
 
-**Not earned:** search recall improvement, scientific correctness, actual cost
+**Not earned:** full MAFS `run_preflight()` execution (NOT_EVALUATED — out of
+scope for P5); search recall improvement, scientific correctness, actual cost
 prediction, completion within CQC ceilings, provider optimality, SearchOrder
 optimality, automated candidate selection, EvidenceLandscapePackage completeness,
-production merge. These require later evidence.
+production merge. These require later evidence or out-of-scope work.
 
 ## L — Next Step
 
 ```text
-CQC-UPSTREAM-FREEZE
+MAFS-REPOSITORY-SIDE-INTEGRATION
 ```
 
-(condition: P5 acceptance confirmed by HO + ChatGPT; any actual repository-side
-merge into MAFS requires a separate bounded integration authorization)
+Per CQC-P5-RA1 Amendment A — Repository Ownership & Integration Path Freeze
+(HO + ChatGPT authority), the next step after this acceptance is
+**MAFS-REPOSITORY-SIDE-INTEGRATION**: a separate bounded contract that
+authorizes a thin MAFS-side consumer adapter against the pinned/versioned
+CQC artifact protocol. That future step may add only the consumer adapter
+inside `mo21cn/mafs-v3-p0`; it must not copy, vendor, or absorb the CQC
+implementation.
+
+# `P5-RA1 Final Closure`
+
+## A. Cross-Repo CI Isolation
+
+CQC pytest collection is scoped to `./tests`. External MAFS tests under
+`external/mafs-v3-p0/tests/` are not collected as CQC tests. The CI step that
+previously ran `python -m pytest -q` from the repository root (which caused
+duplicate `test_p1_ra1` module basename collision with the CQC-owned test of
+the same name) now runs `python -m pytest -q tests`.
+
+## B. MAFS Test Schema Path
+
+`MAFS_BASELINE_DIR` is the single path contract for the validator and the
+tests. The previous hardcoded sibling path `PKG.parent / "mafs-v3-p0" /
+"schemas"` in `tests/test_p5.py` is replaced with
+`Path(os.environ.get("MAFS_BASELINE_DIR", <local default>)) / "schemas"`. CI
+sets `MAFS_BASELINE_DIR=${{ github.workspace }}/external/mafs-v3-p0` for both
+the validator and the test step. In CI, `pinned_mafs_schema_tests_execute_in_ci: true`.
+
+## C. Resource-State Truth
+
+```text
+FEASIBLE ≠ CONSTRAINED ≠ INSUFFICIENT
+CONSTRAINED is no longer collapsed into INSUFFICIENT.
+```
+
+The adapter's binding-status branch now preserves CONSTRAINED as a distinct
+upstream envelope state and maps it to `READY_FOR_MAFS_PREFLIGHT` (with the
+resource constraint recorded in the upstream BudgetEnvelope, not in the
+binding-status field). A regression test exercises a constructed CONSTRAINED
+envelope with `unfunded_obligations=[]` and asserts the binding is not
+`INTEGRATION_BLOCKED_BUDGET_INSUFFICIENT`.
+
+## D. Full Source-Chain Truth
+
+The canonical P5 validator (`scripts/validate_p5.py::ctx_binding_errors`)
+imports and calls `adapter.verify_source_chain()` rather than re-implementing
+the CQS↔SRP↔BudgetEnvelope hash and id checks. There is one source-chain truth
+implementation with multiple consumers (adapter + validator). On any source-
+chain mismatch the canonical validator fails with the adapter's existing
+stable failure semantics (`CQC_SOURCE_CHAIN_MISMATCH`).
+
+A negative regression test (`test_p5.py::TestT1bSourceChainNegative::test_wrong_srp_source_cqs_sha256`)
+mutates `srp.source_cqs_sha256` to a wrong value while leaving the binding
+internally self-consistent, and asserts P5 validation fails with
+`CQC_SOURCE_CHAIN_MISMATCH`. This proves the canonical validator no longer
+validates only the sidecar's local copies.
+
+## E. MAFS Compatibility Claim
+
+```text
+3/3 MAFS-native planning packages schema-validated.
+Full MAFS preflight NOT_EVALUATED.
+```
+
+The previous overclaimed `mafs_preflight_evaluated_count: 3` (which implied
+`MAFS.run_preflight()` was executed) is replaced with
+`mafs_native_planning_schema_evaluated_count: 3` + `mafs_full_preflight_evaluated_count: 0`
++ `mafs_full_preflight_status: "NOT_EVALUATED"`. No fake MAFS preflight
+objects are fabricated; the claim is narrowed to the evidence actually
+earned.
+
+## F. Integration Review
+
+Per-planning-case `evaluation/integration_review.json` artifacts are present
+for the 3 MAFS planning cases (`m1_s4_shared`, `m2_s6_instability`,
+`m3_s5_standard`) and for the 6 contextual bindings. Mechanical fields are
+machine-derived from the binding, envelope, SRP, CQS, and schema-validate
+output. Final semantic adjudication remains `PENDING_HO_CHATGPT`; Local
+Claw does not self-sign final semantic acceptance.
+
+## G. Canonical State
+
+Machine artifacts do not claim `CQC-P5-CLOSED` before independent CI proves
+closure. The previous premature `current_phase_state: "CQC-P5-CLOSED"` (in
+the metrics file while cross-repo CI was red) is replaced with
+`current_phase_state: "READY_FOR_REVIEW"`. The final closure script / workflow
+would update to CLOSED only after a green CI run; the metrics file does not
+encode CLOSED as a machine field that pre-empts the CI verdict.
+
+## H. P4 Source Baseline
+
+```text
+cqc_p4_source_commit: 529ccc63f6d2900172a6ab4367dc33c52eb699fa
+```
+
+The exact 40-char SHA of the P4-RA2 final-gate acceptance commit
+(`CQC-P4-RA2: resource rationale & canonical closure finalization`) is
+written directly into this summary and into `docs/CQC_P5_METRICS.json`. No
+indirect "see docs/CQC_P4_METRICS.json" reference; no use of the current
+P5 HEAD as a substitute for the P4 source baseline.
+
+## I. Canonical Integrity
+
+```text
+Summary
+Metrics
+Reviews
+Validator
+Manifest
+```
+
+all describe the same final P5 state.
+
+- Summary: this document.
+- Metrics: `docs/CQC_P5_METRICS.json`.
+- Reviews: `benchmarks/p5/**/evaluation/integration_review.json` (9 files).
+- Validator: `scripts/validate_p5.py` and `integration/mafs_v3/{adapter,validator}.py`.
+- Manifest: `docs/CQC_P5_SHA256_MANIFEST.txt`.
+
+## J. Next Step
+
+`MAFS-REPOSITORY-SIDE-INTEGRATION` (per CQC-P5-RA1 Amendment A — Repository
+Ownership & Integration Path Freeze; the thin MAFS-side consumer adapter
+that consumes the pinned CQC artifact protocol).

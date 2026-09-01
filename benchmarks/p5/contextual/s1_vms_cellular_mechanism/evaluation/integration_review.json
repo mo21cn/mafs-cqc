@@ -1,0 +1,22 @@
+{
+  "case_id": "BIND-s1_vms_cellular_mechanism",
+  "schema_version": "cqc-p5-integration-review.v0.1",
+  "mechanical": {
+    "source_chain_valid": true,
+    "allocation_route_join_valid": true,
+    "conditional_non_activation_valid": true,
+    "mafs_baseline_valid": true,
+    "mafs_native_schema_valid": true,
+    "stale_state_valid": true
+  },
+  "local_claw_preliminary_review": {
+    "search_order_semantically_contained": true,
+    "authority_leak_observed": false,
+    "source_context_accessible": true,
+    "integration_projection_loss_observed": false,
+    "notes": ""
+  },
+  "final_semantic_adjudication": {
+    "status": "PENDING_HO_CHATGPT"
+  }
+}

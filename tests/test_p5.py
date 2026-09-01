@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import shutil
 import sys
 import unittest
@@ -24,7 +25,14 @@ P5 = PKG / "benchmarks" / "p5"
 CTX = P5 / "contextual"
 MAFS_PL = P5 / "mafs_planning"
 PERT = P5 / "budget_perturbation"
-MAFS_SCHEMAS = PKG.parent / "mafs-v3-p0" / "schemas"
+# Closure B: MAFS schema path must use the same env contract as scripts/validate_p5.py.
+# The hardcoded sibling path (../mafs-v3-p0) is invisible to CI's external/mafs-v3-p0
+# checkout. CI sets MAFS_BASELINE_DIR explicitly; local ad-hoc execution may fall back
+# to the sibling default only if the pinned baseline is absent (clearly non-acceptance).
+MAFS_BASELINE_DIR = os.environ.get(
+    "MAFS_BASELINE_DIR", str(PKG.parent / "mafs-v3-p0")
+)
+MAFS_SCHEMAS = Path(MAFS_BASELINE_DIR) / "schemas"
 
 
 def _load(p: Path):
@@ -235,6 +243,83 @@ def _write(p: Path, obj):
 
 def _write_impl(p: Path, obj):
     p.write_bytes((json.dumps(obj, indent=2, ensure_ascii=False) + "\n").encode("utf-8"))
+
+
+# ============================================================================
+# P5-RA1 regression tests (CQC-P5-RA1 contract §6 + §8)
+# ============================================================================
+
+class TestConstrainedBudgetNotMisclassified(unittest.TestCase):
+    """P5-RA1 §6: a BudgetEnvelope with feasibility.status = CONSTRAINED
+    and unfunded_obligations=[] must NOT be misclassified as
+    INTEGRATION_BLOCKED_BUDGET_INSUFFICIENT.
+
+    The FEASIBLE → READY_FOR_MAFS_PREFLIGHT branch is preserved; a
+    CONSTRAINED envelope with no unfunded_required obligations is also
+    READY_FOR_MAFS_PREFLIGHT. Only INSUFFICIENT envelopes (REQUIRED
+    routes explicitly unfunded) yield
+    INTEGRATION_BLOCKED_BUDGET_INSUFFICIENT.
+    """
+
+    def test_constrained_envelope_not_blocked(self):
+        d = CTX / "s1_vms_cellular_mechanism"
+        cqs = _load(d / "source_cqs.json")
+        srp = _load(d / "source_srp.json")
+        env = _load(d / "budget_envelope.json")
+        # Derive a CONSTRAINED envelope from this FEASIBLE one.
+        env["feasibility"] = {
+            "status": "CONSTRAINED",
+            "unfunded_obligations": [],
+            "constraint_note": "synthetic CONSTRAINED for §6 regression"
+        }
+        with __import__("tempfile").TemporaryDirectory() as td:
+            tp = Path(td)
+            _write(tp / "source_cqs.json", cqs)
+            _write(tp / "source_srp.json", srp)
+            _write(tp / "budget_envelope.json", env)
+            res = adapter.build_binding(case_id="t_constrained",
+                                        cqs_path=tp / "source_cqs.json",
+                                        srp_path=tp / "source_srp.json",
+                                        envelope_path=tp / "budget_envelope.json")
+            self.assertNotEqual(res.code,
+                                INTEGRATION_BLOCKED_BUDGET_INSUFFICIENT,
+                                "CONSTRAINED must not collapse to "
+                                "INTEGRATION_BLOCKED_BUDGET_INSUFFICIENT")
+            self.assertEqual(res.code, "OK")
+            self.assertEqual(res.binding["status"], "READY_FOR_MAFS_PREFLIGHT")
+
+
+class TestSourceChainNegativeSRPHash(unittest.TestCase):
+    """P5-RA1 §8: when SRP.source_cqs_sha256 is wrong but the binding
+    remains internally self-consistent, the canonical validator
+    (validate_p5.py via adapter.verify_source_chain) must fail with
+    CQC_SOURCE_CHAIN_MISMATCH.
+
+    This proves the canonical validator no longer validates only the
+    sidecar's local copies; it actually walks the upstream chain.
+    """
+
+    def test_wrong_srp_source_cqs_sha256_caught(self):
+        d = CTX / "s1_vms_cellular_mechanism"
+        cqs = _load(d / "source_cqs.json")
+        srp = _load(d / "source_srp.json")
+        env = _load(d / "budget_envelope.json")
+        # Tamper with SRP's recorded CQS sha256.
+        real_cqs_sha = hashlib.sha256(
+            (d / "source_cqs.json").read_bytes()
+        ).hexdigest()
+        srp["source_cqs_sha256"] = "f" * 64
+        self.assertNotEqual(srp["source_cqs_sha256"], real_cqs_sha)
+        with __import__("tempfile").TemporaryDirectory() as td:
+            tp = Path(td)
+            _write(tp / "source_cqs.json", cqs)
+            _write(tp / "source_srp.json", srp)
+            _write(tp / "budget_envelope.json", env)
+            with self.assertRaises(adapter.P5Error) as ctx:
+                adapter.verify_source_chain(tp / "source_cqs.json",
+                                            tp / "source_srp.json",
+                                            tp / "budget_envelope.json")
+            self.assertEqual(ctx.exception.code, CQC_SOURCE_CHAIN_MISMATCH)
 
 
 if __name__ == "__main__":

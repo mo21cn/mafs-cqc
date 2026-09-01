@@ -179,7 +179,25 @@ def build_binding(*, case_id: str, cqs_path: Path, srp_path: Path, envelope_path
             res.errors.append(f"SearchOrder {so.get('search_order_id')} claims lineage to held conditional route {src_route}")
             return res
 
-    status = READY if env["feasibility"]["status"] == "FEASIBLE" else INTEGRATION_BLOCKED_BUDGET_INSUFFICIENT
+    # Closure C: preserve FEASIBLE / CONSTRAINED / INSUFFICIENT as three
+    # distinct resource states. CONSTRAINED with no unfunded REQUIRED
+    # obligations is still READY_FOR_MAFS_PREFLIGHT (the resource constraint
+    # is recorded in the upstream BudgetEnvelope, not in the binding status;
+    # the binding schema deliberately does NOT add a new CONSTRAINED status
+    # field — the binding status stays at the existing READY /
+    # INTEGRATION_BLOCKED enum and the envelope remains the source of
+    # resource-constraint truth). Any REQUIRED route that is not active
+    # and not declared unfunded has already triggered
+    # P5_REQUIRED_ROUTE_UNBOUND above, so by the time we reach this line
+    # the unfunded_obligations are not REQUIRED routes.
+    fe_status = env["feasibility"]["status"]
+    if fe_status == "INSUFFICIENT":
+        status = INTEGRATION_BLOCKED_BUDGET_INSUFFICIENT
+    elif fe_status in ("FEASIBLE", "CONSTRAINED"):
+        status = READY
+    else:
+        # Unknown feasibility status is fail-closed (BLOCKED).
+        status = INTEGRATION_BLOCKED_BUDGET_INSUFFICIENT
     binding = {
         "artifact_id": f"BIND-{case_id}",
         "schema_version": "0.1",

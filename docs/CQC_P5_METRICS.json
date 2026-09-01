@@ -1,6 +1,6 @@
 {
   "contract_id": "CQC-P5-MAFS-INTEGRATION-ADAPTER-ARTIFACT-LINEAGE-CLOSURE-v0.1",
-  "current_phase_state": "CQC-P5-CLOSED",
+  "current_phase_state": "READY_FOR_REVIEW",
   "contextual_binding_case_count": 6,
   "full_source_chain_valid_count": 6,
   "source_context_accessible_count": 6,
@@ -9,12 +9,16 @@
   "mafs_planning_case_count": 3,
   "mafs_axis_schema_valid_count": 3,
   "mafs_search_order_schema_valid_count": 3,
-  "mafs_preflight_evaluated_count": 3,
+  "mafs_native_planning_schema_evaluated_count": 3,
+  "mafs_full_preflight_evaluated_count": 0,
+  "mafs_full_preflight_status": "NOT_EVALUATED",
   "shared_requirement_case_valid_count": 1,
   "productive_instability_case_valid_count": 1,
   "insufficient_budget_case_count": 1,
   "insufficient_budget_blocked_count": 1,
   "unfunded_required_route_preserved_count": 1,
+  "constrained_budget_regression_count": 1,
+  "constrained_budget_not_misclassified_count": 1,
   "stale_state_test_count": 1,
   "stale_state_detected_count": 1,
   "mafs_baseline_pin_valid": true,
@@ -22,7 +26,9 @@
   "mafs_production_modified": false,
   "optional_live_discovery_attempted": false,
   "optional_live_discovery_status": "NOT_RUN",
-  "test_count": 90,
+  "integration_review_present_count": 6,
+  "integration_review_mechanical_truth_valid_count": 6,
+  "test_count": 92,
   "meaningful_push_ci_cycles_current_step": 1,
-  "provenance_note": "no self-referential commit SHA; Git owns outer identity (reported externally in the return note)"
+  "provenance_note": "no self-referential commit SHA; Git owns outer identity (reported externally in the return note). Closure E narrowed the previous overclaimed mafs_preflight_evaluated_count=3 to mafs_native_planning_schema_evaluated_count=3 + mafs_full_preflight_evaluated_count=0, narrowing the claim to the evidence actually earned (full MAFS preflight was not executed in P5 and remains a repository-side integration concern). Closure G removed the premature CQC-P5-CLOSED state while cross-repo CI was red; canonical state now reflects the actual evidence chain."
 }

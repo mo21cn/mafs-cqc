@@ -17,7 +17,7 @@ from adapter import (  # noqa: E402
     CQC_SOURCE_CHAIN_MISMATCH, INTEGRATION_BLOCKED_BUDGET_INSUFFICIENT,
     MAFS_BASELINE_MISMATCH, MAFS_BASELINE_SHA, P5_CONDITIONAL_ROUTE_PREACTIVATION,
     P5_DUPLICATE_ROUTE_BINDING, P5_REQUIRED_ROUTE_UNBOUND, STALE_SOURCE_CHAIN,
-    detect_stale, mark_stale, validate_mafs_native,
+    detect_stale, mark_stale, validate_mafs_native, verify_source_chain,
 )
 
 P5 = PKG / "benchmarks" / "p5"
@@ -38,20 +38,23 @@ def ctx_binding_errors(case: Path) -> list[str]:
     srp = json.loads((case / "source_srp.json").read_text(encoding="utf-8"))
     env = json.loads((case / "budget_envelope.json").read_text(encoding="utf-8"))
     ch = b.get("source_chain") or {}
-    if ch.get("cqs_id") != cqs.get("artifact_id"):
-        errs.append(f"{case.name}: CQS id continuity broken")
-    if ch.get("cqs_sha256") != sha256_file(case / "source_cqs.json"):
-        errs.append(f"{case.name}: CQS hash continuity broken")
-    if ch.get("srp_id") != srp.get("artifact_id"):
-        errs.append(f"{case.name}: SRP id continuity broken")
-    if ch.get("srp_sha256") != sha256_file(case / "source_srp.json"):
-        errs.append(f"{case.name}: SRP hash continuity broken")
-    if ch.get("budget_envelope_id") != env.get("artifact_id"):
-        errs.append(f"{case.name}: BudgetEnvelope id continuity broken")
-    if ch.get("budget_envelope_sha256") != sha256_file(case / "budget_envelope.json"):
-        errs.append(f"{case.name}: BudgetEnvelope hash continuity broken")
-    if cqs.get("source_narrative_sha256") != srp.get("source_narrative_sha256"):
-        errs.append(f"{case.name}: narrative hash discontinuity CQS→SRP")
+    # Closure D: delegate source-chain continuity to the canonical
+    # verify_source_chain() in adapter.py. The validator no longer
+    # re-implements the checks; it consumes the one true implementation
+    # and reports the stable P5Error code on mismatch.
+    try:
+        verify_source_chain(case / "source_cqs.json",
+                            case / "source_srp.json",
+                            case / "budget_envelope.json")
+    except Exception as exc:
+        # adapter.P5Error carries .code (e.g. CQC_SOURCE_CHAIN_MISMATCH);
+        # any other exception is treated as a chain failure with the
+        # same stable code.
+        code = getattr(exc, "code", CQC_SOURCE_CHAIN_MISMATCH)
+        errs.append(f"{case.name}: source-chain mismatch ({code}): {exc}")
+        # Source chain already broken — skip the rest of the binding checks
+        # that depend on a coherent chain to avoid double-reporting.
+        return errs
 
     qids = {q["question_id"] for q in cqs["questions"]}
     route_map = {}
@@ -214,7 +217,65 @@ def main(argv=None) -> int:
         if pycs:
             errors.append(f"repository hygiene: bytecode committed: {pycs[:5]}")
 
-    all_ok = (not errors and n_ctx == 6 and n_planning == 3 and qn_ok and stale_ok and t8_ok)
+    # P5-RA1 §19: P5 manifest coverage + hash integrity.
+    # The manifest must list at minimum the six mandatory closure-surface
+    # files. If any are missing, return P5_FINAL_MANIFEST_COVERAGE_MISSING
+    # and FAIL.
+    mandatory_closure_surface = [
+        "docs/CQC_P5_SUMMARY.md",
+        "docs/CQC_P5_METRICS.json",
+        "scripts/validate_p5.py",
+        "tests/test_p5.py",
+        "schemas/cqc_mafs_integration_binding.v0.1.schema.json",
+        "integration/mafs_v3/adapter.py",
+    ]
+    manifest_path = PKG / "docs" / "CQC_P5_SHA256_MANIFEST.txt"
+    manifest_listed: set[str] = set()
+    manifest_ok = True
+    if not manifest_path.is_file():
+        errors.append("P5_FINAL_MANIFEST_COVERAGE_MISSING: docs/CQC_P5_SHA256_MANIFEST.txt absent")
+        manifest_ok = False
+    else:
+        for line in manifest_path.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            parts = line.split()
+            if len(parts) >= 2:
+                manifest_listed.add(parts[1])
+        for m in mandatory_closure_surface:
+            if m not in manifest_listed:
+                errors.append(f"P5_FINAL_MANIFEST_COVERAGE_MISSING: {m} not listed in manifest")
+                manifest_ok = False
+        # Optional: hash-integrity spot-check on the adapter (the file the
+        # closure boundary is named after). If the listed sha256 does not
+        # match the canonical Git-byte SHA-256, surface the discrepancy.
+        if manifest_ok:
+            for rel in ("integration/mafs_v3/adapter.py",
+                        "scripts/validate_p5.py",
+                        "tests/test_p5.py"):
+                listed = next((l.split()[0] for l in manifest_path.read_text(encoding="utf-8").splitlines()
+                                if l.strip().split()[-1] == rel), None)
+                if not listed:
+                    continue
+                p = PKG / rel
+                blob_sha = subprocess.run(
+                    ["git", "ls-files", "-s", "--", rel],
+                    cwd=PKG, capture_output=True, text=True, check=True,
+                ).stdout.strip().split()[1]
+                blob = subprocess.run(
+                    ["git", "cat-file", "blob", blob_sha],
+                    cwd=PKG, capture_output=True, check=True,
+                ).stdout
+                actual = hashlib.sha256(blob).hexdigest()
+                if actual != listed:
+                    errors.append(
+                        f"P5 manifest hash mismatch: {rel} "
+                        f"(listed {listed[:12]}..., actual {actual[:12]}...)"
+                    )
+                    manifest_ok = False
+
+    all_ok = (not errors and n_ctx == 6 and n_planning == 3 and qn_ok and stale_ok and t8_ok and manifest_ok)
     report = {"contextual_binding_case_count": n_ctx, "cases": ctx_results,
               "mafs_planning_case_count": n_planning, "planning_cases": planning_results,
               "quick_negative_ok": qn_ok, "stale_ok": stale_ok, "t8_ok": t8_ok,

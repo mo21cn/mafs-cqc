@@ -1,0 +1,39 @@
+{
+  "case_id": "s1_vms_cellular_mechanism",
+  "source_srp_id": "SRP-CQC-P3-01",
+  "source_srp_sha256": "67755617b29aef2f3d80f53b20fb9fb2434fe8512a4dae5472fe9263e83380ea",
+  "budget_envelope_id": "BE-CQC-P4-S1-R2",
+  "budget_envelope_sha256": "60bb9ab99598389419b31f1b2f9ac65ed1dd82bec54f05102eddbc28d16c958e",
+  "mechanical": {
+    "schema_valid": true,
+    "source_binding_valid": true,
+    "allocation_refs_valid": true,
+    "required_routes_funded": true,
+    "conditional_routes_not_preactivated": true,
+    "target_accounting_valid": true,
+    "ceiling_accounting_valid": true,
+    "shared_requirement_not_duplicated": true,
+    "render_valid": true,
+    "package_complete": true,
+    "source_srp_binding_valid": true,
+    "srp_schema_valid": true,
+    "budget_envelope_schema_valid": true,
+    "budget_intent_valid": true,
+    "feasibility_structural_consistency": true,
+    "no_provider_query_fields": true,
+    "render_reproducible": true,
+    "review_truth_valid": true
+  },
+  "local_claw_preliminary_review": {
+    "resource_shape_rationale": "STANDARD: 2 REQUIRED routes (mechanism core + observability) carry the shape; 2 conditional reserves reflect population-comparison and counterexample uncertainty. S1's SRP has the widest single evidence landscape (mechanism), hence the largest single allocation.",
+    "possible_overallocation": "none observed",
+    "possible_underallocation": "mechanism core (10 min) may be tight for a genuinely large cell-resolution evidence landscape; noted as a risk, not a claim of inaccuracy.",
+    "conditional_reserve_honest": true,
+    "feasibility_status_honest": true,
+    "scientific_obligation_mutation_observed": false,
+    "budget_intent_semantic_leak_observed": false
+  },
+  "final_semantic_adjudication": {
+    "status": "PENDING_HO_CHATGPT"
+  }
+}

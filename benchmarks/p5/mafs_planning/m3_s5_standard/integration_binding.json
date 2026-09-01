@@ -1,0 +1,60 @@
+{
+  "artifact_id": "BIND-m3_s5_standard",
+  "schema_version": "0.1",
+  "source_chain": {
+    "cqs_id": "CQS-CQC-P2-05-R1",
+    "cqs_sha256": "03d9fd18edc8343bddbbd5e88adf0b197113818369b33cc5391b310b08b82cd0",
+    "srp_id": "SRP-CQC-P3-05-R1",
+    "srp_sha256": "be9c573eb78bb32deaf6fae1b73fcee009245ec1554d33f424a199a749674d35",
+    "budget_envelope_id": "BE-CQC-P4-S5-R2",
+    "budget_envelope_sha256": "bdafa07f54ad4de874fe5bf70bfd0f125f271283bba5494df717f29883d74df4"
+  },
+  "mafs_baseline": {
+    "repository": "mo21cn/mafs-v3-p0",
+    "commit_sha": "cd09699fc8cc160ab5cfff00a41e714961dd2109",
+    "interface_state": "MAFS v3.0-P1.5-RA3 closed execution-boundary state"
+  },
+  "active_routes": [
+    {
+      "requirement_id": "R01",
+      "route_id": "mechanism_evidence",
+      "allocation_id": "AL01",
+      "allocation_activation": "COMMITTED",
+      "mafs_axis_id": "A1",
+      "mafs_search_order_ids": [
+        "SO-A1-1"
+      ]
+    },
+    {
+      "requirement_id": "R02",
+      "route_id": "historical_lineage",
+      "allocation_id": "AL02",
+      "allocation_activation": "COMMITTED",
+      "mafs_axis_id": "A2",
+      "mafs_search_order_ids": [
+        "SO-A2-1"
+      ]
+    },
+    {
+      "requirement_id": "R03",
+      "route_id": "measurement_observability",
+      "allocation_id": "AL03",
+      "allocation_activation": "COMMITTED",
+      "mafs_axis_id": "A3",
+      "mafs_search_order_ids": [
+        "SO-A3-1"
+      ]
+    }
+  ],
+  "held_conditional_routes": [
+    {
+      "requirement_id": "R02",
+      "route_id": "counterexample_negative_evidence",
+      "allocation_id": "AL04",
+      "activation": "RESERVE_CONDITIONAL"
+    }
+  ],
+  "unfunded_required_routes": [],
+  "status": "READY_FOR_MAFS_PREFLIGHT",
+  "stale_state": "CURRENT"
+}

@@ -1,0 +1,62 @@
+{
+  "case_id": "case_antagonist_domains",
+  "arm": "C",
+  "generated_from": "arm_c/revised_candidate_question_set.json (CQS-CQC-P1-04-RC1)",
+  "source_artifact_id": "CQS-CQC-P1-04-RC1",
+  "source_artifact_sha256": "3a6fff273978fb80b360da9d1d43b222280feb26a1904ed8f76f626232492d1f",
+  "prior_arm_b_artifact_id": "CQS-CQC-P1-04",
+  "redigestion_note": "regenerated in CQC-P1-RA2 from revised CQS after earned re-digestion; CQ-03 no longer described as an independent tool-use branch (it assumes the pharmacological reading resolved by CQ-01)",
+  "raw_input_sha256": "5975fee3490826bf06cd2005c2230bc19e7797ee4d46fdf4ac27c7068f7a4e6c",
+  "question_ids_to_search": [
+    {
+      "question_id": "CQ-01",
+      "search_question": "『拮抗剂』指称范围消歧（原词检索的实体类型分布 + 操作者确认）",
+      "resolution_condition_ref": "见 CQ-01.resolution_condition"
+    },
+    {
+      "question_id": "CQ-04",
+      "search_question": "盘点维度选择（疾病/靶点/模态/发展阶段试盘点对照）",
+      "resolution_condition_ref": "见 CQ-04.resolution_condition"
+    },
+    {
+      "question_id": "CQ-02",
+      "search_question": "药理拮抗剂应用领域版图盘点（治疗领域×机制家族矩阵）",
+      "resolution_condition_ref": "见 CQ-02.resolution_condition"
+    },
+    {
+      "question_id": "CQ-03",
+      "search_question": "拮抗剂作为研究工具的非治疗用途（药理解读下）",
+      "resolution_condition_ref": "见 CQ-03.resolution_condition"
+    }
+  ],
+  "question_order_if_any": [
+    "CQ-01",
+    "CQ-04",
+    "CQ-02",
+    "CQ-03"
+  ],
+  "reason_for_order": "CQ-01 disambiguation first: both CQ-02 and CQ-03 are blocked by it (see structured blocked list); CQ-04 dimension choice runs in parallel; CQ-02 precedes CQ-03 so the inventory matrix is available when tool-usage usage contexts are classified",
+  "questions_blocked_by_prerequisite": [
+    {
+      "question_id": "CQ-02",
+      "prerequisites": [
+        "CQ-01"
+      ]
+    },
+    {
+      "question_id": "CQ-03",
+      "prerequisites": [
+        "CQ-01"
+      ]
+    }
+  ],
+  "questions_independently_searchable": [
+    "CQ-01",
+    "CQ-04"
+  ],
+  "missing_information_before_search": [
+    "指称范围歧义（CQ-01.uncertainty 显式保留，等待操作者确认）",
+    "盘点维度歧义（CQ-04.uncertainty 显式保留）"
+  ],
+  "natural_reasoning_notes": "RA2 state propagation: CQ-03 is no longer presented as an independent tool-use branch; its pharmacological-molecule assumption is declared and gated on CQ-01 per the revised CQS."
+}

@@ -1,0 +1,37 @@
+{
+  "case_id": "s6_narrow_source_check",
+  "source_cqs_id": "CQS-CQC-P2-06-R1",
+  "source_cqs_sha256": "a67dc5c5e98c8351947f36e4b00e584bd695c0bf6c3166b81b2a768d484836ab",
+  "srp_artifact_id": "SRP-CQC-P3-06-R1",
+  "srp_sha256": "ffdf4d673069fe28784135af9d54734934134a41fb88619db9bcef796fd10032",
+  "mechanical": {
+    "schema_valid": true,
+    "source_binding_valid": true,
+    "question_refs_valid": true,
+    "render_valid": true,
+    "execution_leak_free": true
+  },
+  "local_claw_preliminary_review": {
+    "source_context_contribution": "material — the narrative's fuzzy reference style (author+year+journal, no title/DOI) is exactly what makes the entity route CONDITIONAL; a fully specified reference would collapse it to unconditionally-REQUIRED source-content verification",
+    "uncertainty_preserved": true,
+    "possible_overcommitment": "none; the identity route remains CONDITIONAL (activated only if reference ambiguity becomes material), preserving the unresolved boundary from P2",
+    "possible_context_loss": "low",
+    "possible_question_type_routing_leak": "none; SOURCE_CONTENT type did not restrict the route set — the conditional identity route was added from the uncertainty binding, not from the type",
+    "possible_requirement_overdecomposition": "none (1 requirement mirrors the 1-CQ no-decomposition result)",
+    "possible_missing_requirement": "none observed",
+    "shared_requirement_observed": false
+  },
+  "final_semantic_adjudication": {
+    "initial_status": "PENDING_HO_CHATGPT",
+    "finding": "R01 route condition contained execution-style sequencing; identity-granularity boundary is genuinely use-dependent.",
+    "action": "bounded re-digestion (SRP-CQC-P3-06-R1): condition reworded to evidence-state semantics; 1-requirement structure preserved",
+    "final_state": "BOUNDARY_UNRESOLVED_PRESERVED",
+    "rationale": "No-decomposition capacity is valuable; identity granularity can remain context-dependent; boundary unresolved != failed artifact.",
+    "status": "BOUNDARY_UNRESOLVED_PRESERVED"
+  },
+  "source_context_use": {
+    "observed": "context used to qualify/condition admitted obligations (conditional routes, importance context); no obligation minted beyond CQS boundary after RA1 repairs",
+    "incremental_necessity_tested": false,
+    "conclusion": "NOT_ISOLATED"
+  }
+}

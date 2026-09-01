@@ -1,0 +1,8 @@
+{
+  "case_id": "s6_narrow_source_check",
+  "note": "Why each allocation corresponds to a real SRP route and why its activation is legal. Evaluation-only; the BudgetEnvelope schema carries no evaluation prose.",
+  "allocations": {
+    "AL01": "R01/source_content_verification REQUIRED -> COMMITTED.",
+    "AL02": "R01/entity_resource_identity CONDITIONAL (identity ambiguity materiality) -> RESERVE_CONDITIONAL."
+  }
+}

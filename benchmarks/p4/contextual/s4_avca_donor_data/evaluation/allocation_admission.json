@@ -1,0 +1,9 @@
+{
+  "case_id": "s4_avca_donor_data",
+  "note": "Why each allocation corresponds to a real SRP route and why its activation is legal. Evaluation-only; the BudgetEnvelope schema carries no evaluation prose.",
+  "allocations": {
+    "AL01": "R01/entity_resource_identity REQUIRED and SHARED (targets CQ-01+CQ-02) -> exactly one COMMITTED allocation; no duplicate from question cardinality.",
+    "AL02": "R02/measurement_observability REQUIRED -> COMMITTED.",
+    "AL03": "R03/source_content_verification CONDITIONAL (gated on R01+R02) -> RESERVE_CONDITIONAL."
+  }
+}

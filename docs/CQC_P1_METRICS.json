@@ -1,0 +1,34 @@
+{
+  "contract_id": "CQC-P1-REAL-TASK-DIGESTION-REPLAY-REDIGESTION-LINEAGE-v0.1",
+  "verified_commit_sha": "4b956de2adf841475660c7b998262cf6e855e7d3",
+  "ci_run_id": "33331552163",
+  "benchmark_case_count": 5,
+  "raw_or_verbatim_case_count": 5,
+  "reconstructed_case_count": 0,
+  "arm_a_completed_count": 5,
+  "arm_b_completed_count": 5,
+  "arm_c_triggered_count": 0,
+  "arm_c_completed_count": 0,
+  "candidate_question_schema_valid_count": 5,
+  "source_hash_valid_count": 5,
+  "source_trace_exact_valid_count": 5,
+  "dependency_dag_valid_count": 5,
+  "redigestion_lineage_valid_count": 0,
+  "deterministic_render_valid_count": 5,
+  "test_count": 22,
+  "meaningful_push_ci_cycles": 1,
+  "manual_adjudication_scope": {
+    "adjudicator": "local_claw_preliminary (structured evidence)",
+    "final_authority": "HO + ChatGPT",
+    "fields_under_human_adjudication": [
+      "critical_question_coverage",
+      "unnecessary_questions",
+      "intent_preservation",
+      "granularity",
+      "dependency_truth",
+      "cross_stage_consistency",
+      "repair_quality"
+    ],
+    "note": "machine facts and manual-adjudication facts are kept in separate objects per contract section 14"
+  }
+}

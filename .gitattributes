@@ -1,0 +1,3 @@
+# CQC repo: normalize line endings. Artifact bytes must be byte-stable
+# across OS checkouts because source_narrative_sha256 is an identity anchor.
+* text=auto eol=lf

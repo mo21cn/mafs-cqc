@@ -1,0 +1,14 @@
+{
+  "case_id": "case_vcell_paradigm",
+  "case_family": "B_novelty_prior_art_framing",
+  "input_status": "RAW",
+  "input_sha256": "37f34e945191656a338bfec3cee788dd959cccc3bdbe94fc60171ff88a5a8df4",
+  "input_sha256_basis": "sha256 of exact UTF-8 bytes of raw_narrative.txt (operator verbatim, incl. typos and repetitions)",
+  "source_origin": "operator message in CQC development session (2026-08-31 02:54 +08:00), verbatim copy, no normalization beyond file placement",
+  "model_config": "zai/zai_auto via OpenClaw local claw; same model performs Arm A and Arm B in separate generation passes",
+  "run_timestamp": "2026-08-31T02:58:00Z",
+  "arm_a_run_id": null,
+  "arm_b_run_id": null,
+  "arm_c_run_id": null,
+  "operator_note": "operator supplied 5 raw research questions with the freeze-per-case discipline instruction"
+}

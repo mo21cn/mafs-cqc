@@ -1,0 +1,16 @@
+{
+  "case_id": "case_antagonist_domains",
+  "diagnosis_source": "HO+ChatGPT P1 acceptance",
+  "prior_artifact_id": "CQS-CQC-P1-04",
+  "prior_artifact_sha256": "4ae834bd260c01e70674478bfc31af4b92e5a0f543936e3034eefaed82d90086",
+  "observed_conflict": "Arm B CQ-03 (research-tool usage of antagonists) assumes the pharmacological-molecule interpretation while being marked independent of CQ-01 (term disambiguation). If CQ-01 resolves away from the pharmacological reading, CQ-03 as worded is no longer valid: a missing prerequisite / premature semantic branch.",
+  "diagnosis": "HO+ChatGPT P1 acceptance applied the P0-RA2 rule in the missing-prerequisite direction: the downstream question silently assumes a prior interpretation that it does not declare.",
+  "implicated_fields": [
+    "CQ-03.dependencies",
+    "CQ-03.uncertainty"
+  ],
+  "repair_instruction": "CQ-03.dependencies = [CQ-01] and CQ-03.uncertainty states the assumed pharmacological reading explicitly. No other field changed.",
+  "revised_artifact_id": "CQS-CQC-P1-04-RC1",
+  "revised_artifact_sha256": "3a6fff273978fb80b360da9d1d43b222280feb26a1904ed8f76f626232492d1f",
+  "revised_artifact_sha256_basis": "sha256 of the committed (LF-normalized) revised artifact bytes, rebound in CQC-P1-RA1 after EOL normalization"
+}

@@ -1,0 +1,43 @@
+# CandidateQuestionSet: CQS-CQC-P2-01-R1
+
+- schema_version: 0.1
+- source_narrative_sha256: c0600db6f5bfd1be5e735f298c3ad4944b78c5c7560a4a907f409a42959bab42
+- questions: 3
+
+## Source Narrative (verbatim)
+
+请搜索女性血管舒缩症状在细胞分辨率层面的机制解释
+
+## Questions
+
+### CQ-01
+
+- type: MECHANISM
+- statement: 女性血管舒缩症状的机制解释中，哪些已经在细胞类型分辨率上被确立或正在被检验？
+- source trace:
+  - "女性血管舒缩症状"
+  - "细胞分辨率层面的机制解释"
+- dependencies: (none)
+- resolution condition: 证据条件：在单细胞或细胞类型特异分辨率上刻画血管舒缩症状相关细胞状态与症状关联的研究证据。任一机制解释达到『确立/修正/证伪』任一状态，即构成对该问题状态的实质改变。
+- uncertainty: 原话未指明症状人群（围绝经期自然 VMS vs 治疗诱导 VMS）；人群边界是本问题保留的歧义。
+
+### CQ-02
+
+- type: GENERALIZATION
+- statement: 『女性』的人群范围（自然围绝经期、手术/药物绝经、非绝经相关病因）是否改变血管舒缩症状的细胞机制构成？
+- source trace:
+  - "女性"
+- dependencies: (none)
+- resolution condition: 证据条件：直接比较不同女性人群 VMS 细胞机制证据的研究或权威综述。存在人群间机制差异→机制解释按人群分层；证据显示共享核心机制→可合并处理。
+- uncertainty: 原话只写『女性』，人群边界完全未指定；这是消化必须保留的歧义。
+
+### CQ-03
+
+- type: MEASUREMENT_OR_OBSERVABILITY
+- statement: 『细胞分辨率层面』对应哪些可观测技术（单细胞转录组、空间转录组、细胞类型特异成像/电生理），各技术能回答 VMS 机制问题的哪一部分？
+- source trace:
+  - "细胞分辨率层面"
+- dependencies: (none)
+- resolution condition: 证据条件：VMS 相关组织中各类单细胞/空间/细胞类型分辨率技术的应用现状与方法学边界记录。某技术『可行/不可行/仅部分可行』的确认即为该问题的解决状态。
+- uncertainty: 原话未定义『细胞分辨率』指组学分辨率还是显微成像分辨率。
+

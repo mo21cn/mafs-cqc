@@ -1,0 +1,33 @@
+{
+  "case_id": "case_avca_donor_data",
+  "current_source": "CQC-P1-RA2 (supersedes P1 initial adjudication and RA1 re-adjudication; history preserved in adjudication.md / ra1_adjudication.md)",
+  "machine_facts": {
+    "arm_b_cqs_questions": 3,
+    "arm_c_revised_questions": 3,
+    "arm_a_prepared_questions": 4,
+    "arm_c_triggered": true,
+    "final_explicit_artifact": "arm_c CQS-CQC-P1-05-RC1 (prior CQS-CQC-P1-05 preserved)",
+    "lineage": {"prior_sha": "bound in failure_diagnosis.json", "revised_sha": "bound + verified", "downstream_source_binding": "verified"},
+    "all_structural_checks": "PASS (schema/hash/trace/DAG/render/source-binding/dependency-consistency)"
+  },
+  "manual_adjudication": {
+    "adjudicator": "local_claw_preliminary",
+    "status": "PENDING_HO_PLUS_CHATGPT_FINAL_ADJUDICATION",
+    "comparison_framing": "direct downstream artifact (Arm A) vs typed intermediate CQS + downstream (Arm B→C)",
+    "substantive_targets": ["existence of young-healthy vascular/cardiac primary donor data in Arc Virtual Cell Atlas"],
+    "interpretive_constraints": ["young/healthy/primary threshold decidability (materially binds the existence claim)", "atlas entity identity/scope confirmation"],
+    "noncritical_input_noise": ["'有没有有没有' textual repetition (single-question reading, recorded in uncertainty)"],
+    "substantive_coverage": {"arm_a": "1/1", "final_explicit": "1/1 (parity; CQS-CQC-P1-05-RC1)"},
+    "interpretive_state_capture": {
+      "arm_a": "threshold conventions borrowed silently; repetition normalized silently",
+      "final_explicit": "threshold decidability is CQ-03 (three-state mapping); repetition durably recorded; existence answer (CQ-02) bound to both prerequisites"
+    },
+    "dependency_truth": {
+      "initial_arm_b_failure": "CQ-02 not gated on CQ-03 although prep stated CQ-03 binds the answer (stage-referential contradiction; earned Arm C)",
+      "final_edges": [["CQ-02", "CQ-01"], ["CQ-02", "CQ-03"]],
+      "note": "downstream blocked list propagates both prerequisites; independent list = [CQ-01, CQ-03]"
+    },
+    "local_repairability": "RA1 re-digestion edited CQ-02.dependencies only; RA2 propagated the two-prerequisite state into the prep, closing the cross-stage contradiction",
+    "repeated_reasoning_cost": {"model_calls": "1 per arm + 1 re-digestion pass (earned)", "token_use": null, "manual_intervention_count": 0}
+  }
+}

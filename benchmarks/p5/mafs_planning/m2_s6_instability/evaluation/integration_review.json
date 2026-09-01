@@ -1,0 +1,32 @@
+{
+  "case_id": "BIND-m2_s6_instability",
+  "schema_version": "cqc-p5-integration-review.v0.2",
+  "mechanical": {
+    "source_chain_valid": true,
+    "allocation_route_join_valid": true,
+    "conditional_non_activation_valid": true,
+    "mafs_baseline_valid": true,
+    "mafs_native_schema_valid": true,
+    "stale_state_valid": true,
+    "search_order_lineage_traceable": true
+  },
+  "local_claw_preliminary_review": {
+    "authored_by": "LOCAL_CLAW",
+    "review_basis": [
+      "source_cqs.json",
+      "source_srp.json",
+      "budget_envelope.json",
+      "integration_binding.json",
+      "mafs_planning.json"
+    ],
+    "search_order_semantically_contained": true,
+    "authority_leak_observed": false,
+    "integration_projection_loss_observed": false,
+    "conditional_preactivation_observed": false,
+    "source_context_promoted_to_obligation": false,
+    "notes": "M2 read: SRP defines R01 (CQ-01) as the only REQUIRED route — source_content_verification. BudgetEnvelope allocates AL01/COMMITTED to R01/source_content_verification (8 min / 80k tokens; '存在性三态核查是 S6 唯一 REQUIRED 义务；窄任务保持窄预算') and AL02/RESERVE_CONDITIONAL to R01/entity_resource_identity (3 min / 25k tokens; '指称消歧仅在歧义实质化时升级为显式路线'). Axis A1 (supplementary-material-content-verification) operationalizes the ONLY REQUIRED route. Its proposition 'verify existence of the single-cell hippocampal cell-type annotation table in the Gould 2022 Cell Reports supplementary material' restates R01's evidence_need with the specific target (table in supplementary material) extracted from the source narrative — no scientific meaning absent from the SRP. The single SearchOrder SO-A1-1 (target: 'Gould 2022 Cell Reports (fuzzy: author+year+journal)' / intent: 'supplementary table existence verification') faithfully narrows the existence check to a single query representation. R01/entity_resource_identity remains held as RESERVE_CONDITIONAL (productive instability preserved; per BudgetEnvelope, only upgraded when ambiguity is realized, which MAFS did not). No scientific meaning added; no source-context-only meaning promoted. Final adjudication: PENDING_HO_CHATGPT."
+  },
+  "final_semantic_adjudication": {
+    "status": "PENDING_HO_CHATGPT"
+  }
+}

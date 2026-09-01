@@ -1,0 +1,43 @@
+{
+  "axes": [
+    {
+      "axis_id": "A1",
+      "family": "supplementary-material-content-verification",
+      "proposition": "verify existence of the single-cell hippocampal cell-type annotation table in the Gould 2022 Cell Reports supplementary material",
+      "admission": "admitted",
+      "essential": true,
+      "gate_scopes": [
+        "source-content-verification"
+      ],
+      "blocking_role": "essential"
+    }
+  ],
+  "search_orders": [
+    {
+      "search_order_id": "SO-A1-1",
+      "axis_id": "A1",
+      "operation_type": "lookup_by_id",
+      "required_capabilities": [
+        "supplementary-material-inspection"
+      ],
+      "query_representation": {
+        "target": "Gould 2022 Cell Reports (fuzzy: author+year+journal)",
+        "intent": "supplementary table existence verification"
+      },
+      "expected_output": "raw_snapshot",
+      "gate_scope": "source-content-verification",
+      "blocking_role": "essential",
+      "essential": true
+    }
+  ],
+  "route_bindings": [
+    {
+      "requirement_id": "R01",
+      "route_id": "source_content_verification",
+      "mafs_axis_id": "A1",
+      "mafs_search_order_ids": [
+        "SO-A1-1"
+      ]
+    }
+  ]
+}

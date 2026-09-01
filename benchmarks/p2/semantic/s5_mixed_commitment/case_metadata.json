@@ -1,0 +1,11 @@
+{
+  "case_id": "s5_mixed_commitment",
+  "case_family": "SYNTHETIC_STRESS_mixed_mechanism_novelty_measurement",
+  "input_status": "SYNTHETIC_STRESS",
+  "input_sha256": "21c183e3b096f988d3a80c6ebbd145a1255efab08052009380b154ff48ec7d8d",
+  "input_sha256_basis": "sha256 of exact UTF-8 bytes of source_narrative.txt",
+  "source_origin": "benchmark-only synthetic stimulus authored by Local Claw; deliberately does not tell the model which epistemic dimension is primary; no oracle facts, no pre-labeled decomposition",
+  "model_config": "zai/zai_auto via OpenClaw local claw; single model, frozen P0 digestion instruction",
+  "run_timestamp": "2026-08-31T12:30:00Z",
+  "stress_purpose": "mixed epistemic types without declared primary dimension; question_type overcommitment trap"
+}

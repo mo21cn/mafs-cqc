@@ -1,0 +1,10 @@
+{
+  "case_id": "s4_avca_donor_data",
+  "source_cqs_id": "CQS-CQC-P2-04",
+  "source_cqs_sha256": "ba34208d5ba862e7bdf4498ebe19efcee87efe695c4b61200fe573f1dcef2c15",
+  "source_narrative_sha256": "7b136c4d6ae8d77d9cae98e23e312dfec4fb0076099e295dd0d6a5053a747ae2",
+  "input_status": "FINAL_P2_CQS+RAW (verbatim reuse; narrative bytes unchanged since P1)",
+  "case_family": "D_source_content_verification",
+  "model_config": "zai/zai_auto via OpenClaw local claw; single model, frozen P0 digestion instruction + SRP v0.1 contract",
+  "run_timestamp": "2026-08-31T19:55:00Z"
+}

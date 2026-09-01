@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CandidateQuestionSet",
+  "description": "CQC-P0 frozen artifact contract v0.1 (contract CQC-P0-MINIMAL-DIGESTION-SURFACE-v0.1 section 4-6).",
+  "type": "object",
+  "required": ["artifact_id", "schema_version", "source_narrative_sha256", "source_narrative", "questions"],
+  "additionalProperties": false,
+  "properties": {
+    "artifact_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable artifact identity, e.g. CQS-CQC-P0-A. No semantic meaning encoded."
+    },
+    "schema_version": {
+      "const": "0.1"
+    },
+    "source_narrative_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 of the exact UTF-8 bytes of the digested source narrative."
+    },
+    "source_narrative": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The verbatim source narrative used for digestion."
+    },
+    "questions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["question_id", "statement", "source_trace", "question_type", "dependencies", "resolution_condition", "uncertainty"],
+        "additionalProperties": false,
+        "properties": {
+          "question_id": {
+            "type": "string",
+            "pattern": "^CQ-[0-9]{2,}$"
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Smallest useful scientific question; independently searchable, not a lexical fragment."
+          },
+          "source_trace": {
+            "type": "array",
+            "minItems": 1,
+            "description": "Anti-drift field: every exact_quote must occur verbatim in source_narrative.",
+            "items": {
+              "type": "object",
+              "required": ["exact_quote"],
+              "additionalProperties": false,
+              "properties": {
+                "exact_quote": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "question_type": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Provisional vocabulary as guidance, NOT a frozen ontology. Any non-empty string accepted."
+          },
+          "dependencies": {
+            "type": "array",
+            "description": "Prerequisite question_ids, only when they materially affect search order or interpretation.",
+            "items": {
+              "type": "string",
+              "pattern": "^CQ-[0-9]{2,}$"
+            }
+          },
+          "resolution_condition": {
+            "type": "string",
+            "minLength": 1,
+            "description": "What evidence would materially resolve, falsify, narrow, or change the state of the question. Not a search plan."
+          },
+          "uncertainty": {
+            "type": ["string", "null"],
+            "description": "Preserved ambiguity. null or free text only; no enum in P0."
+          }
+        }
+      }
+    }
+  }
+}

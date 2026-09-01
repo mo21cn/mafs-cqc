@@ -1,0 +1,65 @@
+{
+  "artifact_id": "CQS-CQC-P2-05",
+  "schema_version": "0.1",
+  "source_narrative_sha256": "21c183e3b096f988d3a80c6ebbd145a1255efab08052009380b154ff48ec7d8d",
+  "source_narrative": "我们在推进一项肿瘤代谢方向的研究，现在需要把检索问题梳理清楚。背景是这样的：我们队列里有一部分 IDH1 突变的胶质瘤患者，在使用一种 mTOR 通路抑制剂之后，代谢影像上看到了一些变化，我们怀疑这是代谢通路上游被抑制之后对下游代谢物造成的连锁效应。同时我们不太确定的一点是，这种\"上游通路抑制\"的思路，相对于已有的直接针对突变代谢酶本身的那些策略，到底算不算一种新的治疗范式，还是只是已有思路的变体。另外，组里的高分辨质谱平台能不能在单个细胞或者接近单个细胞的分辨率上把 relevant 的代谢物水平测出来，我们也拿不准，这直接决定后面动物实验的设计。\n",
+  "questions": [
+    {
+      "question_id": "CQ-01",
+      "statement": "mTOR 通路抑制在 IDH1 突变胶质瘤背景下引发下游代谢连锁效应的细胞/通路层面证据有哪些？",
+      "source_trace": [
+        {
+          "exact_quote": "使用一种 mTOR 通路抑制剂之后，代谢影像上看到了一些变化"
+        },
+        {
+          "exact_quote": "怀疑这是代谢通路上游被抑制之后对下游代谢物造成的连锁效应"
+        }
+      ],
+      "question_type": "MECHANISM",
+      "dependencies": [],
+      "resolution_condition": "证据条件：上游通路抑制对突变代谢酶下游代谢物产生连锁效应的细胞/通路层面研究记录（方向、强度、细胞类型特异性）。效应被确立、修正或证伪任一状态均实质改变本问题。",
+      "uncertainty": "『代谢影像上看到了一些变化』的具体表型未在源中说明；消化不代为具体化。"
+    },
+    {
+      "question_id": "CQ-02",
+      "statement": "『上游通路抑制』策略相对既有的直接针对突变代谢酶本身的策略，是否构成治疗范式层面的新意？",
+      "source_trace": [
+        {
+          "exact_quote": "相对于已有的直接针对突变代谢酶本身的那些策略，到底算不算一种新的治疗范式"
+        }
+      ],
+      "question_type": "NOVELTY_OR_PRIOR_ART",
+      "dependencies": [],
+      "resolution_condition": "证据条件：既有直接靶向策略的公开盘点 + 上游抑制策略与其的差异声明。差异被文献/权威记录支持→范式新意成立或不成立（两者都是解决状态）。",
+      "uncertainty": "『治疗范式』的判定基准源未给出（新机制位点？新临床定位？新联合方式？）。"
+    },
+    {
+      "question_id": "CQ-03",
+      "statement": "高分辨质谱在单细胞或近单细胞分辨率上检测相关代谢物的可行性与边界是什么？",
+      "source_trace": [
+        {
+          "exact_quote": "高分辨质谱平台能不能在单个细胞或者接近单个细胞的分辨率上把 relevant 的代谢物水平测出来"
+        }
+      ],
+      "question_type": "MEASUREMENT_OR_OBSERVABILITY",
+      "dependencies": [],
+      "resolution_condition": "证据条件：单细胞/近单细胞代谢组学的技术能力边界记录（检出限、代谢物覆盖面、通量）。『可行/不可行/仅部分可行』的确认即为解决状态。",
+      "uncertainty": "源写『relevant 的代谢物』但未列明具体代谢物种类；操作者语境下存在常见候选，但消化不代为指定。"
+    },
+    {
+      "question_id": "CQ-04",
+      "statement": "CQ-03 的可测性结论如何约束后续动物实验的测量方案设计？",
+      "source_trace": [
+        {
+          "exact_quote": "这直接决定后面动物实验的设计"
+        }
+      ],
+      "question_type": "INTERVENTION_OR_CONTROL",
+      "dependencies": [
+        "CQ-03"
+      ],
+      "resolution_condition": "证据条件：以 CQ-03 的可测性边界为输入的动物实验测量方案设计约束（取样方式、分辨率妥协、必要对照）。约束集明确即为解决状态。",
+      "uncertainty": null
+    }
+  ]
+}

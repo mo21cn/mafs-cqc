@@ -1,0 +1,15 @@
+{
+  "case_id": "s6_narrow_source_check",
+  "diagnosis_source": "HO+ChatGPT P2 acceptance",
+  "prior_artifact_id": "CQS-CQC-P2-06",
+  "prior_artifact_sha256": "42d330ba88f817c7a3ef38af73af6d5d2f863b61ff70099e997886679c2a863d",
+  "measured_failure": "CQ-01 resolution_condition contains procedural step sequencing ('先以作者/年份/期刊锚定论文身份，再核对其补充材料内容'); identity-resolution vs execution-prerequisite boundary remains unresolved",
+  "repair_boundary": "resolution_condition + uncertainty only; preserve the 1-CQ no-decomposition structure",
+  "fields_implicated": [
+    "CQ-01.resolution_condition",
+    "CQ-01.uncertainty"
+  ],
+  "repair_instruction": "De-proceduralize the resolution condition into evidence states; record explicitly that paper identity may be an independent evidence object or an execution prerequisite depending on downstream use; do not standardize toward S4",
+  "revised_artifact_id": "CQS-CQC-P2-06-R1",
+  "revised_artifact_sha256": "a67dc5c5e98c8351947f36e4b00e584bd695c0bf6c3166b81b2a768d484836ab"
+}

@@ -1,0 +1,38 @@
+name: cqc-p0
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install test dependency
+        run: pip install pytest
+      - name: Repository hygiene (no committed bytecode)
+        run: |
+          test -z "$(find . -name '__pycache__' -not -path './.git/*')" || { echo '__pycache__ committed'; exit 1; }
+          test -z "$(find . -name '*.pyc' -not -path './.git/*')" || { echo '*.pyc committed'; exit 1; }
+      - name: Validate committed CQS artifacts (schema + hash + trace + DAG + input crosscheck)
+        run: python scripts/validate_cqs.py examples/outputs/*.json --check-inputs examples/inputs
+      - name: Validate P0 example renderings reproducible
+        run: |
+          python scripts/render_cqs.py examples/outputs/cqs_A_gf_em.json | diff - examples/rendered/cqs_A_gf_em.md
+          python scripts/render_cqs.py examples/outputs/cqs_B_virtual_cell.json | diff - examples/rendered/cqs_B_virtual_cell.md
+          python scripts/render_cqs.py examples/outputs/cqs_C_hbot_ovary.json | diff - examples/rendered/cqs_C_hbot_ovary.md
+      - name: Validate P1 benchmark packages (if present)
+        run: python scripts/validate_p1.py --hygiene
+      - name: Validate P2 semantic stress packages and revision topologies (if present)
+        run: python scripts/validate_p2.py --hygiene
+      - name: Validate P3 contextual SRP packages (if present)
+        run: python scripts/validate_p3.py --hygiene
+      - name: Validate P4 budget envelope packages (if present)
+        run: python scripts/validate_p4.py --hygiene
+      - name: Run tests (validation rules + deterministic rendering reproducibility)
+        run: python -m pytest -q

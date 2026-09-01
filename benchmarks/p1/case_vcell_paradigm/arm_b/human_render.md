@@ -1,0 +1,42 @@
+# CandidateQuestionSet: CQS-CQC-P1-03
+
+- schema_version: 0.1
+- source_narrative_sha256: 37f34e945191656a338bfec3cee788dd959cccc3bdbe94fc60171ff88a5a8df4
+- questions: 3
+
+## Source Narrative (verbatim)
+
+"Virtual Cel"产生了哪些新的研究范式？
+
+## Questions
+
+### CQ-01
+
+- type: NOVELTY_OR_PRIOR_ART
+- statement: 『Virtual Cell』领域中哪些工作构成可辨识的新研究范式（相对经典机制建模与高通量实验范式）？
+- source trace:
+  - "产生了哪些新的研究范式"
+- dependencies: (none)
+- resolution condition: 证据条件：候选范式级工作（如扰动图谱+基础模型预测、数据基础设施即研究范式、可微分/可模拟细胞等）的公开记录，且每条候选附其与既有范式的差异声明。候选清单在多来源不再新增类别时达到饱和。
+- uncertainty: 『新范式』的判定基准原话未给出（见 CQ-02）；本问题先宽收候选，判定在 CQ-02 的基准厘清后进行。
+
+### CQ-02
+
+- type: TERMINOLOGY_OR_NAMING
+- statement: 『新研究范式』在此请求中的判定基准是什么（方法学共同体的实践转变？数据基础设施的形成？假说生成方式的改变？）——原话未定义，需要显式厘清而非默认。
+- source trace:
+  - "新的研究范式"
+- dependencies: (none)
+- resolution condition: 证据条件：操作者确认或领域内权威对『范式』判定基准的使用先例（哪些文献自称/被称为范式、依据什么）。基准确立后 CQ-01 的候选清单据此筛选。
+- uncertainty: 『范式』的判定基准是本案例最大的未消歧点；不同基准产生不同答案，消化不得替操作者选择。
+
+### CQ-03
+
+- type: HISTORICAL_LINEAGE
+- statement: 各候选范式与其所扩展或取代的既有范式之间的谱系关系是什么？
+- source trace:
+  - "产生了哪些新的研究范式"
+- dependencies: CQ-01
+- resolution condition: 证据条件：每个候选范式与既有范式（经典机制建模、高通量筛选等）之间的承继/扩展/取代关系的文献记录。谱系映射完成后，『新』的字面主张获得可核验依据。
+- uncertainty: (none)
+

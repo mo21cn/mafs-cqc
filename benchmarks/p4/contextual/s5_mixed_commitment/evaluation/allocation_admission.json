@@ -1,0 +1,10 @@
+{
+  "case_id": "s5_mixed_commitment",
+  "note": "Why each allocation corresponds to a real SRP route and why its activation is legal. Evaluation-only; the BudgetEnvelope schema carries no evaluation prose.",
+  "allocations": {
+    "AL01": "R01/mechanism_evidence REQUIRED -> COMMITTED.",
+    "AL02": "R02/historical_lineage REQUIRED -> COMMITTED.",
+    "AL03": "R03/measurement_observability REQUIRED -> COMMITTED.",
+    "AL04": "R02/counterexample_negative_evidence CONDITIONAL -> RESERVE_CONDITIONAL."
+  }
+}

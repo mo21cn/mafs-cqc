@@ -1,0 +1,31 @@
+{
+  "case_id": "BIND-s1_vms_cellular_mechanism",
+  "schema_version": "cqc-p5-integration-review.v0.2",
+  "mechanical": {
+    "source_chain_valid": true,
+    "allocation_route_join_valid": true,
+    "conditional_non_activation_valid": true,
+    "mafs_baseline_valid": true,
+    "mafs_native_schema_valid": false,
+    "stale_state_valid": true,
+    "search_order_lineage_traceable": false
+  },
+  "local_claw_preliminary_review": {
+    "authored_by": "MACHINE_DERIVED",
+    "review_basis": [
+      "source_cqs.json",
+      "source_srp.json",
+      "budget_envelope.json",
+      "integration_binding.json"
+    ],
+    "search_order_semantically_contained": "NOT_APPLICABLE",
+    "authority_leak_observed": "NOT_APPLICABLE",
+    "integration_projection_loss_observed": "NOT_APPLICABLE",
+    "conditional_preactivation_observed": "NOT_APPLICABLE",
+    "source_context_promoted_to_obligation": "NOT_APPLICABLE",
+    "notes": "Contextual case carries no MAFS-native planning object; planning-specific semantic fields are NOT_APPLICABLE. Source-chain identity, allocation-route join, and conditional non-activation are verified by the mechanical block."
+  },
+  "final_semantic_adjudication": {
+    "status": "PENDING_HO_CHATGPT"
+  }
+}

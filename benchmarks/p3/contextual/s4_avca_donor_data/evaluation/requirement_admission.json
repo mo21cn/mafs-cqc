@@ -1,0 +1,9 @@
+{
+  "case_id": "s4_avca_donor_data",
+  "note": "SRP requirements authored by Local Claw as the second digestion transition. R01 is a genuine shared requirement: one identity-evidence obligation serves CQ-01 directly and CQ-02 as its inventory-evidence prerequisite.",
+  "admission_rationales": {
+    "R01": "Owns the shared evidence obligation of Atlas identity/scope/access confirmation (serves CQ-01 directly and supplies the inventory source for CQ-02).",
+    "R02": "Owns the evidence obligation of metadata-schema decidability for the three judgment words (three-state verdict).",
+    "R03": "Owns the evidence obligation of donor-data existence inside the confirmed inventory (gated on R01+R02)."
+  }
+}

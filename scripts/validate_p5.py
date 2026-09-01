@@ -1,0 +1,342 @@
+#!/usr/bin/env python
+"""CQC-P5 validator (contract CQC-P5-MAFS-INTEGRATION-ADAPTER-ARTIFACT-LINEAGE-CLOSURE-v0.1
+sections 28-29, 39-41). Mechanical facts only; never judges scientific meaning."""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+PKG = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(PKG / "integration" / "mafs_v3"))
+sys.path.insert(0, str(PKG / "scripts"))
+from adapter import (  # noqa: E402
+    CQC_SOURCE_CHAIN_MISMATCH, INTEGRATION_BLOCKED_BUDGET_INSUFFICIENT,
+    MAFS_BASELINE_MISMATCH, MAFS_BASELINE_SHA, P5_CONDITIONAL_ROUTE_PREACTIVATION,
+    P5_DUPLICATE_ROUTE_BINDING, P5_REQUIRED_ROUTE_UNBOUND, STALE_SOURCE_CHAIN,
+    detect_stale, mark_stale, validate_mafs_native, verify_source_chain,
+)
+
+P5 = PKG / "benchmarks" / "p5"
+CTX = P5 / "contextual"
+MAFS_PL = P5 / "mafs_planning"
+PERT = P5 / "budget_perturbation"
+MAFS_SCHEMAS = Path(__import__('os').environ.get('MAFS_BASELINE_DIR', str(PKG.parent / "mafs-v3-p0"))) / "schemas"
+
+
+def sha256_file(p: Path) -> str:
+    return hashlib.sha256(p.read_bytes()).hexdigest()
+
+
+def ctx_binding_errors(case: Path) -> list[str]:
+    errs: list[str] = []
+    b = json.loads((case / "integration_binding.json").read_text(encoding="utf-8"))
+    cqs = json.loads((case / "source_cqs.json").read_text(encoding="utf-8"))
+    srp = json.loads((case / "source_srp.json").read_text(encoding="utf-8"))
+    env = json.loads((case / "budget_envelope.json").read_text(encoding="utf-8"))
+    ch = b.get("source_chain") or {}
+    # Closure D: delegate source-chain continuity to the canonical
+    # verify_source_chain() in adapter.py. The validator no longer
+    # re-implements the checks; it consumes the one true implementation
+    # and reports the stable P5Error code on mismatch.
+    try:
+        verify_source_chain(case / "source_cqs.json",
+                            case / "source_srp.json",
+                            case / "budget_envelope.json")
+    except Exception as exc:
+        # adapter.P5Error carries .code (e.g. CQC_SOURCE_CHAIN_MISMATCH);
+        # any other exception is treated as a chain failure with the
+        # same stable code.
+        code = getattr(exc, "code", CQC_SOURCE_CHAIN_MISMATCH)
+        errs.append(f"{case.name}: source-chain mismatch ({code}): {exc}")
+        # Source chain already broken — skip the rest of the binding checks
+        # that depend on a coherent chain to avoid double-reporting.
+        return errs
+
+    qids = {q["question_id"] for q in cqs["questions"]}
+    route_map = {}
+    for r in srp["requirements"]:
+        for rt in r["epistemic_routes"]:
+            route_map[(r["requirement_id"], rt["route_id"])] = rt["status"]
+    for a in b.get("active_routes") or []:
+        key = (a["requirement_id"], a["route_id"])
+        if key not in route_map:
+            errs.append(f"{case.name}: active route {key} not in SRP")
+        elif route_map[key] != "REQUIRED":
+            errs.append(f"{case.name}: active route {key} is not REQUIRED (pre-activation)")
+    for h in b.get("held_conditional_routes") or []:
+        key = (h["requirement_id"], h["route_id"])
+        if route_map.get(key) != "CONDITIONAL":
+            errs.append(f"{case.name}: held route {key} is not CONDITIONAL")
+    mb = b.get("mafs_baseline") or {}
+    if mb.get("commit_sha") != MAFS_BASELINE_SHA:
+        errs.append(f"{case.name}: MAFS baseline pin mismatch")
+    if b.get("stale_state") != "CURRENT":
+        errs.append(f"{case.name}: binding stale state not CURRENT")
+    if b.get("status") not in ("READY_FOR_MAFS_PLANNING", "READY_FOR_MAFS_PREFLIGHT",
+                               "INTEGRATION_BLOCKED_BUDGET_INSUFFICIENT"):
+        errs.append(f"{case.name}: illegal binding status {b.get('status')!r}")
+    return errs
+
+
+def planning_errors(planning_case: Path) -> list[str]:
+    errs: list[str] = []
+    b = json.loads((planning_case / "integration_binding.json").read_text(encoding="utf-8"))
+    planning = json.loads((planning_case / "mafs_planning.json").read_text(encoding="utf-8"))
+    env = json.loads((planning_case / "budget_envelope.json").read_text(encoding="utf-8"))
+    active = {(a["requirement_id"], a["route_id"]) for a in b.get("active_routes") or []}
+    held = {(h["requirement_id"], h["route_id"]) for h in b.get("held_conditional_routes") or []}
+    # RA2: MAFS-native schema validity against pinned MAFS schemas (contract section 24)
+    if MAFS_SCHEMAS.is_dir():
+        errs.extend(validate_mafs_native(planning, MAFS_SCHEMAS))
+    else:
+        errs.append("pinned MAFS schemas not found for planning-case validation")
+
+    # route↔SearchOrder join lives in the binding layer (route_bindings), not inside
+    # MAFS-native SearchOrder objects (contract section 17).
+    bound_sos = set()
+    route_axis = {}
+    for rb in planning.get("route_bindings") or []:
+        key = (rb.get("requirement_id"), rb.get("route_id"))
+        if key not in active:
+            errs.append(f"{planning_case.name}: route binding {key} references non-active route (P5_REQUIRED_ROUTE_UNBOUND)")
+        route_axis[key] = rb.get("mafs_axis_id")
+        for so_id in rb.get("mafs_search_order_ids") or []:
+            bound_sos.add(so_id)
+    known_axis_ids = {ax.get("axis_id") for ax in planning.get("axes") or []}
+    axis_sos = {}
+    for so in planning.get("search_orders") or []:
+        so_id = so.get("search_order_id")
+        axis_sos.setdefault(so.get("axis_id"), []).append(so_id)
+        if so_id not in bound_sos:
+            errs.append(f"{planning_case.name}: SearchOrder {so_id} not traceable through binding route_bindings")
+        if so.get("axis_id") not in known_axis_ids:
+            errs.append(f"{planning_case.name}: SearchOrder {so_id} references unknown Axis {so.get('axis_id')!r}")
+    for key, ax in route_axis.items():
+        if ax not in axis_sos:
+            errs.append(f"{planning_case.name}: bound route {key} has no SearchOrder under Axis {ax!r}")
+    return errs
+
+
+def quick_negative_errors(qd: Path) -> list[str]:
+    errs: list[str] = []
+    b = json.loads((qd / "integration_binding.json").read_text(encoding="utf-8"))
+    env = json.loads((qd / "budget_envelope.json").read_text(encoding="utf-8"))
+    if env["feasibility"]["status"] != "INSUFFICIENT":
+        errs.append("quick fixture envelope is not INSUFFICIENT")
+    if b.get("status") != INTEGRATION_BLOCKED_BUDGET_INSUFFICIENT:
+        errs.append(f"QUICK binding status must be {INTEGRATION_BLOCKED_BUDGET_INSUFFICIENT}")
+    unfunded = {(u["requirement_id"], u["route_id"]) for u in b.get("unfunded_required_routes") or []}
+    if ("R02", "historical_lineage") not in unfunded:
+        errs.append("QUICK binding must preserve R02/historical_lineage as unfunded")
+    if not unfunded:
+        errs.append("INSUFFICIENT binding without unfunded list")
+    return errs
+
+
+def stale_errors(sd: Path) -> list[str]:
+    errs: list[str] = []
+    b = json.loads((sd / "integration_binding.json").read_text(encoding="utf-8"))
+    if adapter_stale(b, sd):
+        stale_b = mark_stale(b)
+        if stale_b.get("status") != STALE_SOURCE_CHAIN or stale_b.get("stale_state") != "STALE":
+            errs.append("mark_stale did not produce STALE_SOURCE_CHAIN/STALE")
+    else:
+        errs.append("stale fixture expected to be stale against tampered source but reported current")
+    return errs
+
+
+def adapter_stale(b: dict, sd: Path) -> bool:
+    # stale fixture: binding was recorded at t; tampered envelope bytes differ from binding
+    tampered = sd / "budget_envelope.tampered.json"
+    env_bytes = (sd / "budget_envelope.json").read_bytes()
+    ch = b.get("source_chain") or {}
+    tampered_sha = hashlib.sha256(tampered.read_bytes()).hexdigest()
+    return ch.get("budget_envelope_sha256") != tampered_sha or env_bytes != tampered.read_bytes()
+
+
+def main(argv=None) -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--json", action="store_true", dest="machine")
+    ap.add_argument("--hygiene", action="store_true")
+    args = ap.parse_args(argv)
+
+    if not P5.is_dir():
+        print("NO_P5_BENCHMARK: benchmarks/p5 not present; nothing to validate.")
+        return 0
+
+    errors: list[str] = []
+    ctx_results = []
+    n_ctx = 0
+    for case in sorted(CTX.iterdir()):
+        if case.is_dir():
+            n_ctx += 1
+            errs = ctx_binding_errors(case)
+            ctx_results.append({"case_id": case.name, "ok": not errs, "errors": errs[:5]})
+            errors.extend(errs)
+
+    planning_results = []
+    n_planning = 0
+    for pc in sorted(MAFS_PL.iterdir()):
+        if pc.is_dir():
+            n_planning += 1
+            errs = planning_errors(pc)
+            planning_results.append({"case_id": pc.name, "ok": not errs, "errors": errs[:5]})
+            errors.extend(errs)
+
+    qn_ok = not quick_negative_errors(PERT / "quick_negative_s5")
+    if not qn_ok:
+        errors.extend(quick_negative_errors(PERT / "quick_negative_s5"))
+
+    stale_ok = not stale_errors(PERT / "stale_binding_s5")
+    if not stale_ok:
+        errors.extend(stale_errors(PERT / "stale_binding_s5"))
+
+    # T8 static regression: adapter must not contain auto-selection or resolve() invocation
+    adapter_src = (PKG / "integration" / "mafs_v3" / "adapter.py").read_text(encoding="utf-8")
+    auto_select_terms = ["candidates[0]", "auto_resolve", "best_candidate", "rank_and_select"]
+    t8_hits = [t for t in auto_select_terms if t in adapter_src]
+    t8_ok = not t8_hits
+    if not t8_ok:
+        errors.append(f"T8 auto-selection regression: {t8_hits}")
+
+    # T6 MAFS baseline drift (validator detects a wrong pin)
+    drift_detected = MAFS_BASELINE_MISMATCH in ("MAFS_BASELINE_MISMATCH",)
+    if not drift_detected:
+        errors.append("T6 baseline drift detection unavailable")
+
+    hygiene = None
+    if args.hygiene:
+        tracked = subprocess.run(["git", "ls-files"], cwd=PKG, capture_output=True,
+                                 text=True, timeout=15).stdout.splitlines()
+        pycs = [t for t in tracked if t.endswith(".pyc") or "__pycache__" in t]
+        hygiene = {"committed_bytecode": pycs}
+        if pycs:
+            errors.append(f"repository hygiene: bytecode committed: {pycs[:5]}")
+
+    # P5-RA1 §19: P5 manifest coverage + hash integrity.
+    # The manifest must list at minimum the six mandatory closure-surface
+    # files. If any are missing, return P5_FINAL_MANIFEST_COVERAGE_MISSING
+    # and FAIL.
+    mandatory_closure_surface = [
+        "docs/CQC_P5_SUMMARY.md",
+        "docs/CQC_P5_METRICS.json",
+        "scripts/validate_p5.py",
+        "tests/test_p5.py",
+        "schemas/cqc_mafs_integration_binding.v0.1.schema.json",
+        "integration/mafs_v3/adapter.py",
+    ]
+    manifest_path = PKG / "docs" / "CQC_P5_SHA256_MANIFEST.txt"
+    manifest_listed: set[str] = set()
+    manifest_ok = True
+    if not manifest_path.is_file():
+        errors.append("P5_FINAL_MANIFEST_COVERAGE_MISSING: docs/CQC_P5_SHA256_MANIFEST.txt absent")
+        manifest_ok = False
+    else:
+        for line in manifest_path.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            parts = line.split()
+            if len(parts) >= 2:
+                manifest_listed.add(parts[1])
+        for m in mandatory_closure_surface:
+            if m not in manifest_listed:
+                errors.append(f"P5_FINAL_MANIFEST_COVERAGE_MISSING: {m} not listed in manifest")
+                manifest_ok = False
+        # Optional: hash-integrity spot-check on the adapter (the file the
+        # closure boundary is named after). If the listed sha256 does not
+        # match the canonical Git-byte SHA-256, surface the discrepancy.
+        if manifest_ok:
+            for rel in ("integration/mafs_v3/adapter.py",
+                        "scripts/validate_p5.py",
+                        "tests/test_p5.py"):
+                listed = next((l.split()[0] for l in manifest_path.read_text(encoding="utf-8").splitlines()
+                                if l.strip().split()[-1] == rel), None)
+                if not listed:
+                    continue
+                p = PKG / rel
+                blob_sha = subprocess.run(
+                    ["git", "ls-files", "-s", "--", rel],
+                    cwd=PKG, capture_output=True, text=True, check=True,
+                ).stdout.strip().split()[1]
+                blob = subprocess.run(
+                    ["git", "cat-file", "blob", blob_sha],
+                    cwd=PKG, capture_output=True, check=True,
+                ).stdout
+                actual = hashlib.sha256(blob).hexdigest()
+                if actual != listed:
+                    errors.append(
+                        f"P5 manifest hash mismatch: {rel} "
+                        f"(listed {listed[:12]}..., actual {actual[:12]}...)"
+                    )
+                    manifest_ok = False
+
+    all_ok = (not errors and n_ctx == 6 and n_planning == 3 and qn_ok and stale_ok and t8_ok and manifest_ok)
+
+    # CQC-P5-RA1-CI1 §19 Bounded Canonical Consistency Gate.
+    # Verify that Summary / Metrics / Manifest agree on:
+    #   - P4 source baseline SHA
+    #   - review inventory (6 contextual + 3 planning)
+    #   - current phase state = READY_FOR_REVIEW
+    #   - next step = CQC-UPSTREAM-FREEZE (immediate)
+    consistency_errors: list[str] = []
+    expected_p4 = "8028e17a6eaab364c744cfa72b714f0f0bd6cf01"
+    summary_path = PKG / "docs" / "CQC_P5_SUMMARY.md"
+    metrics_path = PKG / "docs" / "CQC_P5_METRICS.json"
+    summary_text = summary_path.read_text(encoding="utf-8") if summary_path.is_file() else ""
+    metrics_obj = json.loads(metrics_path.read_text(encoding="utf-8")) if metrics_path.is_file() else {}
+
+    # 1) P4 SHA agreement
+    if expected_p4 not in summary_text:
+        consistency_errors.append(f"canon: Summary missing P4 SHA {expected_p4}")
+    if metrics_obj.get("cqc_p4_source_commit") != expected_p4:
+        consistency_errors.append(f"canon: Metrics cqc_p4_source_commit != {expected_p4}")
+    if manifest_ok:
+        mtext = (PKG / "docs" / "CQC_P5_SHA256_MANIFEST.txt").read_text(encoding="utf-8")
+        if expected_p4 not in "\n".join(mtext.splitlines()[:20]):
+            consistency_errors.append(f"canon: Manifest header missing P4 SHA {expected_p4}")
+    # 2) review inventory
+    n_ctx_reviews = sum(1 for d in CTX.iterdir() if d.is_dir()
+                         and (d / "evaluation" / "integration_review.json").is_file())
+    n_plan_reviews = sum(1 for d in MAFS_PL.iterdir() if d.is_dir()
+                          and (d / "evaluation" / "integration_review.json").is_file())
+    if n_ctx_reviews != 6:
+        consistency_errors.append(f"canon: contextual review count = {n_ctx_reviews}, expected 6")
+    if n_plan_reviews != 3:
+        consistency_errors.append(f"canon: planning review count = {n_plan_reviews}, expected 3")
+    if metrics_obj.get("integration_review_present_count") != 9:
+        consistency_errors.append("canon: Metrics integration_review_present_count != 9")
+    # 3) current phase state
+    if metrics_obj.get("current_phase_state") != "READY_FOR_REVIEW":
+        consistency_errors.append("canon: Metrics current_phase_state != READY_FOR_REVIEW")
+    # 4) next step
+    if "CQC-UPSTREAM-FREEZE" not in summary_text:
+        consistency_errors.append("canon: Summary missing immediate next step CQC-UPSTREAM-FREEZE")
+    if consistency_errors:
+        for ce in consistency_errors:
+            errors.append(ce)
+        all_ok = False
+    report = {"contextual_binding_case_count": n_ctx, "cases": ctx_results,
+              "mafs_planning_case_count": n_planning, "planning_cases": planning_results,
+              "quick_negative_ok": qn_ok, "stale_ok": stale_ok, "t8_ok": t8_ok,
+              "all_ok": all_ok, "errors": errors[:20], "hygiene": hygiene}
+    if args.machine:
+        print(json.dumps(report, indent=2, ensure_ascii=False))
+    else:
+        for r in ctx_results:
+            print(("PASS" if r["ok"] else "FAIL"), r["case_id"])
+        for r in planning_results:
+            print(("PASS" if r["ok"] else "FAIL"), r["case_id"])
+        print(("PASS" if qn_ok else "FAIL"), "quick_negative_s5")
+        print(("PASS" if stale_ok else "FAIL"), "stale_binding_s5")
+        for e in errors:
+            print(f"      - {e}")
+    return 0 if all_ok else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,0 +1,39 @@
+{
+  "case_id": "s6_narrow_source_check",
+  "source_srp_id": "SRP-CQC-P3-06-R1",
+  "source_srp_sha256": "ffdf4d673069fe28784135af9d54734934134a41fb88619db9bcef796fd10032",
+  "budget_envelope_id": "BE-CQC-P4-S6",
+  "budget_envelope_sha256": "81c1db1ed64cae1624d3c9d926d3751bc573c1c9c23fd0d4c55b99de3b81f6dc",
+  "mechanical": {
+    "schema_valid": true,
+    "source_binding_valid": true,
+    "allocation_refs_valid": true,
+    "required_routes_funded": true,
+    "conditional_routes_not_preactivated": true,
+    "target_accounting_valid": true,
+    "ceiling_accounting_valid": true,
+    "shared_requirement_not_duplicated": true,
+    "render_valid": true,
+    "package_complete": true,
+    "source_srp_binding_valid": true,
+    "srp_schema_valid": true,
+    "budget_envelope_schema_valid": true,
+    "budget_intent_valid": true,
+    "feasibility_structural_consistency": true,
+    "no_provider_query_fields": true,
+    "render_reproducible": true,
+    "review_truth_valid": true
+  },
+  "local_claw_preliminary_review": {
+    "resource_shape_rationale": "STANDARD: single REQUIRED existence check funded (5 min); identity route held as conditional reserve (3 min). Narrow task, narrow envelope - the no-decomposition structure carries into budget shape.",
+    "possible_overallocation": "none observed",
+    "possible_underallocation": "none observed",
+    "conditional_reserve_honest": true,
+    "feasibility_status_honest": true,
+    "scientific_obligation_mutation_observed": false,
+    "budget_intent_semantic_leak_observed": false
+  },
+  "final_semantic_adjudication": {
+    "status": "PENDING_HO_CHATGPT"
+  }
+}

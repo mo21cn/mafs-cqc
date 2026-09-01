@@ -1,0 +1,39 @@
+{
+  "case_id": "s2_vcell_paradigm",
+  "source_srp_id": "SRP-CQC-P3-02-R1",
+  "source_srp_sha256": "67036a5c48d02608a25ba00c85260162dc6bce74a78ba4079f0c12f18e6cf1a0",
+  "budget_envelope_id": "BE-CQC-P4-S2-R1",
+  "budget_envelope_sha256": "0ca314756380044a26d69ef6a125996e670f92442d58a4b0da2d36e6e58b2937",
+  "mechanical": {
+    "schema_valid": true,
+    "source_binding_valid": true,
+    "allocation_refs_valid": true,
+    "required_routes_funded": true,
+    "conditional_routes_not_preactivated": true,
+    "target_accounting_valid": true,
+    "ceiling_accounting_valid": true,
+    "shared_requirement_not_duplicated": true,
+    "render_valid": true,
+    "package_complete": true,
+    "source_srp_binding_valid": true,
+    "srp_schema_valid": true,
+    "budget_envelope_schema_valid": true,
+    "budget_intent_valid": true,
+    "feasibility_structural_consistency": true,
+    "no_provider_query_fields": true,
+    "render_reproducible": true,
+    "review_truth_valid": true
+  },
+  "local_claw_preliminary_review": {
+    "resource_shape_rationale": "STANDARD: 3 REQUIRED routes with zero conditional routes; R01 receives the largest allocation because its stopping condition requires candidate paradigm categories to reach evidential saturation under the admitted paradigm criterion (P3-RA1 wording).",
+    "possible_overallocation": "none observed",
+    "possible_underallocation": "R03 lineage mapping may grow with candidate count; reserve-less by SRP shape.",
+    "conditional_reserve_honest": true,
+    "feasibility_status_honest": true,
+    "scientific_obligation_mutation_observed": false,
+    "budget_intent_semantic_leak_observed": false
+  },
+  "final_semantic_adjudication": {
+    "status": "PENDING_HO_CHATGPT"
+  }
+}

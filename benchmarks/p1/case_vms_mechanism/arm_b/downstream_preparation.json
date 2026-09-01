@@ -1,0 +1,41 @@
+{
+  "case_id": "case_vms_mechanism",
+  "arm": "B",
+  "generated_from": "arm_b/candidate_question_set.json (explicit digestion artifact CQS-CQC-P1-01)",
+  "raw_input_sha256": "c0600db6f5bfd1be5e735f298c3ad4944b78c5c7560a4a907f409a42959bab42",
+  "question_ids_to_search": [
+    {
+      "question_id": "CQ-01",
+      "search_question": "核心机制问题（中枢 KNDy 线 + 血管线，细胞分辨率证据）",
+      "resolution_condition_ref": "见 CQ-01.resolution_condition"
+    },
+    {
+      "question_id": "CQ-03",
+      "search_question": "观测技术盘点：单细胞/空间/成像技术在 VMS 上的可行性与边界",
+      "resolution_condition_ref": "见 CQ-03.resolution_condition"
+    },
+    {
+      "question_id": "CQ-02",
+      "search_question": "人群分层核查：自然绝经 vs 治疗诱导 VMS 机制是否同构",
+      "resolution_condition_ref": "见 CQ-02.resolution_condition"
+    }
+  ],
+  "question_order_if_any": [
+    "CQ-01",
+    "CQ-03",
+    "CQ-02"
+  ],
+  "reason_for_order": "CQ-01 为核心证据景观；CQ-03 决定检索的数据资源类型（组学库 vs 临床文献）；CQ-02 的分层核查在核心证据成形后进行以避免过早收窄人群",
+  "questions_blocked_by_prerequisite": [],
+  "questions_independently_searchable": [
+    "CQ-01",
+    "CQ-02",
+    "CQ-03"
+  ],
+  "missing_information_before_search": [
+    "人群范围歧义（保留于 CQ-02.uncertainty，不擅自收窄）",
+    "『细胞分辨率』的组学/成像歧义（保留于 CQ-03.uncertainty）"
+  ],
+  "natural_reasoning_notes": "Explicit digestion arm: every search line is backed by an inspectable CandidateQuestion with verbatim source trace; ambiguities are durable artifact fields rather than inline notes.",
+  "raw_input_sha256_note": "corrected in CQC-P1-RA1 Closure A (mechanical provenance fix; value was hand-copied incorrectly at P1)"
+}

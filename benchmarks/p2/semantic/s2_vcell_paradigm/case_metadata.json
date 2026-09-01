@@ -1,0 +1,11 @@
+{
+  "case_id": "s2_vcell_paradigm",
+  "case_family": "B_novelty_prior_art_framing",
+  "input_status": "RAW",
+  "input_sha256": "37f34e945191656a338bfec3cee788dd959cccc3bdbe94fc60171ff88a5a8df4",
+  "input_sha256_basis": "sha256 of exact UTF-8 bytes of source_narrative.txt",
+  "source_origin": "verbatim reuse of P1 case_vcell_paradigm raw bytes",
+  "model_config": "zai/zai_auto via OpenClaw local claw; single model, frozen P0 digestion instruction",
+  "run_timestamp": "2026-08-31T12:30:00Z",
+  "stress_purpose": "short-narrative + undefined-criterion case"
+}

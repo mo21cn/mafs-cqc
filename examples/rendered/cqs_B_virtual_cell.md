@@ -1,0 +1,72 @@
+# CandidateQuestionSet: CQS-CQC-P0-B
+
+- schema_version: 0.1
+- source_narrative_sha256: 22861d39f28c1a0eaa5e49dff81ee522270c8d017bdcea3fdd27207f904eb959
+- questions: 4
+
+## Source Narrative (verbatim)
+
+# Narrative B — Virtual Cell novelty-framing task
+
+## Research intent (operator voice)
+
+We want to build a foundation model that predicts how cell states respond to genetic and chemical perturbations, learned from large perturbation maps, and we want to frame it as a step toward a "virtual cell". Before committing the framing, we need to know whether this combination is already claimed by existing work.
+
+## What we believe the landscape looks like
+
+Several teams have pretrained transformer-style foundation models on large-scale single-cell transcriptomics data — for example scGPT, Geneformer, scBERT and scVI-lineage models — mostly targeting cell-type annotation, batch integration, and gene-network inference.
+
+More recent work and several well-funded programs explicitly use the phrase "virtual cell" for models that simulate cellular behavior under perturbation. The boundary between "representation model", "perturbation-response predictor", and "causal mechanism model" is blurred in public claims, and each team emphasizes a different one.
+
+## Where we think our differentiation lies
+
+Our differentiation is systematic generalization across perturbation combinations: most published evaluations report single-gene knockouts or single-drug responses, while we want double- and triple-perturbation settings with held-out combination classes.
+
+## What is unclear to us
+
+We do not know the actual coverage of existing perturbation-prediction models over combination settings, we do not know whether a community benchmark for combination generalization already exists, and we do not know which specific "virtual cell" claims have already been publicly staked by which teams.
+
+Our novelty framing may drift as the literature moves quickly, so the uncertainty must stay visible rather than being resolved by assumption.
+
+## Questions
+
+### CQ-01
+
+- type: NOVELTY_OR_PRIOR_ART
+- statement: 现有扰动响应预测模型对组合扰动设置（double/triple perturbation，含 held-out 组合类别）的实际覆盖程度如何？
+- source trace:
+  - "We do not know the actual coverage of existing perturbation-prediction models over combination settings"
+- dependencies: (none)
+- resolution condition: 证据条件：已发表扰动预测工作的公开可复核评测证据所构成的覆盖图——按实验设置分类（单基因敲除 / 单药响应 / 组合扰动）后，组合扰动设置被覆盖的程度与规模。覆盖认定以公开可复核的评测结果为准，不以团队自述为准。
+- uncertainty: (none)
+
+### CQ-02
+
+- type: NOVELTY_OR_PRIOR_ART
+- statement: 针对组合扰动泛化，是否已存在社区公认的评测基准（benchmark/leaderboard）？
+- source trace:
+  - "we do not know whether a community benchmark for combination generalization already exists"
+- dependencies: (none)
+- resolution condition: 证据条件：是否存在社区公认的组合扰动泛化评测基准。『存在』的证据状态由该基准公开的数据划分、指标定义与当前最优结果记录构成；无此类记录时，『无公认基准』即为问题的解决状态。
+- uncertainty: (none)
+
+### CQ-03
+
+- type: NOVELTY_OR_PRIOR_ART
+- statement: 『virtual cell』框架下，哪些具体主张（表征 / 扰动预测 / 因果机制）已被哪些团队公开声明？
+- source trace:
+  - "we do not know which specific "virtual cell" claims have already been publicly staked by which teams."
+- dependencies: (none)
+- resolution condition: 证据条件：各团队公开材料（论文、预印本、官方声明）中关于 virtual cell 的明确主张，按表征 / 扰动预测 / 因果机制归类后形成的主张-团队-时间点映射。该映射的完备性受公开材料可见性约束，结论必须绑定检索时点。
+- uncertainty: 该领域演进快、公共表述边界模糊，主张面会随时间漂移；结论必须绑定检索时点，且叙事明确指出各团队强调点不同。
+
+### CQ-04
+
+- type: GENERALIZATION
+- statement: 现有方法是否评估过跨扰动组合的系统性泛化（如 held-out combination classes）？其评测协议是否可复用？
+- source trace:
+  - "Our differentiation is systematic generalization across perturbation combinations: most published evaluations report single-gene knockouts or single-drug responses, while we want double- and triple-perturbation settings with held-out combination classes."
+- dependencies: (none)
+- resolution condition: 证据条件：评测协议是否同时包含组合扰动设置与 held-out 组合类别划分——无论该协议是否已成为社区公认基准。已发表工作中的协议设计本身即证据：其数据可得性、指标定义与划分方式构成可复用性的证据状态；完全缺失此类协议时，即构成明确的协议缺口。
+- uncertainty: (none)
+

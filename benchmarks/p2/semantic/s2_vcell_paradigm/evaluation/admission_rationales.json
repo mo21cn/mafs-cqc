@@ -1,0 +1,9 @@
+{
+  "case_id": "s2_vcell_paradigm",
+  "note": "Admission rationale per final CQ: what independent evidence landscape does this question own? (contract section 15; stored here, NOT added to CQS schema)",
+  "admission_rationales": {
+    "CQ-01": "Owns the evidence landscape of paradigm-level work claims inside the Virtual Cell field (what candidate paradigms the literature itself generates).",
+    "CQ-02": "Owns the evidence landscape of paradigm-judgment criteria precedents (how the field/operator decides something counts as a new paradigm).",
+    "CQ-03": "Owns the evidence landscape of lineage relations between candidate paradigms and the paradigms they extend or replace."
+  }
+}

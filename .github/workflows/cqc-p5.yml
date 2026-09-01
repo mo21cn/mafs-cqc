@@ -1,0 +1,43 @@
+name: cqc-p5
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: mo21cn/mafs-v3-p0
+          ref: cd09699fc8cc160ab5cfff00a41e714961dd2109
+          path: external/mafs-v3-p0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install test dependency
+        run: pip install pytest
+      - name: Repository hygiene (no committed bytecode)
+        run: |
+          test -z "$(find . -name '__pycache__' -not -path './.git/*' -not -path './external/*')" || { echo '__pycache__ committed'; exit 1; }
+          test -z "$(find . -name '*.pyc' -not -path './.git/*' -not -path './external/*')" || { echo '*.pyc committed'; exit 1; }
+      - name: Verify pinned MAFS baseline
+        run: |
+          cd external/mafs-v3-p0
+          echo "MAFS HEAD: $(git rev-parse HEAD)"
+      - name: Validate P5 bindings, planning cases, perturbations
+        env:
+          MAFS_BASELINE_DIR: ${{ github.workspace }}/external/mafs-v3-p0
+        run: python scripts/validate_p5.py --hygiene
+      - name: Run all CQC tests
+        env:
+          MAFS_BASELINE_DIR: ${{ github.workspace }}/external/mafs-v3-p0
+        # Closure A: scope pytest collection to CQC's own ./tests only.
+        # The MAFS checkout under external/mafs-v3-p0 contains its own
+        # tests/test_p1_ra1.py which collides with CQC's tests/test_p1_ra1.py.
+        # MAFS is a read-only compatibility dependency, not part of the
+        # CQC test collection.
+        run: python -m pytest -q tests

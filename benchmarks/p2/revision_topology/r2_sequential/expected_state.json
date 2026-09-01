@@ -1,0 +1,29 @@
+{
+  "scenario": "R2_sequential_revision_partial_regeneration",
+  "topology": "A0 → {B0, C0}; A0→A1, regenerate B1 only (C0 left); A1→A2 (nothing regenerated)",
+  "stages": [
+    {
+      "stage": "initial_all_current",
+      "current_revisions": {"P2B-A": 0, "P2B-B": 0, "P2B-C": 0},
+      "expected": {"P2B-A@0": "current", "P2B-B@0": "current", "P2B-C@0": "current"}
+    },
+    {
+      "stage": "after_A1_partial_regeneration_B_only",
+      "current_revisions": {"P2B-A": 1, "P2B-B": 1, "P2B-C": 0},
+      "expected": {
+        "P2B-A@1": "current",
+        "P2B-B@1": "current",
+        "P2B-C@0": "stale"
+      }
+    },
+    {
+      "stage": "after_A2_with_no_regeneration",
+      "current_revisions": {"P2B-A": 2, "P2B-B": 1, "P2B-C": 0},
+      "expected": {
+        "P2B-A@2": "current",
+        "P2B-B@1": "stale",
+        "P2B-C@0": "stale"
+      }
+    }
+  ]
+}

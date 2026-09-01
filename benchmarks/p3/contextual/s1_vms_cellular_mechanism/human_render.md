@@ -1,0 +1,49 @@
+# SearchRequirementProfile: SRP-CQC-P3-01
+
+- schema_version: 0.1
+- source_cqs_id: CQS-CQC-P2-01-R1
+- source_cqs_sha256: 92305bf11f989cf22a0a8121e5705c74028c0fce0c785352c65715a05bcb31e7
+- source_narrative_sha256: c0600db6f5bfd1be5e735f298c3ad4944b78c5c7560a4a907f409a42959bab42
+- requirements: 3
+
+## Source Narrative (verbatim)
+
+请搜索女性血管舒缩症状在细胞分辨率层面的机制解释
+
+## Requirements
+
+### R01
+
+- target_question_ids: CQ-01
+- evidence_need: 在细胞或细胞类型分辨率上刻画女性血管舒缩症状相关机制的研究证据——确立、修正或证伪任一机制解释都构成对 CQ-01 的实质推进。所需的证据状态是『机制主张 × 细胞层面证据』的配对，而非泛综述。
+- epistemic routes:
+  - mechanism_evidence [REQUIRED] — 获取在细胞/细胞类型分辨率上讨论血管舒缩症状机制的研究证据
+    condition: 始终需要；这是 CQ-01 的核心证据义务
+- source_requirements: primary study (cell-resolution or cell-type-specific), authoritative review
+- stopping_condition: 某一机制解释达到『确立/修正/证伪』任一状态，且细胞分辨率的证据覆盖不再新增机制类别时，CQ-01 的搜索义务即可向下移交。
+- uncertainty_binding: 人群范围歧义（围绝经期 vs 治疗诱导等）由 CQ-02 承接，不在本 requirement 内收窄。
+
+### R02
+
+- target_question_ids: CQ-02
+- evidence_need: 跨人群（自然围绝经期 / 手术或药物绝经 / 其他病因）的 VMS 机制比较证据，或明确陈述机制共享的证据。
+- epistemic routes:
+  - mechanism_evidence [CONDITIONAL] — 在不同人群语境下检验机制证据是否同构
+    condition: 若 R01 的证据暗示人群间机制可能不同时激活
+  - counterexample_negative_evidence [CONDITIONAL] — 寻找某人群机制解释在另一人群不成立的反例
+    condition: 当跨人群外推主张出现且需要检验时激活
+- source_requirements: primary study, authoritative review
+- stopping_condition: 人群间机制『同构/分层/未知』三态之一被证据支持时解决。
+- uncertainty_binding: 本 requirement 的存在本身源自『女性』人群范围歧义——歧义解除（操作者确认人群）后 CONDITIONAL 路线可升级或关闭。
+
+### R03
+
+- target_question_ids: CQ-03
+- evidence_need: 各类细胞分辨率观测技术（单细胞转录组、空间转录组、细胞类型特异成像/电生理）在 VMS 相关问题上可行性与边界的方法学证据。
+- epistemic routes:
+  - measurement_observability [REQUIRED] — 确认各观测技术在 VMS 相关组织/问题上的可行、不可行与部分可行边界
+    condition: 始终需要；它决定 CQ-01 证据的可靠性与缺口
+- source_requirements: methods literature, authoritative review
+- stopping_condition: 三类技术各自获得『可行/不可行/部分可行』判定。
+- uncertainty_binding: 『细胞分辨率』的组学/成像歧义由本 requirement 的多技术覆盖承接，不预先收窄。
+

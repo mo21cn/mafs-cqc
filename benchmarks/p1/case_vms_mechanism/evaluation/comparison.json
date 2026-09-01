@@ -1,0 +1,28 @@
+{
+  "case_id": "case_vms_mechanism",
+  "current_source": "CQC-P1-RA2 (supersedes P1 initial adjudication and RA1 re-adjudication; history preserved in adjudication.md / ra1_adjudication.md)",
+  "machine_facts": {
+    "arm_b_cqs_questions": 3,
+    "arm_b_dependency_edges": 0,
+    "arm_a_prepared_questions": 5,
+    "arm_c_triggered": false,
+    "final_explicit_artifact": "arm_b CQS-CQC-P1-01",
+    "all_structural_checks": "PASS (schema/hash/trace/DAG/render)"
+  },
+  "manual_adjudication": {
+    "adjudicator": "local_claw_preliminary",
+    "status": "PENDING_HO_PLUS_CHATGPT_FINAL_ADJUDICATION",
+    "comparison_framing": "direct downstream artifact (Arm A) vs typed intermediate CQS + downstream (Arm B)",
+    "substantive_targets": ["cell-resolution mechanism landscape for female vasomotor symptoms (central KNDy + vascular lines)"],
+    "interpretive_constraints": ["population scope of 女性 unspecified", "细胞分辨率 means omics vs imaging unspecified"],
+    "noncritical_input_noise": [],
+    "substantive_coverage": {"arm_a": "1/1", "final_explicit": "1/1 (parity)"},
+    "interpretive_state_capture": {
+      "arm_a": "both constraints recorded as free-form notes inside the prep document (missing_information_before_search)",
+      "final_explicit": "both constraints are durable per-question uncertainty fields (CQ-02/CQ-03), question-addressable"
+    },
+    "dependency_truth": {"final_edges": [], "note": "all three questions independently searchable; RA2 test applied"},
+    "local_repairability": "amending a constraint answer touches one uncertainty field; Arm A requires re-reading the whole prep",
+    "repeated_reasoning_cost": {"model_calls": "1 per arm", "token_use": null, "manual_intervention_count": 0}
+  }
+}

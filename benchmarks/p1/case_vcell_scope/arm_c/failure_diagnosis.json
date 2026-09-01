@@ -1,0 +1,15 @@
+{
+  "case_id": "case_vcell_scope",
+  "diagnosis_source": "HO+ChatGPT P1 acceptance",
+  "prior_artifact_id": "CQS-CQC-P1-02",
+  "prior_artifact_sha256": "acd33c058fddf2904276db7a88190816140701b6b1290aaa01c3646e96f2d107",
+  "observed_conflict": "Arm B edge CQ-01->CQ-02 is a false prerequisite: CQ-01 (Virtual Cell direction inventory) is meaningfully searchable from Virtual Cell reviews/programs alone; adjacent-term boundary (CQ-02) improves coverage but does not block the core inventory.",
+  "diagnosis": "P0-RA2 prerequisite rule applied by HO+ChatGPT acceptance: removing the edge leaves CQ-01 correctly answerable, interpretable and searchable.",
+  "implicated_fields": [
+    "CQ-01.dependencies"
+  ],
+  "repair_instruction": "CQ-01.dependencies = [] (remove edge CQ-01->CQ-02). No other field changed.",
+  "revised_artifact_id": "CQS-CQC-P1-02-RC1",
+  "revised_artifact_sha256": "5767b00560755456d91c545d70cdd42bf87d226e72db98b38a7c0d1650618791",
+  "revised_artifact_sha256_basis": "sha256 of the committed (LF-normalized) revised artifact bytes, rebound in CQC-P1-RA1 after EOL normalization"
+}

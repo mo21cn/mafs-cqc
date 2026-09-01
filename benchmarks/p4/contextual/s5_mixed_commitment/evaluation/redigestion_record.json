@@ -1,0 +1,13 @@
+{
+  "case_id": "s5_mixed_commitment",
+  "diagnosis_source": "HO+ChatGPT P4-RA1 acceptance",
+  "prior_budget_envelope_id": "BE-CQC-P4-S5",
+  "prior_budget_envelope_sha256": "b3457ad94f6d7dcde101d9d91b5318d8b69e2a45376a898e521f5e9e499d6a2a",
+  "measured_failure": "resource rationale reintroduced downstream animal-design meaning (context-only meaning imported into the resource artifact)",
+  "repair_boundary": "rationale only",
+  "fields_changed": [
+    "AL03.rationale"
+  ],
+  "revised_budget_envelope_id": "BE-CQC-P4-S5-R2",
+  "revised_budget_envelope_sha256": "bdafa07f54ad4de874fe5bf70bfd0f125f271283bba5494df717f29883d74df4"
+}

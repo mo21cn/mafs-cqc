@@ -1,0 +1,46 @@
+{
+  "case_id": "s1_vms_cellular_mechanism",
+  "input_status": "RAW",
+  "source_sha256": "c0600db6f5bfd1be5e735f298c3ad4944b78c5c7560a4a907f409a42959bab42",
+  "cqs_artifact_id": "CQS-CQC-P2-01",
+  "cqs_sha256": "bbf2efe61e3c64ef1c560ad84aacdf59cdaef4554977629abd103004478933e3",
+  "mechanical": {
+    "schema_valid": true,
+    "source_hash_valid": true,
+    "source_trace_exact_valid": true,
+    "dependency_dag_valid": true,
+    "deterministic_render_valid": true
+  },
+  "local_claw_preliminary_review": {
+    "source_intent_elements": [
+      "搜索动作请求（『请搜索』）",
+      "对象：女性血管舒缩症状",
+      "分辨率要求：细胞分辨率层面",
+      "目标：机制解释"
+    ],
+    "preserved_elements": [
+      "对象与机制目标（CQ-01 statement + trace）",
+      "分辨率歧义（CQ-03 + uncertainty）",
+      "人群范围歧义（CQ-02 + uncertainty）"
+    ],
+    "possibly_lost_elements": [
+      "『请搜索』的执行动作意图：CQS 只保留问题层面，搜索执行交给下游（设计性投影，非意外损失——MAFS 消费问题集）"
+    ],
+    "possible_unsupported_commitments": [
+      "statement 引入『潮热/盗汗』作为血管舒缩症状的具体化——源原话未含该词，属领域常识展开；判为合理的术语明确化而非无据主张，但记录为投影选择"
+    ],
+    "ambiguity_preserved": true,
+    "possible_false_precision": "无显著：三类问题各自证据景观独立",
+    "possible_over_decomposition": "无（3 问对应 3 个独立证据景观）",
+    "possible_under_decomposition": "无",
+    "possible_context_loss": "低：源叙事本身极短（raw 即全部上下文），CQS+source_narrative 足以恢复消化语境",
+    "possible_dependency_issue": "无（3 问独立，0 边通过 RA2 判据）",
+    "possible_question_type_overcommitment": "无（MECHANISM/GENERALIZATION/MEASUREMENT 三类边界清晰）"
+  },
+  "final_semantic_adjudication": {
+    "status": "PASS",
+    "finding": "Destructive overcommitment: CQ-01 committed source-absent mechanism anchors (KNDy/kisspeptin/NK neurons, vascular endothelium/smooth muscle, hypothalamic nuclei).",
+    "action": "Re-digested (CQS-CQC-P2-01-R1): statements/conditions neutralized to source-authorized scope; ambiguities retained.",
+    "rationale": "Scientifically plausible elaboration is not source-authorized commitment; the neutral form still supports the same downstream work."
+  }
+}

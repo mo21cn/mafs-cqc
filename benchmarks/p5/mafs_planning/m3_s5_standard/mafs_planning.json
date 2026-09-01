@@ -1,0 +1,113 @@
+{
+  "axes": [
+    {
+      "axis_id": "A1",
+      "family": "mechanism-cascade-evidence",
+      "proposition": "cell/pathway-level evidence of downstream metabolic cascade effects under upstream inhibition in IDH1-mutant glioma",
+      "admission": "admitted",
+      "essential": true,
+      "gate_scopes": [
+        "mechanism"
+      ],
+      "blocking_role": "essential"
+    },
+    {
+      "axis_id": "A2",
+      "family": "prior-art-strategy-inventory",
+      "proposition": "public record of direct mutant-enzyme-targeting strategies and recorded differences vs upstream-inhibition",
+      "admission": "admitted",
+      "essential": true,
+      "gate_scopes": [
+        "novelty"
+      ],
+      "blocking_role": "essential"
+    },
+    {
+      "axis_id": "A3",
+      "family": "single-cell-metabolomics-capability",
+      "proposition": "detection limit, metabolite coverage, throughput, and single-cell/near-single-cell feasibility boundaries",
+      "admission": "admitted",
+      "essential": true,
+      "gate_scopes": [
+        "measurement"
+      ],
+      "blocking_role": "essential"
+    }
+  ],
+  "search_orders": [
+    {
+      "search_order_id": "SO-A1-1",
+      "axis_id": "A1",
+      "operation_type": "discovery_search",
+      "required_capabilities": [
+        "mechanism-evidence-retrieval"
+      ],
+      "query_representation": {
+        "target": "IDH1-mutant glioma upstream inhibition",
+        "intent": "downstream metabolic cascade evidence at cell/pathway level"
+      },
+      "expected_output": "candidate_pointer_set",
+      "gate_scope": "mechanism",
+      "blocking_role": "essential",
+      "essential": true
+    },
+    {
+      "search_order_id": "SO-A2-1",
+      "axis_id": "A2",
+      "operation_type": "discovery_search",
+      "required_capabilities": [
+        "prior-art-retrieval"
+      ],
+      "query_representation": {
+        "target": "direct mutant-enzyme-targeting strategies",
+        "intent": "strategy inventory and recorded differences"
+      },
+      "expected_output": "candidate_pointer_set",
+      "gate_scope": "novelty",
+      "blocking_role": "essential",
+      "essential": true
+    },
+    {
+      "search_order_id": "SO-A3-1",
+      "axis_id": "A3",
+      "operation_type": "discovery_search",
+      "required_capabilities": [
+        "methods-evidence-retrieval"
+      ],
+      "query_representation": {
+        "target": "single-cell metabolomics",
+        "intent": "capability boundaries: detection limit, coverage, throughput, feasibility"
+      },
+      "expected_output": "candidate_pointer_set",
+      "gate_scope": "measurement",
+      "blocking_role": "essential",
+      "essential": true
+    }
+  ],
+  "route_bindings": [
+    {
+      "requirement_id": "R01",
+      "route_id": "mechanism_evidence",
+      "mafs_axis_id": "A1",
+      "mafs_search_order_ids": [
+        "SO-A1-1"
+      ]
+    },
+    {
+      "requirement_id": "R02",
+      "route_id": "historical_lineage",
+      "mafs_axis_id": "A2",
+      "mafs_search_order_ids": [
+        "SO-A2-1"
+      ]
+    },
+    {
+      "requirement_id": "R03",
+      "route_id": "measurement_observability",
+      "mafs_axis_id": "A3",
+      "mafs_search_order_ids": [
+        "SO-A3-1"
+      ]
+    }
+  ]
+}

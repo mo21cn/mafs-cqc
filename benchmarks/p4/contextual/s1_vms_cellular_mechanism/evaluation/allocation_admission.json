@@ -1,0 +1,10 @@
+{
+  "case_id": "s1_vms_cellular_mechanism",
+  "note": "Why each allocation corresponds to a real SRP route and why its activation is legal. Evaluation-only; the BudgetEnvelope schema carries no evaluation prose.",
+  "allocations": {
+    "AL01": "R01/mechanism_evidence is REQUIRED in the SRP; COMMITTED is the only legal activation.",
+    "AL02": "R03/measurement_observability is REQUIRED; COMMITTED legal.",
+    "AL03": "R02/mechanism_evidence is CONDITIONAL (population comparison activates on R01 evidence); RESERVE_CONDITIONAL legal - uncertainty reserved, not activated.",
+    "AL04": "R02/counterexample_negative_evidence is CONDITIONAL; RESERVE_CONDITIONAL legal."
+  }
+}

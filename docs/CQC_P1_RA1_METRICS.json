@@ -1,0 +1,25 @@
+{
+  "contract_id": "CQC-P1-RA1-EXPERIMENTAL-TRUTH-LINEAGE-EARNED-REDIGESTION-CLOSURE-v0.1",
+  "verified_commit_sha": "fc6e367a466bbe5da869988df039e37b1b839c32",
+  "ci_run_id": "33334697645",
+  "benchmark_case_count": 5,
+  "raw_hash_match_arm_a_count": 5,
+  "raw_hash_match_arm_b_count": 5,
+  "arm_c_triggered_count": 3,
+  "arm_c_completed_count": 3,
+  "arm_c_lineage_valid_count": 3,
+  "arm_c_raw_hash_match_count": 3,
+  "candidate_question_schema_valid_count": 5,
+  "source_hash_valid_count": 5,
+  "source_trace_exact_valid_count": 5,
+  "dependency_dag_valid_count": 5,
+  "deterministic_render_valid_count": 5,
+  "test_count": 28,
+  "meaningful_push_ci_cycles": 2,
+  "manual_adjudication_scope": {
+    "adjudicator": "local_claw_preliminary (structured evidence)",
+    "final_authority": "HO + ChatGPT",
+    "note": "semantic fields remain manual; machine layer verifies lineage/structure only"
+  },
+  "meaningful_push_ci_cycles_correction": "corrected in CQC-P1-RA2: cycle 1 (c75864a) failed CI on a real byte-level lineage failure; cycle 2 (fc6e367) succeeded"
+}

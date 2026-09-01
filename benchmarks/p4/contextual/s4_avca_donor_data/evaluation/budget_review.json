@@ -1,0 +1,39 @@
+{
+  "case_id": "s4_avca_donor_data",
+  "source_srp_id": "SRP-CQC-P3-04",
+  "source_srp_sha256": "03355816136dd52e66e70f7c92125386bf62c5ee1d57bd2e9a30f0ecad0cad31",
+  "budget_envelope_id": "BE-CQC-P4-S4",
+  "budget_envelope_sha256": "47ac0a82624d616baa568c2e49ff8c89860b00f61f7d8cf2faf42686e3f2b442",
+  "mechanical": {
+    "schema_valid": true,
+    "source_binding_valid": true,
+    "allocation_refs_valid": true,
+    "required_routes_funded": true,
+    "conditional_routes_not_preactivated": true,
+    "target_accounting_valid": true,
+    "ceiling_accounting_valid": true,
+    "shared_requirement_not_duplicated": true,
+    "render_valid": true,
+    "package_complete": true,
+    "source_srp_binding_valid": true,
+    "srp_schema_valid": true,
+    "budget_envelope_schema_valid": true,
+    "budget_intent_valid": true,
+    "feasibility_structural_consistency": true,
+    "no_provider_query_fields": true,
+    "render_reproducible": true,
+    "review_truth_valid": true
+  },
+  "local_claw_preliminary_review": {
+    "resource_shape_rationale": "STANDARD: shared identity requirement (R01, targets CQ-01+CQ-02) budgeted exactly once; 2 REQUIRED routes + 1 conditional reserve for the gated existence check.",
+    "possible_overallocation": "none observed; shared requirement single-surface rule honored",
+    "possible_underallocation": "none observed",
+    "conditional_reserve_honest": true,
+    "feasibility_status_honest": true,
+    "scientific_obligation_mutation_observed": false,
+    "budget_intent_semantic_leak_observed": false
+  },
+  "final_semantic_adjudication": {
+    "status": "PENDING_HO_CHATGPT"
+  }
+}

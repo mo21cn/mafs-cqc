@@ -1,0 +1,33 @@
+{
+  "case_id": "case_antagonist_domains",
+  "current_source": "CQC-P1-RA2 (supersedes P1 initial adjudication and RA1 re-adjudication; history preserved in adjudication.md / ra1_adjudication.md)",
+  "machine_facts": {
+    "arm_b_cqs_questions": 4,
+    "arm_c_revised_questions": 4,
+    "arm_a_prepared_questions": 4,
+    "arm_c_triggered": true,
+    "final_explicit_artifact": "arm_c CQS-CQC-P1-04-RC1 (prior CQS-CQC-P1-04 preserved)",
+    "lineage": {"prior_sha": "bound in failure_diagnosis.json", "revised_sha": "bound + verified", "downstream_source_binding": "verified"},
+    "all_structural_checks": "PASS (schema/hash/trace/DAG/render/source-binding/dependency-consistency)"
+  },
+  "manual_adjudication": {
+    "adjudicator": "local_claw_preliminary",
+    "status": "PENDING_HO_PLUS_CHATGPT_FINAL_ADJUDICATION",
+    "comparison_framing": "direct downstream artifact (Arm A) vs typed intermediate CQS + downstream (Arm B→C)",
+    "substantive_targets": ["application-domain inventory of antagonist research", "research-tool (non-therapeutic) usage"],
+    "interpretive_constraints": ["antagonist referent range unspecified (pharmacological vs muscle vs other)", "inventory dimension unspecified (disease/target/modality)"],
+    "noncritical_input_noise": [],
+    "substantive_coverage": {"arm_a": "2/2", "final_explicit": "2/2 (parity; CQS-CQC-P1-04-RC1)"},
+    "interpretive_state_capture": {
+      "arm_a": "pharmacological reading defaulted silently; dimension choice implicit",
+      "final_explicit": "referent range is CQ-01 (gating); dimension choice is CQ-04; tool-usage branch CQ-03 declares and gates its pharmacological assumption"
+    },
+    "dependency_truth": {
+      "initial_arm_b_failure": "CQ-03 assumed pharmacological reading while independent of CQ-01 (missing prerequisite; earned Arm C)",
+      "final_edges": [["CQ-02", "CQ-01"], ["CQ-03", "CQ-01"]],
+      "note": "downstream blocked list propagates both edges; CQ-03 is NOT described as an independent branch"
+    },
+    "local_repairability": "RA1 re-digestion added one edge + uncertainty statement to CQ-03 only; RA2 propagated into prep",
+    "repeated_reasoning_cost": {"model_calls": "1 per arm + 1 re-digestion pass (earned)", "token_use": null, "manual_intervention_count": 0}
+  }
+}

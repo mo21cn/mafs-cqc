@@ -1,0 +1,29 @@
+{
+  "case_id": "case_vcell_paradigm",
+  "current_source": "CQC-P1-RA2 (supersedes P1 initial adjudication and RA1 re-adjudication; history preserved in adjudication.md / ra1_adjudication.md)",
+  "machine_facts": {
+    "arm_b_cqs_questions": 3,
+    "arm_b_dependency_edges": 1,
+    "arm_b_edges": [["CQ-03", "CQ-01"]],
+    "arm_a_prepared_questions": 4,
+    "arm_c_triggered": false,
+    "final_explicit_artifact": "arm_b CQS-CQC-P1-03",
+    "all_structural_checks": "PASS (schema/hash/trace/DAG/render)"
+  },
+  "manual_adjudication": {
+    "adjudicator": "local_claw_preliminary",
+    "status": "PENDING_HO_PLUS_CHATGPT_FINAL_ADJUDICATION",
+    "comparison_framing": "direct downstream artifact (Arm A) vs typed intermediate CQS + downstream (Arm B)",
+    "substantive_targets": ["candidate new-paradigm inventory in Virtual Cell field", "lineage of candidates vs prior paradigms"],
+    "interpretive_constraints": ["paradigm-judgment criterion undefined (affects candidate filtering width)"],
+    "noncritical_input_noise": ["'Virtual Cel' spelling (same-origin as case_vcell_scope; treated as field reading)"],
+    "substantive_coverage": {"arm_a": "2/2", "final_explicit": "2/2 (parity; CQ-01 inventory + CQ-03 lineage)"},
+    "interpretive_state_capture": {
+      "arm_a": "loose self-claimed-paradigm proxy adopted silently inside prep",
+      "final_explicit": "criterion gap is CQ-02 — an operable question requiring operator confirmation before final filtering"
+    },
+    "dependency_truth": {"final_edges": [["CQ-03", "CQ-01"]], "note": "lineage has no object without the candidate list; RA2 test applied and passed"},
+    "local_repairability": "criterion resolution amends one question's scope; candidate list untouched",
+    "repeated_reasoning_cost": {"model_calls": "1 per arm", "token_use": null, "manual_intervention_count": 0}
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "case_id": "s4_avca_donor_data",
+  "input_status": "RAW",
+  "source_sha256": "7b136c4d6ae8d77d9cae98e23e312dfec4fb0076099e295dd0d6a5053a747ae2",
+  "cqs_artifact_id": "CQS-CQC-P2-04",
+  "cqs_sha256": "3b94752de0af4850de6dd540d4eac5218d1b6054be540da428c1e531be2243bf",
+  "mechanical": {
+    "schema_valid": true,
+    "source_hash_valid": true,
+    "source_trace_exact_valid": true,
+    "dependency_dag_valid": true,
+    "deterministic_render_valid": true
+  },
+  "local_claw_preliminary_review": {
+    "source_intent_elements": [
+      "资源实体：Arc Virtual Cell Atlas",
+      "查证内容：年轻健康血管/心脏原代供体数据",
+      "疑问语气（原文重复『有没有』）"
+    ],
+    "preserved_elements": [
+      "实体确认（CQ-01）",
+      "存在性查证（CQ-02，门控于 CQ-01+CQ-03）",
+      "三判定词可判定性（CQ-03）",
+      "文本重复显式记录（CQ-02.uncertainty）"
+    ],
+    "possibly_lost_elements": [
+      "操作者可能的用途语境（为何需要该数据）——源未含，非损失"
+    ],
+    "possible_unsupported_commitments": [
+      "无重大：判定词阈值未被代拟"
+    ],
+    "ambiguity_preserved": true,
+    "possible_false_precision": "无：存在性回答被显式要求绑定判定标准",
+    "possible_over_decomposition": "无（3 问）",
+    "possible_under_decomposition": "无",
+    "possible_context_loss": "低",
+    "possible_dependency_issue": "CQ-02→[CQ-01, CQ-03]：通过 RA2 判据。诚实备注：本消化直接产出双门控结构，反映本会话已吸收 RA1 的缺前置教训（同模型会话先验无法抹除）——P1 首轮同案例只写 [CQ-01]。此不对称记入实验记录。",
+    "possible_question_type_overcommitment": "无（ENTITY/SOURCE_CONTENT/MEASUREMENT 边界清晰）"
+  },
+  "final_semantic_adjudication": {
+    "status": "PASS_WITH_CAVEAT",
+    "finding": "Three-question structure acceptable; however, the dual-gate dependency (CQ-02 on CQ-01+CQ-03) reflects session-memory absorption of the P1-RA lesson, not an independent demonstration.",
+    "action": "No re-digestion; CQS unchanged (current == initial).",
+    "rationale": "Contamination caveat preserved: this case is not independent evidence of the model producing the gate unprompted."
+  }
+}

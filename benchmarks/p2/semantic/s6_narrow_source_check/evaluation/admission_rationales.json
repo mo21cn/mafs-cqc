@@ -1,0 +1,7 @@
+{
+  "case_id": "s6_narrow_source_check",
+  "note": "Admission rationale per final CQ: what independent evidence landscape does this question own? (contract section 15; stored here, NOT added to CQS schema)",
+  "admission_rationales": {
+    "CQ-01": "Owns the evidence landscape of the identified paper's supplementary-material content (table existence, three-state verdict) — paper identity is resolved as the execution path of this single landscape, not as a separate question."
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "case_id": "s5_mixed_commitment",
+  "input_status": "SYNTHETIC_STRESS",
+  "source_sha256": "21c183e3b096a96c3db999d74a11655b4374e3d7b0347575a7d77676d7c7d2a3",
+  "cqs_artifact_id": "CQS-CQC-P2-05",
+  "cqs_sha256": "f992080ecf169c90e19437ee811c611aa7039bb941a3c15f73bbaba6792fc333",
+  "mechanical": {
+    "schema_valid": true,
+    "source_hash_valid": true,
+    "source_trace_exact_valid": true,
+    "dependency_dag_valid": true,
+    "deterministic_render_valid": true
+  },
+  "local_claw_preliminary_review": {
+    "source_intent_elements": [
+      "机制维度：上游抑制 → 下游代谢连锁效应",
+      "新颖性维度：相对既有直接靶向策略是否新范式",
+      "测量维度：单细胞/近单细胞质谱可测性 → 决定动物实验设计",
+      "（叙事故意不声明主维度）"
+    ],
+    "preserved_elements": [
+      "三维度全部保留为独立 CQ（CQ-01 机制 / CQ-02 新颖性 / CQ-03 测量 / CQ-04 实验设计约束）",
+      "维度间真实关联保留为依赖边（CQ-04→CQ-03）"
+    ],
+    "possibly_lost_elements": [
+      "『代谢影像上看到了一些变化』的具体表型未进入 artifact——源未说明，消化未代填（保守投影）"
+    ],
+    "possible_unsupported_commitments": [
+      "无：未引入源外实体（如具体 oncometabolite 名称）；CQ-03 明确拒绝代为指定『relevant 的代谢物』"
+    ],
+    "ambiguity_preserved": true,
+    "possible_false_precision": "边界观察：四类 question_type 各一——无单一类型能概括本案；若下游把 type 当路由键（硬 router），本案会在任一单类型下失真。这是 P2 设计的核心压测点：类型分散本身就是诚实信号。",
+    "possible_over_decomposition": "无：三维度证据景观确实独立（机制文献 / 先例对比 / 技术能力 / 实验设计）",
+    "possible_under_decomposition": "无",
+    "possible_context_loss": "中低：叙事中的临床语境（IDH1 突变胶质瘤队列、影像变化）部分压入 CQ statement 的术语，其余保留在 source_narrative 水库",
+    "possible_dependency_issue": "CQ-04→CQ-03 通过 RA2 判据（可测性不确定则实验设计无法定）；其余独立",
+    "possible_question_type_overcommitment": "核心发现：本案证明混合认知承诺**可以**在七字段内诚实呈现——前提是 question_type 不被当作权威路由（类型分散 + uncertainty 承接判定基准缺失）"
+  },
+  "final_semantic_adjudication": {
+    "status": "PRODUCTIVE_INSTABILITY_PRESERVED",
+    "finding": "CQ-04 converted a downstream consequence (animal-experiment design) into an upstream question; the mixed-type dispersion of CQ-01/02/03 is a positive result.",
+    "action": "Re-digested (CQS-CQC-P2-05-R1): CQ-04 removed; consequence demoted to context in CQ-03 condition; mixed types preserved.",
+    "rationale": "Mixed epistemic structure is not a failure; downstream consequence is not an upstream CandidateQuestion."
+  }
+}

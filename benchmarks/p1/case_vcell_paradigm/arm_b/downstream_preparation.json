@@ -1,0 +1,42 @@
+{
+  "case_id": "case_vcell_paradigm",
+  "arm": "B",
+  "generated_from": "arm_b/candidate_question_set.json (explicit digestion artifact CQS-CQC-P1-03)",
+  "raw_input_sha256": "37f34e945191656a338bfec3cee788dd959cccc3bdbe94fc60171ff88a5a8df4",
+  "question_ids_to_search": [
+    {
+      "question_id": "CQ-01",
+      "search_question": "候选范式宽收（多来源类别饱和盘点）",
+      "resolution_condition_ref": "见 CQ-01.resolution_condition"
+    },
+    {
+      "question_id": "CQ-03",
+      "search_question": "候选范式 vs 既有范式的谱系映射（依赖 CQ-01 清单）",
+      "resolution_condition_ref": "见 CQ-03.resolution_condition"
+    },
+    {
+      "question_id": "CQ-02",
+      "search_question": "『范式』判定基准厘清（与操作者/权威先例核对后筛选候选清单）",
+      "resolution_condition_ref": "见 CQ-02.resolution_condition"
+    }
+  ],
+  "question_order_if_any": [
+    "CQ-01",
+    "CQ-03",
+    "CQ-02"
+  ],
+  "reason_for_order": "先宽收候选（CQ-01），清单在手后做谱系映射（CQ-03，依赖边 CQ-03→CQ-01）；判定基准（CQ-02）与操作者确认后对候选清单做最终筛选",
+  "questions_blocked_by_prerequisite": [
+    "CQ-03 (blocked by CQ-01 per dependency edge)"
+  ],
+  "questions_independently_searchable": [
+    "CQ-01",
+    "CQ-02"
+  ],
+  "missing_information_before_search": [
+    "『范式』判定基准未定义——显式保留于 CQ-02，并作为需要操作者确认的事项上浮",
+    "拼写歧义同 case_vcell_scope（原话同源），本次以领域解读为主并保留于 CQ-01.uncertainty"
+  ],
+  "natural_reasoning_notes": "Explicit digestion arm: the paradigm-criterion gap is a durable, operable question (CQ-02) rather than an implicit assumption; wide-net-then-filter strategy is visible in the order rationale.",
+  "raw_input_sha256_note": "corrected in CQC-P1-RA1 Closure A (mechanical provenance fix; value was hand-copied incorrectly at P1)"
+}

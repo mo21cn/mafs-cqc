@@ -1,0 +1,13 @@
+{
+  "case_id": "s6_narrow_source_check",
+  "diagnosis_source": "HO+ChatGPT P3 acceptance",
+  "prior_srp_artifact_id": "SRP-CQC-P3-06",
+  "prior_srp_sha256": "d07a425f30a0388d098290ae70502402ed398c661c62f0af735ab94b7df50fb8",
+  "measured_failure": "SRP R01 route condition contained execution-style sequencing ('否则作为 R01 的内嵌执行路径') instead of evidence-state semantics",
+  "repair_boundary": "requirements only; envelope, schema, source bindings unchanged",
+  "fields_changed": [
+    "requirements"
+  ],
+  "revised_srp_artifact_id": "SRP-CQC-P3-06-R1",
+  "revised_srp_sha256": "ffdf4d673069fe28784135af9d54734934134a41fb88619db9bcef796fd10032"
+}

@@ -1,0 +1,10 @@
+{
+  "case_id": "s5_mixed_commitment",
+  "source_cqs_id": "CQS-CQC-P2-05-R1",
+  "source_cqs_sha256": "03d9fd18edc8343bddbbd5e88adf0b197113818369b33cc5391b310b08b82cd0",
+  "source_narrative_sha256": "21c183e3b096f988d3a80c6ebbd145a1255efab08052009380b154ff48ec7d8d",
+  "input_status": "FINAL_P2_CQS+RAW (verbatim reuse; narrative bytes unchanged since P1)",
+  "case_family": "SYNTHETIC_STRESS_mixed_mechanism_novelty_measurement",
+  "model_config": "zai/zai_auto via OpenClaw local claw; single model, frozen P0 digestion instruction + SRP v0.1 contract",
+  "run_timestamp": "2026-08-31T19:55:00Z"
+}

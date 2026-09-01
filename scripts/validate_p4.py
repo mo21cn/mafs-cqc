@@ -425,7 +425,7 @@ def validate_final_manifest(errors: list) -> dict:
         if not line.strip():
             continue
         sha, rel = line.split("  ", 1)
-        p = PKG / rel
+        p = Path(PKG) / rel
         n += 1
         if not p.is_file():
             bad.append(f"missing {rel}")

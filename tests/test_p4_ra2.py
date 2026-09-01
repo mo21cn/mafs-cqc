@@ -133,12 +133,13 @@ class TestManifestCoverage(unittest.TestCase):
             mf.write_text((f"{real_sha}  docs/CQC_P4_SUMMARY.md\n"), encoding="utf-8")
             errors: list[str] = []
             import validate_p4 as vp
-            old_docs = vp.DOCS
+            old_docs, old_pkg = vp.DOCS, vp.PKG
             vp.DOCS = tmp_docs
+            vp.PKG = td
             try:
                 out = vp.validate_final_manifest(errors)
             finally:
-                vp.DOCS = old_docs
+                vp.DOCS, vp.PKG = old_docs, old_pkg
             self.assertFalse(out.get("final_manifest_valid"))
             self.assertTrue(any("COVERAGE_MISSING" in e for e in errors))
 

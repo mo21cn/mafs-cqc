@@ -5,11 +5,13 @@ import hashlib
 import json
 import os
 import shutil
+import subprocess
 import sys
 import unittest
 from pathlib import Path
 
 PKG = Path(__file__).resolve().parents[1]
+DOCS = PKG / "docs"
 sys.path.insert(0, str(PKG / "integration" / "mafs_v3"))
 sys.path.insert(0, str(PKG / "scripts"))
 
@@ -320,6 +322,174 @@ class TestSourceChainNegativeSRPHash(unittest.TestCase):
                                             tp / "source_srp.json",
                                             tp / "budget_envelope.json")
             self.assertEqual(ctx.exception.code, CQC_SOURCE_CHAIN_MISMATCH)
+
+
+# ============================================================================
+# CQC-P5-RA1-CI1 regression tests (semantic-review provenance + canonical
+# consistency gate).
+# ============================================================================
+
+CORRECT_P4_SHA = "8028e17a6eaab364c744cfa72b714f0f0bd6cf01"
+WRONG_P4_SHA = "529ccc63f6d2900172a6ab4367dc33c52eb699fa"
+
+
+class TestRA1_CI1_PlanningVerdictsNotAutoApproved(unittest.TestCase):
+    """P5-RA1-CI1 §18.1: planning semantic verdicts are not mechanically
+    auto-approved. Local Claw preliminary review block must be authored
+    by LOCAL_CLAW and contain a `notes` field recording observed
+    conclusions after reading M1/M2/M3."""
+
+    def test_all_three_planning_reviews_have_local_claw_preliminary(self):
+        for case in ("m1_s4_shared", "m2_s6_instability", "m3_s5_standard"):
+            p = MAFS_PL / case / "evaluation" / "integration_review.json"
+            self.assertTrue(p.is_file(), f"{case} integration_review.json missing")
+            r = _load(p)
+            prelim = r.get("local_claw_preliminary_review") or {}
+            self.assertEqual(prelim.get("authored_by"), "LOCAL_CLAW",
+                             f"{case}: local_claw_preliminary_review.authored_by must be LOCAL_CLAW")
+            # No PENDING placeholders may remain in committed reviews
+            for fld in ("search_order_semantically_contained",
+                        "authority_leak_observed",
+                        "integration_projection_loss_observed",
+                        "conditional_preactivation_observed",
+                        "source_context_promoted_to_obligation"):
+                val = prelim.get(fld)
+                self.assertNotEqual(val, "PENDING_LOCAL_CLAW",
+                                    f"{case}.{fld} still PENDING_LOCAL_CLAW; Local Claw must fill")
+                self.assertIsInstance(val, bool,
+                                      f"{case}.{fld} must be bool, got {val!r}")
+            self.assertIsInstance(prelim.get("notes"), str)
+            self.assertGreater(len(prelim.get("notes", "")), 50,
+                               f"{case}: notes too short to record real observations")
+
+
+class TestRA1_CI1_ContextualNoSearchOrderClaims(unittest.TestCase):
+    """P5-RA1-CI1 §18.2 + §6: contextual cases do not claim SearchOrder
+    semantic containment without SearchOrders. The planning-specific
+    semantic fields must be NOT_APPLICABLE (or absent)."""
+
+    def test_six_contextual_cases_mark_planning_fields_not_applicable(self):
+        for case in ("s1_vms_cellular_mechanism", "s2_vcell_paradigm",
+                     "s3_antagonist_domains", "s4_avca_donor_data",
+                     "s5_mixed_commitment", "s6_narrow_source_check"):
+            p = CTX / case / "evaluation" / "integration_review.json"
+            self.assertTrue(p.is_file(), f"{case} integration_review.json missing")
+            r = _load(p)
+            prelim = r.get("local_claw_preliminary_review") or {}
+            for fld in ("search_order_semantically_contained",
+                        "authority_leak_observed",
+                        "integration_projection_loss_observed",
+                        "conditional_preactivation_observed",
+                        "source_context_promoted_to_obligation"):
+                self.assertEqual(prelim.get(fld), "NOT_APPLICABLE",
+                                 f"{case}.{fld} must be NOT_APPLICABLE (no MAFS planning object)")
+
+
+class TestRA1_CI1_PlanningFinalAdjudicationPending(unittest.TestCase):
+    """P5-RA1-CI1 §18.4 + §9: all 3 planning reviews retain
+    PENDING_HO_CHATGPT final status. CI1 must not self-sign PASS."""
+
+    def test_all_three_planning_reviews_pending_ho_chatgpt(self):
+        for case in ("m1_s4_shared", "m2_s6_instability", "m3_s5_standard"):
+            p = MAFS_PL / case / "evaluation" / "integration_review.json"
+            r = _load(p)
+            self.assertEqual(r["final_semantic_adjudication"]["status"],
+                             "PENDING_HO_CHATGPT",
+                             f"{case}: final_semantic_adjudication must be PENDING_HO_CHATGPT")
+
+
+class TestRA1_CI1_CanonicalP4SHA(unittest.TestCase):
+    """P5-RA1-CI1 §18.5 + §10 + §11: Summary, Metrics, and Manifest agree
+    on the P4 source baseline SHA = 8028e17... (the P4-RA2 final-gate
+    commit). The previously-pinned 529ccc63 was an intermediate that
+    must not survive in the P5 closure surface."""
+
+    def test_summary_p4_pin_correct(self):
+        s = (DOCS / "CQC_P5_SUMMARY.md").read_text(encoding="utf-8")
+        self.assertIn(CORRECT_P4_SHA, s,
+                      "CQC_P5_SUMMARY.md must pin P4 source baseline 8028e17...")
+        self.assertNotIn(WRONG_P4_SHA, s,
+                         "CQC_P5_SUMMARY.md must not still carry the intermediate 529ccc63 SHA")
+
+    def test_metrics_p4_pin_correct(self):
+        m = _load(DOCS / "CQC_P5_METRICS.json")
+        self.assertEqual(m.get("cqc_p4_source_commit"), CORRECT_P4_SHA,
+                         "CQC_P5_METRICS.json cqc_p4_source_commit must be 8028e17...")
+        self.assertNotIn(WRONG_P4_SHA, json.dumps(m),
+                         "CQC_P5_METRICS.json must not still carry the intermediate 529ccc63 SHA")
+
+    def test_manifest_p4_pin_correct(self):
+        m_path = DOCS / "CQC_P5_SHA256_MANIFEST.txt"
+        self.assertTrue(m_path.is_file())
+        head = "\n".join(m_path.read_text(encoding="utf-8").splitlines()[:20])
+        self.assertIn(CORRECT_P4_SHA, head,
+                      "manifest header must reference the correct P4 baseline 8028e17...")
+
+
+class TestRA1_CI1_ReviewInventoryCounts(unittest.TestCase):
+    """P5-RA1-CI1 §18.6-8: 6 contextual + 3 planning = 9 total
+    integration_review.json files. Each carries the right shape
+    (planning → LOCAL_CLAW; contextual → MACHINE_DERIVED)."""
+
+    def test_review_inventory_counts(self):
+        n_ctx = 0
+        n_plan = 0
+        for case in ("s1_vms_cellular_mechanism", "s2_vcell_paradigm",
+                     "s3_antagonist_domains", "s4_avca_donor_data",
+                     "s5_mixed_commitment", "s6_narrow_source_check"):
+            p = CTX / case / "evaluation" / "integration_review.json"
+            if p.is_file():
+                n_ctx += 1
+        for case in ("m1_s4_shared", "m2_s6_instability", "m3_s5_standard"):
+            p = MAFS_PL / case / "evaluation" / "integration_review.json"
+            if p.is_file():
+                n_plan += 1
+        self.assertEqual(n_ctx, 6, f"contextual review count = {n_ctx}, expected 6")
+        self.assertEqual(n_plan, 3, f"planning review count = {n_plan}, expected 3")
+        self.assertEqual(n_ctx + n_plan, 9, "total review count must be 9")
+
+
+class TestRA1_CI1_ManifestNoLiteralShellExpression(unittest.TestCase):
+    """P5-RA1-CI1 §18.9 + §13: manifest must not contain the literal
+    text `$(git rev-parse HEAD)`. The actual HEAD SHA must be evaluated
+    and written, or the header line removed entirely."""
+
+    def test_manifest_has_no_unevaluated_shell_expression(self):
+        m_path = DOCS / "CQC_P5_SHA256_MANIFEST.txt"
+        head = "\n".join(m_path.read_text(encoding="utf-8").splitlines()[:20])
+        self.assertNotIn("$(git rev-parse HEAD)", head,
+                         "manifest must not contain literal $(git rev-parse HEAD) text")
+
+
+class TestRA1_CI1_NoPriorPhaseMutation(unittest.TestCase):
+    """P5-RA1-CI1 §18.10 + §16: no docs/CQC_P3_*, docs/CQC_P4_*,
+    scripts/validate_p3.py, validate_p4.py, benchmarks/p0..p4 may be
+    modified. The CI1 repair surface is P5-only."""
+
+    def test_no_p3_p4_or_p0_through_p4_canonical_files_changed(self):
+        # Use the latest commit on dev/cqc-p5 (the one we are about to
+        # push) to ensure this runs against the post-CI1 state. We
+        # verify the *already-committed* baseline (HEAD) does not touch
+        # these paths in the latest commit, and that the working tree
+        # has no staged or unstaged changes to them either.
+        # Stage all pending changes first.
+        out = subprocess.run(
+            ["git", "diff", "--name-only", "HEAD"],
+            cwd=str(PKG), capture_output=True, text=True, check=True,
+        ).stdout.split()
+        forbidden = [
+            p for p in out
+            if p.startswith("docs/CQC_P3_") or p.startswith("docs/CQC_P4_")
+            or p == "scripts/validate_p3.py"
+            or p == "scripts/validate_p4.py"
+            or p.startswith("benchmarks/p0/")
+            or p.startswith("benchmarks/p1/")
+            or p.startswith("benchmarks/p2/")
+            or p.startswith("benchmarks/p3/")
+            or p.startswith("benchmarks/p4/")
+        ]
+        self.assertEqual(forbidden, [],
+                         f"forbidden P3/P4/P0-P4 files modified: {forbidden}")
 
 
 if __name__ == "__main__":

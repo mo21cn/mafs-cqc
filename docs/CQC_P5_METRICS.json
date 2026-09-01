@@ -1,6 +1,8 @@
 {
   "contract_id": "CQC-P5-MAFS-INTEGRATION-ADAPTER-ARTIFACT-LINEAGE-CLOSURE-v0.1",
   "current_phase_state": "READY_FOR_REVIEW",
+  "cqc_p4_source_commit": "8028e17a6eaab364c744cfa72b714f0f0bd6cf01",
+  "mafs_baseline_commit": "cd09699fc8cc160ab5cfff00a41e714961dd2109",
   "contextual_binding_case_count": 6,
   "full_source_chain_valid_count": 6,
   "source_context_accessible_count": 6,
@@ -21,14 +23,20 @@
   "constrained_budget_not_misclassified_count": 1,
   "stale_state_test_count": 1,
   "stale_state_detected_count": 1,
+  "contextual_integration_review_present_count": 6,
+  "planning_integration_review_present_count": 3,
+  "integration_review_present_count": 9,
+  "contextual_integration_review_mechanical_truth_valid_count": 6,
+  "planning_integration_review_mechanical_truth_valid_count": 3,
+  "integration_review_mechanical_truth_valid_count": 9,
+  "planning_local_claw_preliminary_review_completed_count": 3,
+  "planning_final_semantic_adjudication_pending_count": 3,
   "mafs_baseline_pin_valid": true,
   "candidate_auto_selection_added": false,
   "mafs_production_modified": false,
   "optional_live_discovery_attempted": false,
   "optional_live_discovery_status": "NOT_RUN",
-  "integration_review_present_count": 6,
-  "integration_review_mechanical_truth_valid_count": 6,
-  "test_count": 92,
+  "test_count": 96,
   "meaningful_push_ci_cycles_current_step": 1,
-  "provenance_note": "no self-referential commit SHA; Git owns outer identity (reported externally in the return note). Closure E narrowed the previous overclaimed mafs_preflight_evaluated_count=3 to mafs_native_planning_schema_evaluated_count=3 + mafs_full_preflight_evaluated_count=0, narrowing the claim to the evidence actually earned (full MAFS preflight was not executed in P5 and remains a repository-side integration concern). Closure G removed the premature CQC-P5-CLOSED state while cross-repo CI was red; canonical state now reflects the actual evidence chain."
+  "provenance_note": "no self-referential commit SHA; Git owns outer identity (reported externally in the return note). P4 source baseline corrected from intermediate 529ccc63 to the P4-RA2 final-gate commit 8028e17a6eaab364c744cfa72b714f0f0bd6cf01 per CQC-P5-RA1-CI1 Closure B. Review inventory split into 6 contextual (NOT_APPLICABLE for planning-specific fields) + 3 planning (Local Claw preliminary review completed; final adjudication remains PENDING_HO_CHATGPT) = 9 total per CQC-P5-RA1-CI1 Closure C."
 }

@@ -7,15 +7,16 @@ contract_id: CQC-P5-MAFS-INTEGRATION-ADAPTER-ARTIFACT-LINEAGE-CLOSURE-v0.1
 current_phase_state: READY_FOR_REVIEW
 repository: mo21cn/mafs-cqc
 branch: dev/cqc-p5
-cqc_p4_source_commit: 529ccc63f6d2900172a6ab4367dc33c52eb699fa
+cqc_p4_source_commit: 8028e17a6eaab364c744cfa72b714f0f0bd6cf01
 mafs_baseline_commit: cd09699fc8cc160ab5cfff00a41e714961dd2109
 meaningful_push_ci_cycles_current_step: 1
 ```
 
 `cqc_p4_source_commit` is the exact 40-char SHA of the P4-RA2 final-gate
-acceptance commit (529ccc63) on `dev/cqc-p4`, frozen into this summary per
-Closure H. No indirect `see other artifact` reference; the SHA itself is
-pinned.
+acceptance commit (`CQC-P4-RA2-FINAL-GATE: coverage fixture uses Path object for
+PKG monkeypatch + manifest entry rebound for tests/test_p4_ra2.py`)
+on `dev/cqc-p4`, frozen into this summary per Closure H. No indirect
+`see other artifact` reference; the SHA itself is pinned.
 
 ## B — Frozen Artifact Chain
 
@@ -153,16 +154,28 @@ production merge. These require later evidence or out-of-scope work.
 ## L — Next Step
 
 ```text
-MAFS-REPOSITORY-SIDE-INTEGRATION
+Immediate next step: CQC-UPSTREAM-FREEZE
+Post-freeze integration path: MAFS-REPOSITORY-SIDE-INTEGRATION / Path C
 ```
 
-Per CQC-P5-RA1 Amendment A — Repository Ownership & Integration Path Freeze
-(HO + ChatGPT authority), the next step after this acceptance is
-**MAFS-REPOSITORY-SIDE-INTEGRATION**: a separate bounded contract that
-authorizes a thin MAFS-side consumer adapter against the pinned/versioned
-CQC artifact protocol. That future step may add only the consumer adapter
-inside `mo21cn/mafs-v3-p0`; it must not copy, vendor, or absorb the CQC
-implementation.
+Per CQC-P5-RA1-CI1 §15, the immediate next step after P5 final acceptance
+is **CQC-UPSTREAM-FREEZE** (P5 closure acceptance → CQC upstream line
+freeze). Only after that freeze may a separate bounded contract authorize
+**MAFS-REPOSITORY-SIDE-INTEGRATION** (the thin MAFS-side consumer adapter
+against the pinned/versioned CQC artifact protocol) per CQC-P5-RA1
+Amendment A — Path C.
+
+The freeze sequence:
+
+```text
+CQC-P5 acceptance (CI1)
+  ↓
+CQC-UPSTREAM-FREEZE            (P5 closure final; CQC upstream line frozen)
+  ↓
+separate bounded authorization
+  ↓
+MAFS-REPOSITORY-SIDE-INTEGRATION / Path C   (thin MAFS-side consumer adapter)
+```
 
 # `P5-RA1 Final Closure`
 
@@ -228,12 +241,34 @@ earned.
 
 ## F. Integration Review
 
-Per-planning-case `evaluation/integration_review.json` artifacts are present
-for the 3 MAFS planning cases (`m1_s4_shared`, `m2_s6_instability`,
-`m3_s5_standard`) and for the 6 contextual bindings. Mechanical fields are
-machine-derived from the binding, envelope, SRP, CQS, and schema-validate
-output. Final semantic adjudication remains `PENDING_HO_CHATGPT`; Local
-Claw does not self-sign final semantic acceptance.
+Per-case `evaluation/integration_review.json` artifacts are present for
+**6 contextual + 3 MAFS-planning = 9 total** (per CQC-P5-RA1-CI1 Closure C).
+
+The review inventory distinguishes three layers:
+
+```text
+mechanical review truth
+  machine-derived: source-chain, route-join, conditional non-activation,
+  MAFS baseline pin, MAFS-native schema validity, stale-state, search-
+  order lineage traceability. 9/9 PASS.
+
+Local Claw preliminary semantic review
+  authored_by: LOCAL_CLAW (planning) | MACHINE_DERIVED (contextual).
+  3/3 planning cases completed by Local Claw after reading M1/M2/M3
+  artifacts (source_cqs.json, source_srp.json, budget_envelope.json,
+  integration_binding.json, mafs_planning.json).
+  6/6 contextual cases set planning-specific fields to NOT_APPLICABLE
+  (no MAFS-native planning object exists for contextual cases).
+
+HO+ChatGPT final semantic adjudication
+  3/3 PENDING_HO_CHATGPT (CI1 must not self-sign PASS).
+```
+
+The P5-RA1 contract's "structural traceability != semantic containment"
+rule (Closure A) is enforced by separating `mechanical` (machine-derived
+from structural artifacts) from `local_claw_preliminary_review` (Local
+Claw inspects M1/M2/M3 and records observed conclusions) and
+`final_semantic_adjudication` (PENDING_HO_CHATGPT).
 
 ## G. Canonical State
 
@@ -247,7 +282,7 @@ encode CLOSED as a machine field that pre-empts the CI verdict.
 ## H. P4 Source Baseline
 
 ```text
-cqc_p4_source_commit: 529ccc63f6d2900172a6ab4367dc33c52eb699fa
+cqc_p4_source_commit: 8028e17a6eaab364c744cfa72b714f0f0bd6cf01
 ```
 
 The exact 40-char SHA of the P4-RA2 final-gate acceptance commit
@@ -276,6 +311,5 @@ all describe the same final P5 state.
 
 ## J. Next Step
 
-`MAFS-REPOSITORY-SIDE-INTEGRATION` (per CQC-P5-RA1 Amendment A — Repository
-Ownership & Integration Path Freeze; the thin MAFS-side consumer adapter
-that consumes the pinned CQC artifact protocol).
+`CQC-UPSTREAM-FREEZE` (immediate); `MAFS-REPOSITORY-SIDE-INTEGRATION` /
+Path C (post-freeze; per CQC-P5-RA1-CI1 §15).

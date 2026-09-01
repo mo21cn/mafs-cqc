@@ -1,20 +1,30 @@
 {
   "case_id": "BIND-m1_s4_shared",
-  "schema_version": "cqc-p5-integration-review.v0.1",
+  "schema_version": "cqc-p5-integration-review.v0.2",
   "mechanical": {
     "source_chain_valid": true,
     "allocation_route_join_valid": true,
     "conditional_non_activation_valid": true,
     "mafs_baseline_valid": true,
     "mafs_native_schema_valid": true,
-    "stale_state_valid": true
+    "stale_state_valid": true,
+    "search_order_lineage_traceable": true
   },
   "local_claw_preliminary_review": {
+    "authored_by": "LOCAL_CLAW",
+    "review_basis": [
+      "source_cqs.json",
+      "source_srp.json",
+      "budget_envelope.json",
+      "integration_binding.json",
+      "mafs_planning.json"
+    ],
     "search_order_semantically_contained": true,
     "authority_leak_observed": false,
-    "source_context_accessible": true,
     "integration_projection_loss_observed": false,
-    "notes": ""
+    "conditional_preactivation_observed": false,
+    "source_context_promoted_to_obligation": false,
+    "notes": "M1 read: SRP declares R01 as a shared requirement serving CQ-01 (entity identity) and CQ-02 (source content) — the shared obligation is upstream, not introduced by integration. Axis A1 (resource-identity-confirmation, gate_scope=source-content-verification) operationalizes R01 faithfully: its proposition 'confirm Arc Virtual Cell Atlas entity identity, dataset inventory scope, and access path (shared obligation serving CQ-01 and CQ-02)' is a direct restatement of the SRP's R01 evidence_need. Axis A2 (metadata-decidability for young/healthy/primary) operationalizes R02 (CQ-03 measurement observability) faithfully. R03/source_content_verification (CONDITIONAL, gated on R01+R02) remains held as RESERVE_CONDITIONAL — productive instability preserved. No scientific meaning absent from SRP was added. No source-context-only meaning promoted to a new obligation. SearchOrder target/intent for SO-A1-1 (entity identity, dataset inventory, access path) and SO-A2-1 (Atlas metadata schema decidability of young/healthy/primary) faithfully operationalize the Axes' propositions. Final adjudication: PENDING_HO_CHATGPT (this preliminary review records observed structural semantic conformance, not final acceptance)."
   },
   "final_semantic_adjudication": {
     "status": "PENDING_HO_CHATGPT"

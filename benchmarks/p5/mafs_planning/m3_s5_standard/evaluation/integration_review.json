@@ -1,20 +1,30 @@
 {
   "case_id": "BIND-m3_s5_standard",
-  "schema_version": "cqc-p5-integration-review.v0.1",
+  "schema_version": "cqc-p5-integration-review.v0.2",
   "mechanical": {
     "source_chain_valid": true,
     "allocation_route_join_valid": true,
     "conditional_non_activation_valid": true,
     "mafs_baseline_valid": true,
     "mafs_native_schema_valid": true,
-    "stale_state_valid": true
+    "stale_state_valid": true,
+    "search_order_lineage_traceable": true
   },
   "local_claw_preliminary_review": {
+    "authored_by": "LOCAL_CLAW",
+    "review_basis": [
+      "source_cqs.json",
+      "source_srp.json",
+      "budget_envelope.json",
+      "integration_binding.json",
+      "mafs_planning.json"
+    ],
     "search_order_semantically_contained": true,
     "authority_leak_observed": false,
-    "source_context_accessible": true,
     "integration_projection_loss_observed": false,
-    "notes": ""
+    "conditional_preactivation_observed": false,
+    "source_context_promoted_to_obligation": false,
+    "notes": "M3 read: SRP declares 3 REQUIRED routes — R01/mechanism_evidence (CQ-01), R02/historical_lineage (CQ-02), R03/measurement_observability (CQ-03) — plus 1 CONDITIONAL R02/counterexample_negative_evidence. BudgetEnvelope allocates AL01/AL02/AL03 COMMITTED to the 3 REQUIRED routes and AL04 RESERVE_CONDITIONAL to R02/counterexample_negative_evidence. Axis A1 (mechanism-cascade-evidence) operationalizes R01; its proposition 'cell/pathway-level evidence of downstream metabolic cascade effects under upstream inhibition in IDH1-mutant glioma' is from the source narrative (S5's IDH1-mutant glioma + upstream-inhibition narrative) and the SRP R01's evidence_need (在细胞/通路层面获得间接代理反映……下游代谢级联) — no new meaning added. Axis A2 (prior-art-strategy-inventory) operationalizes R02; its proposition 'public record of direct mutant-enzyme-targeting strategies and recorded differences vs upstream-inhibition' is a faithful restatement of R02's evidence_need. Axis A3 (single-cell-metabolomics-capability) operationalizes R03; its proposition 'detection limit, metabolite coverage, throughput, and single-cell/near-single-cell feasibility boundaries' is a faithful restatement of R03's evidence_need. SearchOrders SO-A1-1/SO-A2-1/SO-A3-1 with discovery_search operation_type and the recorded targets/intents faithfully operationalize the Axes. CRITICAL CONTRACT CHECK PASSED: the SRP's R02.uncertainty_binding records 'relevant 的代表动物种类未规定' as a known uncertainty — this is NOT promoted to a new evidence obligation; the counterexample route (R02/counterexample_negative_evidence) stays held as RESERVE_CONDITIONAL in the binding. No animal-experiment smuggling. Productive instability preserved. No scientific meaning absent from SRP was added. Final adjudication: PENDING_HO_CHATGPT."
   },
   "final_semantic_adjudication": {
     "status": "PENDING_HO_CHATGPT"

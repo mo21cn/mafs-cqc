@@ -94,13 +94,17 @@ def main(argv=None) -> int:
         entries.append((sha, rel))
 
     # Header
+    head_sha = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=str(PKG), capture_output=True, text=True, check=True,
+    ).stdout.strip() or "unknown"
     lines = [
         "# CQC_P5_SHA256_MANIFEST.txt - canonical Git-byte SHA-256 of P5 closure surface",
         "# contract: CQC-P5-RA1-CROSS-REPO-CI-INTEGRATION-TRUTH-FINAL-CLOSURE-v0.1 §18",
         f"# package: {PKG.name}",
-        f"# generated from HEAD: $(git rev-parse HEAD)",
+        f"# generated from HEAD: {head_sha}",
         f"# pinned MAFS baseline: cd09699fc8cc160ab5cfff00a41e714961dd2109",
-        f"# P4 source baseline: 529ccc63f6d2900172a6ab4367dc33c52eb699fa",
+        f"# P4 source baseline: 8028e17a6eaab364c744cfa72b714f0f0bd6cf01",
         f"# total entries: {len(entries)}",
         "#",
         "# This manifest is pinned to the canonical Git object bytes (post-",

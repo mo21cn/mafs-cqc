@@ -276,6 +276,50 @@ def main(argv=None) -> int:
                     manifest_ok = False
 
     all_ok = (not errors and n_ctx == 6 and n_planning == 3 and qn_ok and stale_ok and t8_ok and manifest_ok)
+
+    # CQC-P5-RA1-CI1 §19 Bounded Canonical Consistency Gate.
+    # Verify that Summary / Metrics / Manifest agree on:
+    #   - P4 source baseline SHA
+    #   - review inventory (6 contextual + 3 planning)
+    #   - current phase state = READY_FOR_REVIEW
+    #   - next step = CQC-UPSTREAM-FREEZE (immediate)
+    consistency_errors: list[str] = []
+    expected_p4 = "8028e17a6eaab364c744cfa72b714f0f0bd6cf01"
+    summary_path = PKG / "docs" / "CQC_P5_SUMMARY.md"
+    metrics_path = PKG / "docs" / "CQC_P5_METRICS.json"
+    summary_text = summary_path.read_text(encoding="utf-8") if summary_path.is_file() else ""
+    metrics_obj = json.loads(metrics_path.read_text(encoding="utf-8")) if metrics_path.is_file() else {}
+
+    # 1) P4 SHA agreement
+    if expected_p4 not in summary_text:
+        consistency_errors.append(f"canon: Summary missing P4 SHA {expected_p4}")
+    if metrics_obj.get("cqc_p4_source_commit") != expected_p4:
+        consistency_errors.append(f"canon: Metrics cqc_p4_source_commit != {expected_p4}")
+    if manifest_ok:
+        mtext = (PKG / "docs" / "CQC_P5_SHA256_MANIFEST.txt").read_text(encoding="utf-8")
+        if expected_p4 not in "\n".join(mtext.splitlines()[:20]):
+            consistency_errors.append(f"canon: Manifest header missing P4 SHA {expected_p4}")
+    # 2) review inventory
+    n_ctx_reviews = sum(1 for d in CTX.iterdir() if d.is_dir()
+                         and (d / "evaluation" / "integration_review.json").is_file())
+    n_plan_reviews = sum(1 for d in MAFS_PL.iterdir() if d.is_dir()
+                          and (d / "evaluation" / "integration_review.json").is_file())
+    if n_ctx_reviews != 6:
+        consistency_errors.append(f"canon: contextual review count = {n_ctx_reviews}, expected 6")
+    if n_plan_reviews != 3:
+        consistency_errors.append(f"canon: planning review count = {n_plan_reviews}, expected 3")
+    if metrics_obj.get("integration_review_present_count") != 9:
+        consistency_errors.append("canon: Metrics integration_review_present_count != 9")
+    # 3) current phase state
+    if metrics_obj.get("current_phase_state") != "READY_FOR_REVIEW":
+        consistency_errors.append("canon: Metrics current_phase_state != READY_FOR_REVIEW")
+    # 4) next step
+    if "CQC-UPSTREAM-FREEZE" not in summary_text:
+        consistency_errors.append("canon: Summary missing immediate next step CQC-UPSTREAM-FREEZE")
+    if consistency_errors:
+        for ce in consistency_errors:
+            errors.append(ce)
+        all_ok = False
     report = {"contextual_binding_case_count": n_ctx, "cases": ctx_results,
               "mafs_planning_case_count": n_planning, "planning_cases": planning_results,
               "quick_negative_ok": qn_ok, "stale_ok": stale_ok, "t8_ok": t8_ok,

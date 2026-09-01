@@ -87,9 +87,8 @@ def planning_errors(planning_case: Path) -> list[str]:
     active = {(a["requirement_id"], a["route_id"]) for a in b.get("active_routes") or []}
     held = {(h["requirement_id"], h["route_id"]) for h in b.get("held_conditional_routes") or []}
     # RA2: MAFS-native schema validity against pinned MAFS schemas (contract section 24)
-    mafs_schemas = PKG.parent / "mafs-v3-p0" / "schemas"
-    if mafs_schemas.is_dir():
-        errs.extend(validate_mafs_native(planning, mafs_schemas))
+    if MAFS_SCHEMAS.is_dir():
+        errs.extend(validate_mafs_native(planning, MAFS_SCHEMAS))
     else:
         errs.append("pinned MAFS schemas not found for planning-case validation")
 

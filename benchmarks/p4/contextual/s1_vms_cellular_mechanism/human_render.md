@@ -1,4 +1,4 @@
-# BudgetEnvelope: BE-CQC-P4-S1-R1
+# BudgetEnvelope: BE-CQC-P4-S1-R2
 
 - schema_version: 0.1
 - source_srp_id: SRP-CQC-P3-01
@@ -15,7 +15,7 @@
 - route_id: mechanism_evidence [COMMITTED]
 - wall_clock_target_minutes: 10
 - model_token_target: 120000
-- rationale: R01/mechanism_evidence is the largest evidence obligation in S1 and therefore receives the largest committed allocation. ( formerly named specific unadmitted mechanism lines )
+- rationale: R01/mechanism_evidence 是 S1 最大的单一证据义务，因此获得最大的 committed 资源分配。
 
 ### AL02
 

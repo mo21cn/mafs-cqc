@@ -2,8 +2,8 @@
   "case_id": "s1_vms_cellular_mechanism",
   "source_srp_id": "SRP-CQC-P3-01",
   "source_srp_sha256": "67755617b29aef2f3d80f53b20fb9fb2434fe8512a4dae5472fe9263e83380ea",
-  "budget_envelope_id": "BE-CQC-P4-S1-R1",
-  "budget_envelope_sha256": "3cc487ecde4e41cace35c9a66b80a8dc54b44d7948df57b25d60b029263d5f67",
+  "budget_envelope_id": "BE-CQC-P4-S1-R2",
+  "budget_envelope_sha256": "60bb9ab99598389419b31f1b2f9ac65ed1dd82bec54f05102eddbc28d16c958e",
   "mechanical": {
     "schema_valid": true,
     "source_binding_valid": true,

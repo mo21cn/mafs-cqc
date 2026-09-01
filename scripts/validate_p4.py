@@ -35,6 +35,24 @@ PKG_REQUIRED = {
 }
 _counts: dict = {}
 
+MANDATORY_P4_MANIFEST_PATHS = {
+    "docs/CQC_P4_SUMMARY.md",
+    "docs/CQC_P4_METRICS.json",
+    "scripts/validate_p4.py",
+    "tests/test_p4.py",
+    "schemas/budget_envelope.v0.1.schema.json",
+    "benchmarks/p4/contextual/s1_vms_cellular_mechanism/budget_envelope.json",
+    "benchmarks/p4/contextual/s1_vms_cellular_mechanism/budget_envelope.initial.json",
+    "benchmarks/p4/contextual/s1_vms_cellular_mechanism/evaluation/redigestion_record.json",
+    "benchmarks/p4/contextual/s5_mixed_commitment/budget_envelope.json",
+    "benchmarks/p4/contextual/s5_mixed_commitment/budget_envelope.pre_ra2.json",
+    "benchmarks/p4/contextual/s5_mixed_commitment/evaluation/redigestion_record.json",
+    "benchmarks/p4/contextual/s5_mixed_commitment/evaluation/budget_review.json",
+    "benchmarks/p4/budget_perturbation/quick_constraint_s5/budget_envelope.json",
+    "benchmarks/p4/budget_perturbation/deep_expansion_s5/budget_envelope.json",
+    "benchmarks/p4/budget_perturbation/intent_invariance_s5/comparison.json",
+}
+
 LEAK_TERMS = ["crossref", "pubmed", "google scholar", "api endpoint", "top-k",
               "http request", "query string", "provider fallback", "resolver call"]
 
@@ -381,6 +399,9 @@ def validate_canonical_metrics(errors: list) -> dict:
         "feasible_case_count": _counts.get("feasible_case_count"),
         "constrained_case_count": _counts.get("constrained_case_count"),
         "insufficient_case_count": _counts.get("insufficient_case_count"),
+        "budget_perturbation_case_count": _counts.get("budget_perturbation_case_count"),
+        "budget_perturbation_source_srp_identity_valid_count": _counts.get("budget_perturbation_source_srp_identity_valid_count"),
+        "quick_standard_deep_semantic_invariance_valid_count": _counts.get("quick_standard_deep_semantic_invariance_valid_count"),
     }
     bad = [k for k, val in recomputed.items() if m.get(k) != val]
     if bad:
@@ -414,6 +435,12 @@ def validate_final_manifest(errors: list) -> dict:
     if bad:
         errors.append(f"P4_FINAL_MANIFEST_MISMATCH: {bad[:5]}")
         return out
+    listed = {line.split("  ", 1)[1] for line in mf.read_text(encoding="utf-8").splitlines() if line.strip()}
+    missing_coverage = sorted(MANDATORY_P4_MANIFEST_PATHS - listed)
+    if missing_coverage:
+        errors.append(f"P4_FINAL_MANIFEST_COVERAGE_MISSING: {missing_coverage}")
+        return out
+    out["mandatory_coverage_valid"] = True
     out["final_manifest_valid"] = True
     return out
 
@@ -508,6 +535,10 @@ def main(argv=None) -> int:
         "feasible_case_count": feas["FEASIBLE"],
         "constrained_case_count": feas["CONSTRAINED"],
         "insufficient_case_count": feas["INSUFFICIENT"],
+        "budget_perturbation_case_count": len([p for p in pert_results if p.get("perturbation")]),
+        "budget_perturbation_source_srp_identity_valid_count": sum(
+            1 for p in pert_results if p["checks"].get("source_srp_identity_valid")),
+        "quick_standard_deep_semantic_invariance_valid_count": 1 if inv_ok else 0,
     }
     canon = validate_canonical_metrics(errors)
     manif = validate_final_manifest(errors)

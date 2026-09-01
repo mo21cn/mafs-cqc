@@ -9,5 +9,17 @@
     "AL01.rationale"
   ],
   "revised_budget_envelope_id": "BE-CQC-P4-S1-R1",
-  "revised_budget_envelope_sha256": "3cc487ecde4e41cace35c9a66b80a8dc54b44d7948df57b25d60b029263d5f67"
+  "revised_budget_envelope_sha256": "3cc487ecde4e41cace35c9a66b80a8dc54b44d7948df57b25d60b029263d5f67",
+  "ra2_round": {
+    "diagnosis_source": "HO+ChatGPT P4-RA1 acceptance",
+    "measured_failure": "final S1 rationale contained repair-history prose (historical parenthetical) that belongs in the redigestion record",
+    "repair_boundary": "rationale only",
+    "fields_changed": [
+      "AL01.rationale"
+    ],
+    "prior_budget_envelope_id": "BE-CQC-P4-S1-R1",
+    "prior_budget_envelope_sha256": "3cc487ecde4e41cace35c9a66b80a8dc54b44d7948df57b25d60b029263d5f67",
+    "revised_budget_envelope_id": "BE-CQC-P4-S1-R2",
+    "revised_budget_envelope_sha256": "60bb9ab99598389419b31f1b2f9ac65ed1dd82bec54f05102eddbc28d16c958e"
+  }
 }

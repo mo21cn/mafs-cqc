@@ -1,4 +1,4 @@
-# BudgetEnvelope: BE-CQC-P4-S5
+# BudgetEnvelope: BE-CQC-P4-S5-R2
 
 - schema_version: 0.1
 - source_srp_id: SRP-CQC-P3-05-R1
@@ -31,7 +31,7 @@
 - route_id: measurement_observability [COMMITTED]
 - wall_clock_target_minutes: 7
 - model_token_target: 80000
-- rationale: 单细胞代谢组学能力边界是第三维度（measurement），其结论约束动物实验设计（重要性语境）。
+- rationale: R03 获得 committed 资源是因为已接纳的测量/观测义务需要对检出限、代谢物覆盖面、通量与单细胞/近单细胞可行性边界的刻画。
 
 ### AL04
 
